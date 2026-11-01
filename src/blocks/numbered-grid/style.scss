@@ -1,0 +1,193 @@
+// --------------------------------------------------
+//      Block: Numbered points (ashlar/numbered-grid)
+//      Escritorio: cabecera con la entradilla a la derecha (420) y rejilla de
+//      3 columnas con filete arriba y entre columnas. Tableta: 2 columnas.
+//      Móvil: lista con el número a la izquierda (Figma 75:568).
+//      .numbered-grid--cards (About, Figma 90:915 / 91:790): tarjetas con
+//      fondo, número y cifra grande (stat) arriba; 1 columna hasta lg.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.numbered-grid {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-30);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__list {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom: 1px solid var(--line);
+
+        // La primera columna no lleva hueco a la izquierda: se le resta para
+        // que el texto tenga el mismo ancho en todas (como en el Figma)
+        @include up(md) {
+            grid-template-columns: calc((100% - 2rem) / 2) minmax(0, 1fr);
+            border-bottom: 0;
+        }
+
+        @include up(lg) {
+            grid-template-columns: calc((100% - 4rem) / 3) repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-content: start;
+        align-items: start;
+        gap: 1rem;
+        padding-block: 1.25rem;
+        border-top: 1px solid var(--line);
+
+        @include up(md) {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0.75rem;
+            padding: 2rem 2rem 2.5rem;
+            border-left: 1px solid var(--line);
+        }
+    }
+
+    // Primera columna de cada fila: sin filete ni hueco a la izquierda
+    &__item:nth-child(2n + 1) {
+        @include up(md) {
+            padding-left: 0;
+            border-left: 0;
+        }
+    }
+
+    &__item:nth-child(n) {
+        @include up(lg) {
+            padding-left: 2rem;
+            border-left: 1px solid var(--line);
+        }
+    }
+
+    &__item:nth-child(3n + 1) {
+        @include up(lg) {
+            padding-left: 0;
+            border-left: 0;
+        }
+    }
+
+    &__num {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__text {
+        display: grid;
+        gap: 0.25rem;
+
+        @include up(md) {
+            gap: 0.75rem;
+        }
+    }
+
+    &__item-title {
+        @include t-h4;
+
+        @include up(md) {
+            @include t-h3;
+        }
+    }
+
+    &__item-text {
+        color: var(--fg-soft);
+        @include t-small;
+
+        @include up(md) {
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+        }
+    }
+
+    // Cifra de la tarjeta: 56 px en el Figma, sin token propio (entre H2 y H1)
+    &__stat {
+        color: var(--accent);
+        font-family: var(--font-family-display);
+        font-size: clamp(2.25rem, 1.7rem + 2.3vw, 3.5rem);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: -0.03em;
+    }
+
+    // Variante en tarjetas. Va después de las reglas de filetes para
+    // ganarles con la misma especificidad.
+    &--cards &__list {
+        gap: 1rem;
+        border-bottom: 0;
+
+        @include up(lg) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: var(--gap);
+        }
+    }
+
+    &--cards &__item {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "num stat"
+            "text text";
+        align-items: center;
+        gap: 0.75rem 1rem;
+        padding: 1.25rem;
+        border: 0;
+        background-color: var(--fill);
+
+        @include up(md) {
+            gap: 1.25rem 1rem;
+            padding: 2rem;
+        }
+    }
+
+    &--cards &__num {
+        grid-area: num;
+    }
+
+    &--cards &__stat {
+        grid-area: stat;
+    }
+
+    &--cards &__text {
+        grid-area: text;
+        gap: 0.75rem;
+
+        @include up(md) {
+            gap: 1.25rem;
+        }
+    }
+}

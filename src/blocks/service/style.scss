@@ -1,0 +1,166 @@
+// --------------------------------------------------
+//      Block: Service (ashlar/service)
+//      Escritorio: foto 600×620 y contenido 600 con 80 de hueco, centrados en
+//      vertical; .service--right pasa la foto a la derecha. Móvil: foto arriba
+//      (358×260) y el contenido debajo, botón a todo el ancho.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.service {
+    &__inner {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+            column-gap: var(--space-70);
+        }
+    }
+
+    &__media {
+        aspect-ratio: 358 / 260;
+        background-color: var(--fill);
+
+        @include up(lg) {
+            aspect-ratio: 600 / 620;
+        }
+    }
+
+    &--right &__media {
+        @include up(lg) {
+            order: 2;
+        }
+    }
+
+    &__content {
+        display: grid;
+        gap: var(--space-40);
+    }
+
+    &__heading {
+        display: grid;
+        gap: 0.75rem;
+
+        @include up(lg) {
+            gap: 1rem;
+        }
+    }
+
+    &__number {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__summary {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    // Tres datos en fila, separados por filetes
+    &__facts {
+        display: grid;
+        grid-auto-columns: minmax(0, 1fr);
+        grid-auto-flow: column;
+        margin: 0;
+        border-block: 1px solid var(--line);
+    }
+
+    &__fact {
+        display: grid;
+        align-content: space-between;
+        gap: 0.25rem;
+        padding-block: 0.875rem;
+
+        @include up(md) {
+            padding-block: 1rem;
+        }
+
+        & + & {
+            padding-left: 0.8125rem;
+            border-left: 1px solid var(--line);
+
+            @include up(md) {
+                padding-left: 1.25rem;
+            }
+        }
+
+        dt {
+            color: var(--fg-muted);
+            @include t-label;
+        }
+
+        dd {
+            margin: 0;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    }
+
+    &__included {
+        display: grid;
+        gap: 0.5rem;
+
+        @include up(md) {
+            gap: 0.75rem;
+        }
+    }
+
+    &__label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__list {
+        gap: 0.5rem;
+
+        @include up(md) {
+            gap: 0.75rem;
+        }
+
+        li {
+            line-height: 1.5;
+        }
+    }
+
+    // «Good to know»: caja en el tono contrario con raya corten a la izquierda
+    &__note {
+        display: grid;
+        gap: 0.25rem;
+        padding: 1rem 1rem 1rem 1.125rem;
+        border-left: 3px solid var(--btn-bg);
+        background-color: var(--fill-contrast);
+    }
+
+    &__note-label {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem 2rem;
+    }
+
+    &__button {
+        width: 100%;
+
+        @include up(sm) {
+            width: auto;
+        }
+    }
+
+    // Objetivo táctil de 44 px aunque el texto sea pequeño
+    &__link {
+        min-height: 2.75rem;
+        font-size: var(--font-size-sm);
+    }
+}

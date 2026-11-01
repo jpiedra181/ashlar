@@ -1,0 +1,16 @@
+// --------------------------------------------------
+//		Elements: SVG Icon base
+// --------------------------------------------------
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+    }
+}

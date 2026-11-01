@@ -1,0 +1,139 @@
+// --------------------------------------------------
+//		Elements: Motion
+//		Los estados iniciales de las animaciones SOLO se aplican cuando el
+//		JS confirma que hay movimiento (html.motion, ver inc/front.php).
+//		Sin JS, con movimiento reducido o con el interruptor «Animaciones»
+//		apagado, todo se ve desde el primer pintado.
+// --------------------------------------------------
+
+.motion {
+    // .is-in: ya entró y el JS limpió sus estilos en línea (animations.js)
+    [data-reveal]:not(.is-in) {
+        opacity: 0;
+        transform: translate3d(0, 2.5rem, 0);
+    }
+
+    [data-reveal="fade"]:not(.is-in) {
+        transform: none;
+    }
+
+    [data-split],
+    [data-rise] {
+        opacity: 0;
+    }
+
+    // .is-in en una foto: un bloque dio su cortinilla por hecha (service-stack)
+    [data-media-reveal]:not(.is-in) {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    [data-draw] {
+        transform: scaleX(0);
+        transform-origin: left center;
+    }
+}
+
+// Máscaras de línea (SplitText y titulares de entrada): un poco de aire para
+// que tildes y descendentes no se recorten con el interlineado cerrado. El
+// margen negativo lo devuelve sin cambiar el interlineado. Ojo: entre líneas
+// los márgenes verticales se COLAPSAN (no se suman), así que el de una línea
+// con la siguiente se pone entero en la segunda.
+.split-line-mask,
+.intro-mask {
+    padding-block: 0.14em 0.16em;
+    margin-block: 0;
+
+    &:first-child {
+        margin-top: -0.14em;
+    }
+
+    &:last-child {
+        margin-bottom: -0.16em;
+    }
+
+    & + & {
+        margin-top: -0.3em;
+    }
+}
+
+// Coreografía de entrada para lo que se ve sin hacer scroll. CSS puro: arranca
+// en el primer pintado y nunca retrasa el LCP detrás del JavaScript.
+.intro-mask {
+    display: block;
+    overflow: clip;
+}
+
+.intro-line {
+    display: block;
+}
+
+.motion .intro-line {
+    animation: intro-line 1.5s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 0.1s + 0.1s);
+}
+
+.motion [data-intro] {
+    animation: intro-rise 1.4s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 0.1s + 0.25s);
+}
+
+.motion [data-intro-zoom] > picture,
+.motion [data-intro-zoom] > img {
+    animation: intro-zoom 2.6s var(--ease-out) both;
+}
+
+@keyframes intro-line {
+    from {
+        transform: translate3d(0, 110%, 0);
+    }
+}
+
+@keyframes intro-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 1.25rem, 0);
+    }
+}
+
+@keyframes intro-zoom {
+    from {
+        scale: 1.14;
+    }
+}
+
+// Punto que late de «On site now» (ticker y cartel de obra del hero)
+@keyframes ticker-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+}
+
+// Movimiento reducido: el ajuste del sistema y el interruptor de la web.
+// !important a propósito: tiene que ganar a cualquier transición de bloque.
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+html[data-motion="off"] {
+    scroll-behavior: auto !important;
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

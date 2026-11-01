@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/page-intro",
+    "version": "1.0.0",
+    "title": "Page intro",
+    "category": "ashlar",
+    "description": "The top of an inner page: a small label, the main headline and a short introduction. Optionally, quick links to the sections below and a wide photo with a caption.",
+    "keywords": ["intro", "page header", "title", "headline", "hero"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "eyebrow": { "type": "string", "default": "Projects" },
+        "title": { "type": "string", "default": "118 houses,<br>by street." },
+        "lede": { "type": "string", "default": "Every project with the weeks it took and what the final bill came to against the fixed price. The good ones and the ones where it rained for nine days." },
+        "ledeAlign": { "type": "string", "enum": ["top", "bottom"], "default": "bottom" },
+        "linksLabel": { "type": "string", "default": "Jump to" },
+        "links": { "type": "array", "default": [] },
+        "image": { "type": "object", "default": {} },
+        "caption": { "type": "string", "default": "" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/manifesto",
+    "version": "1.0.0",
+    "title": "Manifesto",
+    "category": "ashlar",
+    "description": "A large statement in the founders’ words, signed, with an optional small portrait of who wrote it. Mark the second half in italics to show it in the softer tone.",
+    "keywords": ["manifesto", "why", "statement", "quote", "founders"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "" },
+        "chapterLabel": { "type": "string", "default": "Why we started" },
+        "text": { "type": "string", "default": "I spent fifteen years as a carpenter on other people’s jobs, and the clients I felt for were the ones left chasing, ringing round on a Thursday to find out nobody had been on site since Monday. When Priya and I started on our own in 2009, we decided ours would never have to chase. <em>We’d write everything down and send it to them every Friday, before they asked.</em>" },
+        "signature": { "type": "string", "default": "Tom Hale, co-founder" },
+        "portrait": { "type": "object", "default": {} }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/faq",
+    "version": "1.0.0",
+    "title": "Questions",
+    "category": "ashlar",
+    "description": "Questions and answers that open and close, with the heading on the left. They work with the keyboard and without JavaScript.",
+    "keywords": ["faq", "questions", "answers", "accordion", "help"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "eyebrow": { "type": "string", "default": "Questions" },
+        "title": { "type": "string", "default": "What people ask<br>at the first visit." },
+        "openFirst": { "type": "boolean", "default": true },
+        "items": {
+            "type": "array",
+            "default": [
+                { "question": "Do I need planning permission?", "answer": "Most rear extensions and dormer lofts fall under permitted development, so you don’t. If yours doesn’t, or you’re in a conservation area, we tell you at the first visit and handle the application with the architect." },
+                { "question": "Can we stay in the house during the work?", "answer": "On most extensions and lofts, yes. We set up a temporary kitchen if you need one and seal off the work area. Basements and whole-house jobs usually mean moving out for part of the build." },
+                { "question": "What isn’t included in the fixed price?", "answer": "Architect fees, loose furniture and appliances you choose yourself. Anything we can’t see until we open up, like what’s behind a wall, goes in as a separate line with a ceiling. Priya can’t stand open-ended provisional sums, so ours always have a maximum." },
+                { "question": "How soon can you start?", "answer": "We’re booking starts for March 2027. Surveys and design can begin now, so you’re ready when your slot comes up." },
+                { "question": "Do you work outside north and east London?", "answer": "We work within about five miles of our yard in N1: Islington, Hackney, Camden, Haringey and Tower Hamlets. It’s how your site manager can be with you in 20 minutes." }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

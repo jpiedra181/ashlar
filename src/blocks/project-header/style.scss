@@ -1,0 +1,92 @@
+// --------------------------------------------------
+//      Block: Project · Header (ashlar/project-header)
+//      Migas y «Project 014 of 118» · rótulo · nombre en Display (104) ·
+//      resumen a la derecha (460).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.project-header {
+    padding-block: var(--space-40) var(--space-60);
+
+    &__inner {
+        display: grid;
+        gap: var(--space-60);
+    }
+
+    &__top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 2rem;
+        @include t-label;
+    }
+
+    &__crumbs ol {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li + li::before {
+            content: "/";
+            margin-inline: 0.75rem;
+            color: var(--fg-muted);
+        }
+
+        // 24 px de alto: objetivo táctil mínimo (WCAG 2.2, 2.5.8)
+        a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 1.5rem;
+            color: var(--fg-soft);
+            text-decoration: none;
+
+            &:hover {
+                color: var(--fg);
+                text-decoration: underline;
+            }
+
+            &[aria-current] {
+                color: var(--fg);
+            }
+        }
+    }
+
+    &__position {
+        color: var(--fg-soft);
+    }
+
+    &__main {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 28.75rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1rem;
+    }
+
+    &__eyebrow {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__title {
+        @include t-display;
+    }
+
+    &__summary {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+}

@@ -1,0 +1,275 @@
+// --------------------------------------------------
+//		Layout: Footer
+//		Pie oscuro: llamada («Let's build something that lasts.» + botón) ·
+//		frase y tres columnas · barra legal · muro de sillares con el nombre
+//		grabado, apoyado en el borde de la página. Markup: template part
+//		`footer` (<footer class="site-footer theme-dark">) con los bloques
+//		ashlar/footer-cta, ashlar/footer-brand, ashlar/nav-menu,
+//		ashlar/site-contact, ashlar/footer-bottom y ashlar/footer-wall.
+//		.site-footer--short (part `footer-short`): sin la llamada; columnas a
+//		72 px del borde y sin filete encima. Sin uso desde el 31 oct (Contact
+//		y 404 llevan el pie completo); queda disponible en el Editor del sitio.
+//
+//		Parallax (src/js/modules/footer.js): el pie sale de debajo de la
+//		página; su contenido llega desplazado hacia arriba y en sombra
+//		(--footer-shade) y se asienta cuando el pie toca el borde superior.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.site-footer {
+    --footer-shade: 0;
+
+    position: relative;
+    overflow: clip;
+    padding-top: var(--section);
+
+    // Sombra del parallax: el fondo del propio pie por encima del contenido.
+    // Sin movimiento se queda a 0 y no se ve.
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: var(--bg);
+        opacity: var(--footer-shade);
+        pointer-events: none;
+    }
+
+    &--short {
+        padding-top: var(--space-30);
+    }
+
+    &--short &__grid {
+        border-top: 0;
+    }
+
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-50) var(--space-50);
+        padding-top: var(--space-50);
+        border-top: 1px solid var(--line);
+
+        @include up(sm) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include up(lg) {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    // Títulos de columna en Label/Mono apagado
+    .nav-menu__title,
+    .site-contact__title {
+        margin-bottom: 0.25rem;
+        color: var(--fg-muted);
+    }
+
+    .nav-menu__list,
+    .site-contact__list {
+        display: grid;
+    }
+
+    .nav-menu__link,
+    .site-contact__link,
+    .site-contact__text {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2rem;
+        line-height: 1.4;
+    }
+
+    // Móvil: cada enlace ocupa 44 px de alto para el dedo
+    @include down(lg) {
+        .nav-menu__link,
+        .site-contact__link {
+            min-height: 2.75rem;
+        }
+    }
+
+    .nav-menu__link,
+    .site-contact__link {
+        background-image: linear-gradient(currentColor, currentColor);
+        background-size: 0% 1px;
+        background-position: 0 85%;
+        background-repeat: no-repeat;
+        transition: background-size var(--duration-slow) var(--ease-out);
+
+        &:hover,
+        &[aria-current] {
+            background-size: 100% 1px;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Llamada
+// --------------------------------------------------
+
+.footer-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-40);
+
+    &__heading {
+        display: grid;
+        gap: 1rem;
+    }
+
+    &__eyebrow {
+        color: var(--accent);
+    }
+
+    &__title {
+        max-width: 10em;
+        @include t-h2;
+    }
+
+    // Móvil: el botón ocupa todo el ancho (como en el Figma Mobile)
+    @include down(md) {
+        &__action,
+        &__action .btn {
+            width: 100%;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Marca: logotipo + una frase
+// --------------------------------------------------
+
+.footer-brand {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+
+    &__text {
+        max-width: 32ch;
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}
+
+// --------------------------------------------------
+//  Barra legal
+// --------------------------------------------------
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--fg-muted);
+    @include t-small;
+
+    &__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1.25rem;
+        list-style: none;
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        color: var(--fg-muted);
+        transition: color var(--duration-base) ease;
+
+        @include up(lg) {
+            min-height: 1.5rem;
+        }
+
+        &:hover {
+            color: var(--fg);
+        }
+
+        // La página actual no se marca solo con el color
+        &[aria-current="page"] {
+            color: var(--fg);
+            text-decoration: underline;
+            text-underline-offset: 0.3em;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Muro: hiladas de sillares a soga con el nombre grabado en el zócalo
+//  Columnas de medio sillar (--cols = 2 × --stones): un sillar ocupa dos y
+//  las hiladas desplazadas empiezan y acaban en una, así cada junta cae
+//  exactamente en el centro del sillar de abajo. Las medidas salen del ancho
+//  del muro (cqi) para que el aparejo sea el mismo a cualquier ancho.
+// --------------------------------------------------
+
+.footer-wall {
+    --joint: 0.1875rem; // junta de mortero
+    --ratio: 2; // largo : alto de un sillar
+    --plinth: 0.9; // alto del zócalo, en largos de sillar
+    --letter: 0.66; // cuerpo de las letras, en largos de sillar
+    --stone-w: calc(100cqi / var(--stones));
+
+    container-type: inline-size;
+    display: grid;
+    gap: var(--joint);
+
+    @include up(md) {
+        --joint: 0.25rem;
+        --ratio: 3;
+        --plinth: 0.72;
+        --letter: 0.56;
+    }
+
+    &__course {
+        display: grid;
+        grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+        column-gap: var(--joint);
+        height: calc(var(--stone-w) / var(--ratio));
+
+        &--plinth {
+            height: calc(var(--stone-w) * var(--plinth));
+        }
+    }
+
+    &__stone {
+        display: grid;
+        grid-column: span 2;
+        place-items: center;
+        background-color: var(--surface);
+
+        &--half {
+            grid-column: span 1;
+        }
+
+        &--t1 {
+            background-color: var(--fill);
+        }
+
+        &--t2 {
+            background-color: color-mix(in srgb, var(--surface) 50%, var(--fill));
+        }
+
+        &--accent {
+            background-color: var(--mark-accent);
+        }
+    }
+
+    &__letter {
+        font-family: var(--font-family-display);
+        font-size: calc(var(--stone-w) * var(--letter));
+        font-weight: 600;
+        line-height: 1;
+        color: var(--fg);
+    }
+}

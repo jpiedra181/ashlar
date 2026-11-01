@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/numbered-grid",
+    "version": "1.0.0",
+    "title": "Numbered points",
+    "category": "ashlar",
+    "description": "A heading and short numbered points, three across on desktop and a list on mobile. Ruled, or as cards with a big figure each. For what every job includes, house rules or any set of promises.",
+    "keywords": ["numbered", "points", "list", "grid", "promises", "included", "guarantee"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "dark" },
+        "variant": { "type": "string", "enum": ["ruled", "cards"], "default": "ruled" },
+        "eyebrow": { "type": "string", "default": "Whatever the size" },
+        "title": { "type": "string", "default": "Every job comes with these." },
+        "lede": { "type": "string", "default": "Small kitchen or Grade II restoration, these are written into the contract." },
+        "items": {
+            "type": "array",
+            "default": [
+                { "title": "A measured survey", "text": "Laser-scanned and drawn, before anyone guesses at a price." },
+                { "title": "An itemised fixed price", "text": "Every line priced. What you sign is what you pay." },
+                { "title": "Permits handled", "text": "Building control, party wall and planning, managed by us." },
+                { "title": "One site manager", "text": "The same person from the first brick to the final snag." },
+                { "title": "A Friday report", "text": "Photos, progress and decisions, every week by 5pm." },
+                { "title": "A 10-year warranty", "text": "Insurance-backed, and transferable if you sell." }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

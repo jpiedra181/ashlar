@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/logo",
+    "version": "1.0.0",
+    "title": "Logo",
+    "category": "ashlar",
+    "icon": "heading",
+    "description": "The Ashlar mark and the site name, linked to the home page. Uses the image from Site Identity if there is one.",
+    "keywords": ["logo", "brand", "mark"],
+    "textdomain": "ashlar",
+    "supports": {
+        "html": false,
+        "reusable": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

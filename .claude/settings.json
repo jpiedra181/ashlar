@@ -1,0 +1,122 @@
+{
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "enabledMcpjsonServers": ["playwright"],
+    "permissions": {
+        "allow": [
+            "Read",
+            "Glob",
+            "Grep",
+            "Bash(npm run build)",
+            "Bash(npm run build:*)",
+            "Bash(npm run lint:*)",
+            "Bash(npm ci)",
+            "Bash(npm ls:*)",
+            "Bash(npx wp-scripts:*)",
+            "Bash(node --version)",
+            "Bash(node .claude/skills/*)",
+            "Bash(node .claude/hooks/*)",
+            "Bash(node .claude/lib/*)",
+            "Bash(php .claude/skills/wp-local/scripts/*)",
+            "Bash(php -l:*)",
+            "Bash(git status:*)",
+            "Bash(git diff:*)",
+            "Bash(git log:*)",
+            "Bash(git show:*)",
+            "Bash(git ls-files:*)",
+            "Bash(git blame:*)",
+            "Bash(git branch:*)",
+            "Bash(git merge-base:*)",
+            "Bash(curl -sI:*)",
+            "Bash(curl -s -o /dev/null:*)",
+            "mcp__playwright__browser_navigate",
+            "mcp__playwright__browser_navigate_back",
+            "mcp__playwright__browser_snapshot",
+            "mcp__playwright__browser_take_screenshot",
+            "mcp__playwright__browser_resize",
+            "mcp__playwright__browser_console_messages",
+            "mcp__playwright__browser_network_requests",
+            "mcp__playwright__browser_evaluate",
+            "mcp__playwright__browser_find",
+            "mcp__playwright__browser_hover",
+            "mcp__playwright__browser_click",
+            "mcp__playwright__browser_press_key",
+            "mcp__playwright__browser_wait_for",
+            "mcp__playwright__browser_tabs",
+            "mcp__playwright__browser_close",
+            "mcp__claude_ai_Figma__get_design_context",
+            "mcp__claude_ai_Figma__get_metadata",
+            "mcp__claude_ai_Figma__get_screenshot",
+            "mcp__claude_ai_Figma__get_variable_defs",
+            "mcp__claude_ai_Figma__search_design_system"
+        ],
+        "ask": [
+            "Bash(npm install:*)",
+            "Bash(npm i:*)",
+            "Bash(npm uninstall:*)",
+            "Bash(git push:*)",
+            "Bash(git reset:*)",
+            "Bash(git checkout:*)",
+            "Bash(git rebase:*)",
+            "mcp__playwright__browser_fill_form",
+            "mcp__playwright__browser_type",
+            "mcp__playwright__browser_file_upload",
+            "mcp__playwright__browser_run_code_unsafe"
+        ],
+        "deny": [
+            "Edit(build/**)",
+            "Write(build/**)",
+            "Edit(node_modules/**)",
+            "Write(node_modules/**)",
+            "Read(.env)",
+            "Read(.env.*)",
+            "Read(**/wp-config.php)",
+            "Bash(rm -rf:*)",
+            "Bash(git push --force:*)",
+            "Bash(git push -f:*)"
+        ]
+    },
+    "hooks": {
+        "SessionStart": [
+            {
+                "matcher": "startup|resume|clear",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .claude/hooks/session-context.mjs",
+                        "timeout": 15,
+                        "statusMessage": "Leyendo estado del entorno…"
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "Edit|Write|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .claude/hooks/guard-build-dir.mjs",
+                        "timeout": 10
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .claude/hooks/guard-save-js.mjs",
+                        "timeout": 15
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Edit|Write|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .claude/hooks/check-scss-tokens.mjs",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ]
+    }
+}

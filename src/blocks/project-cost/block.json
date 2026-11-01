@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-cost",
+    "version": "1.0.0",
+    "title": "Project · The money",
+    "category": "ashlar",
+    "description": "Where the money went: a bar split by item, the list with percentages and amounts, and the fixed price, client changes and final account worked out for you.",
+    "keywords": ["project", "cost", "money", "price", "budget", "breakdown"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "chapterNum": { "type": "string", "default": "06" },
+        "chapterLabel": { "type": "string", "default": "The money" },
+        "title": { "type": "string", "default": "Where the £149,740 went." },
+        "lede": { "type": "string", "default": "The fixed price was £148,500. One change, asked for by the client and priced in writing first, took it to £149,740." },
+        "items": {
+            "type": "array",
+            "default": [
+                { "label": "Structure &amp; groundworks", "amount": 44920, "change": false },
+                { "label": "Steel-framed glazing &amp; rooflight", "amount": 28450, "change": false },
+                { "label": "Kitchen &amp; joinery", "amount": 23960, "change": false },
+                { "label": "Floors, plaster &amp; limestone", "amount": 20960, "change": false },
+                { "label": "Electrics, plumbing &amp; heating", "amount": 16470, "change": false },
+                { "label": "Site management, insurance &amp; party wall", "amount": 13740, "change": false },
+                { "label": "Client change: extra socket circuit", "amount": 1240, "change": true }
+            ]
+        },
+        "fixedLabel": { "type": "string", "default": "Fixed price" },
+        "changesLabel": { "type": "string", "default": "Client changes" },
+        "finalLabel": { "type": "string", "default": "Final account" },
+        "footnote": { "type": "string", "default": "Prices ex VAT. Design team fees paid separately to Studio Norland." }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

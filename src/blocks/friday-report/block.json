@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/friday-report",
+    "version": "1.0.0",
+    "title": "Friday report",
+    "category": "ashlar",
+    "description": "One real Friday report from a live job, shown as the document the client got: who sent it and when, a site photo, this week, next week, any decision needed and where the price stands.",
+    "keywords": ["friday", "report", "site", "update", "progress"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "chapterNum": { "type": "string", "default": "" },
+        "chapterLabel": { "type": "string", "default": "Friday report" },
+        "title": { "type": "string", "default": "This one went to the Barkers at 4.52pm." },
+        "lede": { "type": "string", "default": "Highbury Hill, week 9. Shared with their permission, exactly as Dan sent it." },
+        "note": { "type": "string", "default": "If it had gone out after 5pm, £100 would have come off their final invoice. It’s in the contract, and it’s happened twice since 2019." },
+        "docLabel": { "type": "string", "default": "Friday report · Week 9 of 22" },
+        "docTitle": { "type": "string", "default": "Highbury Hill, N5 · Rear extension" },
+        "status": { "type": "string", "default": "On programme" },
+        "late": { "type": "boolean", "default": false },
+        "avatar": { "type": "object", "default": {} },
+        "meta": {
+            "type": "array",
+            "default": [
+                { "key": "From", "value": "Dan Okafor, site manager" },
+                { "key": "To", "value": "Kate and Ollie Barker" },
+                { "key": "Sent", "value": "Fri 30 Oct, 4.52pm" }
+            ]
+        },
+        "image": { "type": "object", "default": {} },
+        "caption": { "type": "string", "default": "Tue 27 Oct · second steel going in over the new opening" },
+        "weekLabel": { "type": "string", "default": "This week" },
+        "weekText": { "type": "string", "default": "Both steels went in over the new opening on Tuesday, and building control came out on Thursday and signed them off. The back wall is propped and sheeted, so the house stayed warm and dry through Thursday’s rain." },
+        "nextLabel": { "type": "string", "default": "Next week" },
+        "next": {
+            "type": "array",
+            "default": [
+                "Bricklayers start the new side wall on Monday.",
+                "Skip swap on Wednesday morning. The lorry will be on the road for about an hour, and I’ve told Nos. 12 and 16.",
+                "Roof joists arrive on Friday."
+            ]
+        },
+        "decisionLabel": { "type": "string", "default": "Decision needed by Wed 4 Nov" },
+        "decision": { "type": "string", "default": "Rooflight: plain glass, or the one with the slim black frame? Both samples are on your kitchen table. If we order by Wednesday, it’s here for week 13." },
+        "priceLabel": { "type": "string", "default": "Your price" },
+        "price": { "type": "string", "default": "£131,200, unchanged since you signed" },
+        "signoff": { "type": "string", "default": "Have a good weekend. Dan" }
+    },
+    "supports": {
+        "html": false,
+        "align": ["full"],
+        "anchor": true
+    },
+    "example": {
+        "viewportWidth": 1440
+    },
+    "editorScript": "file:./index.js"
+}

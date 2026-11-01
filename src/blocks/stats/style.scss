@@ -1,0 +1,58 @@
+// --------------------------------------------------
+//      Block: Key figures (ashlar/stats)
+//      Escritorio: todas las cifras en una fila (5 en About), filete oscuro
+//      arriba, cifra H1 y la línea en Body/Small. Móvil: dos por fila.
+//      .stats--attached: sin espacio arriba (va pegada a la intro).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.stats {
+    &--attached {
+        padding-top: 0;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(md) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: var(--gap);
+        }
+
+        @include up(lg) {
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column;
+            grid-template-columns: none;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding-block: 1rem 1.25rem;
+        border-top: 1px solid var(--fg);
+
+        @include up(lg) {
+            gap: 0.5rem;
+            padding: 1.25rem 1.5rem 0 0;
+        }
+    }
+
+    &__value {
+        font-variant-numeric: lining-nums;
+        @include t-h1;
+    }
+
+    &__label {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}

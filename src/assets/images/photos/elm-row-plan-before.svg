@@ -1,0 +1,25 @@
+<svg width="562" height="780" viewBox="0 0 562 780" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Ground floor plan</title>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="170" y="18.875">STREET &#x2191;</tspan></text>
+<rect x="170" y="40" width="210" height="168" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="186" y="68.875">FRONT ROOM&#10;</tspan><tspan x="186" y="84.875">17 M&#xb2;</tspan></text>
+<rect x="170" y="208" width="210" height="147" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="186" y="236.875">LIVING&#10;</tspan><tspan x="186" y="252.875">12 M&#xb2;</tspan></text>
+<rect x="170" y="355" width="109.2" height="126" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="182" y="383.875">KITCHEN&#10;</tspan><tspan x="182" y="399.875">7.8 M&#xb2;</tspan></text>
+<rect x="170" y="481" width="109.2" height="105" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="182" y="509.875">LEAN-TO&#10;</tspan><tspan x="182" y="525.875">4 M&#xb2;</tspan></text>
+<g clip-path="url(#clip0_64_340)">
+<path d="M170.5 604V616M278.7 604V616M170.5 610H278.7M168 613L173 607M276.2 613L281.2 607" stroke="#685F52"/>
+</g>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="206.6" y="632.875">2 600</tspan></text>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="293.2" y="409.875">SIDE RETURN&#10;</tspan><tspan x="293.2" y="425.875">(UNUSED)</tspan></text>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="170" y="662.875">GARDEN &#x2193;</tspan></text>
+<path d="M512 10L520 32H504L512 10Z" fill="#685F52"/>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="Hanken Grotesk, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0em"><tspan x="508" y="43.6364">N</tspan></text>
+<defs>
+<clipPath id="clip0_64_340">
+<rect width="109.2" height="12" fill="white" transform="translate(170 604)"/>
+</clipPath>
+</defs>
+</svg>

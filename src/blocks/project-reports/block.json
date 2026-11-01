@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-reports",
+    "version": "1.0.0",
+    "title": "Project · Friday reports",
+    "category": "ashlar",
+    "description": "A few of the weekly reports the client got, as cards: the week, whether it was on programme, a photo, what happened and any decision you needed from them.",
+    "keywords": ["project", "reports", "friday", "updates", "weekly"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "05" },
+        "chapterLabel": { "type": "string", "default": "From the Friday reports" },
+        "title": { "type": "string", "default": "Hannah and James got 22 of these." },
+        "lede": { "type": "string", "default": "Three of them, unedited. Every Ashlar client gets one by 5pm every Friday, whether or not they ask for it." },
+        "decisionLabel": { "type": "string", "default": "Decision needed" },
+        "reports": {
+            "type": "array",
+            "default": [
+                { "date": "Week 3 · Fri 7 Mar", "status": "On programme", "late": false, "image": {}, "text": "Party wall award signed with No. 14 today, two weeks ahead of what we planned. Skip and scaffold booked for Monday.", "decision": "", "signature": "— Dan Okafor, site manager" },
+                { "date": "Week 12 · Fri 23 May", "status": "1 week behind", "late": true, "image": {}, "text": "Both steels lifted in and packed, and building control passed them. We’re still a week behind from the rain, so a second roof crew starts Monday to win it back.", "decision": "", "signature": "— Dan Okafor, site manager" },
+                { "date": "Week 19 · Fri 11 Jul", "status": "On programme", "late": false, "image": {}, "text": "Limestone threshold laid. Glazing frame arrives Tuesday. One thing we need from you before Wednesday:", "decision": "Glazing frame colour: RAL 7021 or 9005?", "signature": "— Dan Okafor, site manager" }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

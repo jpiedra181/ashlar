@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/not-found",
+    "version": "1.0.0",
+    "title": "Page not found",
+    "category": "ashlar",
+    "description": "The 404 page: a room crossed off the plan, the message and links to the main pages, plus the phone number from Options → Contact. Used in the 404 template.",
+    "keywords": ["404", "not found", "error"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "tag": { "type": "string", "default": "Removed — not on the current plan" },
+        "point": { "type": "string", "default": "SP-404" },
+        "width": { "type": "string", "default": "5 600" },
+        "height": { "type": "string", "default": "4 000" },
+        "eyebrow": { "type": "string", "default": "Error 404 · Page not found" },
+        "title": { "type": "string", "default": "This page isn’t<br>on the plan." },
+        "text": { "type": "string", "default": "We measure everything twice, but this link slipped through. It probably moved when we rebuilt the site. You were most likely looking for one of these:" },
+        "links": {
+            "type": "array",
+            "default": [
+                { "label": "Home", "sub": "Start from the front door", "url": "/", "accent": false },
+                { "label": "Services", "sub": "Five kinds of job, with prices", "url": "/services/", "accent": false },
+                { "label": "Projects", "sub": "118 houses, by street", "url": "/projects/", "accent": false },
+                { "label": "Get a rough price", "sub": "Takes about two minutes", "url": "/contact/", "accent": true }
+            ]
+        },
+        "callText": { "type": "string", "default": "Or call Marta on" }
+    },
+    "supports": { "html": false, "reusable": false, "multiple": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

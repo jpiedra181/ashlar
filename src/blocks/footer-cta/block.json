@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/footer-cta",
+    "version": "1.0.0",
+    "title": "Footer call to action",
+    "category": "ashlar",
+    "icon": "megaphone",
+    "description": "The eyebrow, headline and button that open the footer. Edited in Options → Footer.",
+    "keywords": [
+        "cta",
+        "footer",
+        "quote"
+    ],
+    "textdomain": "ashlar",
+    "supports": {
+        "html": false,
+        "reusable": false,
+        "multiple": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

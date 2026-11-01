@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/site-ticker",
+    "version": "1.0.0",
+    "title": "On site now",
+    "category": "ashlar",
+    "description": "Dark strip with the job on site right now, its week and progress bar, and how many sites are live.",
+    "keywords": [
+        "on site",
+        "live",
+        "progress",
+        "ticker"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        },
+        "label": {
+            "type": "string",
+            "default": "On site now"
+        },
+        "site": {
+            "type": "string",
+            "default": "Highbury Hill, N5 — Rear extension"
+        },
+        "weekCurrent": {
+            "type": "number",
+            "default": 9
+        },
+        "weekTotal": {
+            "type": "number",
+            "default": 22
+        },
+        "capacity": {
+            "type": "string",
+            "default": "6 of 6 sites running · Next start: March 2027"
+        },
+        "weekFormat": {
+            "type": "string",
+            "default": "Week {current} of {total}"
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": [
+            "full"
+        ],
+        "anchor": true
+    },
+    "example": {
+        "viewportWidth": 1440
+    },
+    "editorScript": "file:./index.js"
+}

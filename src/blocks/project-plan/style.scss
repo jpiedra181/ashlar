@@ -1,0 +1,136 @@
+// --------------------------------------------------
+//      Block: Project · The plan (ashlar/project-plan)
+//      Dos láminas blancas con filete (628 × 900): título, rótulo (el del
+//      «después» en corten) y el plano. Debajo, la leyenda de líneas y la
+//      escala. Móvil: una lámina debajo de otra.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.project-plan {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+
+        sup {
+            font-size: 0.5em;
+            line-height: 0;
+            vertical-align: 0.9em;
+        }
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__sheets {
+        display: grid;
+        gap: var(--gap);
+
+        @include up(md) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    &__sheet {
+        display: grid;
+        align-content: start;
+        gap: var(--space-30);
+        margin: 0;
+        padding: var(--space-30);
+        border: 1px solid var(--line);
+        background-color: var(--surface);
+    }
+
+    &__sheet-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+    }
+
+    &__sheet-title {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-h4);
+        font-weight: 500;
+    }
+
+    &__sheet-label {
+        color: var(--fg-soft);
+        @include t-label;
+
+        .is-result & {
+            color: var(--accent);
+        }
+    }
+
+    // El plano se ve entero (no se recorta como una foto).
+    &__drawing {
+        aspect-ratio: 562 / 780;
+        background-color: transparent;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    &__legend {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 2rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--fg-soft);
+        @include t-label;
+
+        li {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+    }
+
+    &__swatch {
+        display: inline-block;
+        width: 2rem;
+        height: 0;
+        border-top: 3px solid var(--fg);
+
+        &--new {
+            border-top-width: 6px;
+            border-top-color: var(--color-corten-500);
+        }
+
+        &--removed {
+            border-top: 1.5px dashed var(--fg-muted);
+        }
+
+        &--rooflight {
+            border-top: 1.5px dashed var(--accent);
+        }
+    }
+}

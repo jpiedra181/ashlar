@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/article-toc",
+    "version": "1.0.0",
+    "title": "Article · Contents",
+    "category": "ashlar",
+    "description": "The list of sections of a Journal article (one per heading), sticky beside the text on large screens, with a short call to action underneath.",
+    "keywords": ["article", "journal", "contents", "index", "sections"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "title": { "type": "string", "default": "In this article" },
+        "ctaText": { "type": "string", "default": "Got a job like this one?" }
+    },
+    "supports": { "html": false, "multiple": false, "inserter": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

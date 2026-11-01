@@ -1,0 +1,108 @@
+// --------------------------------------------------
+//      Block: Article · Header (ashlar/article-header)
+//      Migas · minutos y fecha · la pregunta en H1 · «The short answer» a la
+//      derecha (como el resumen de la ficha de proyecto) · foto a lo ancho
+//      del contenedor.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.article-header {
+    display: grid;
+    gap: var(--space-60);
+    padding-block: var(--space-40) var(--space-60);
+
+    &__inner {
+        display: grid;
+        gap: var(--space-60);
+    }
+
+    &__crumbs ol {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        @include t-label;
+
+        li + li::before {
+            content: "/";
+            margin-inline: 0.75rem;
+            color: var(--fg-muted);
+        }
+
+        // 24 px de alto como mínimo para el dedo (WCAG 2.2, tamaño del objetivo)
+        a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 1.5rem;
+            color: var(--fg-soft);
+            text-decoration: none;
+
+            &:hover {
+                color: var(--fg);
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__main {
+        display: grid;
+        gap: var(--space-50);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 1.5rem;
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__title {
+        max-width: 18ch;
+        @include t-h1;
+    }
+
+    // Recuadro de la respuesta corta: filete de corten arriba
+    &__answer {
+        display: grid;
+        gap: 0.75rem;
+        padding-top: 1.25rem;
+        border-top: 2px solid var(--accent);
+    }
+
+    &__label {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__text {
+        @include t-lead;
+    }
+
+    &__media {
+        aspect-ratio: 4 / 3;
+        background-color: var(--fill);
+
+        @include up(md) {
+            aspect-ratio: 16 / 9;
+        }
+
+        @include up(lg) {
+            aspect-ratio: 21 / 9;
+        }
+    }
+}

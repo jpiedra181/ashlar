@@ -1,0 +1,44 @@
+// --------------------------------------------------
+//      Block: Article · Keep reading (ashlar/article-next)
+//      Título y enlace al Journal en una fila · tres tarjetas de pregunta.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.article-next {
+    padding-block: var(--section);
+
+    &__inner {
+        display: grid;
+        gap: var(--space-60);
+    }
+
+    &__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__list {
+        display: grid;
+        gap: var(--space-50) var(--gap);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(md) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    &__item {
+        display: grid;
+    }
+}

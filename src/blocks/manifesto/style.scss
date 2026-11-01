@@ -1,0 +1,55 @@
+// --------------------------------------------------
+//      Block: Manifesto (ashlar/manifesto)
+//      Capítulo en una columna de 320 px y la frase (Heading/H2) en la de 960.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.manifesto {
+    &__inner {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: 1fr 3fr;
+            column-gap: 0;
+        }
+    }
+
+    &__body {
+        display: grid;
+        gap: var(--space-50);
+    }
+
+    &__text {
+        @include t-h2;
+        text-wrap: pretty;
+
+        em {
+            font-style: normal;
+            color: var(--fg-muted);
+        }
+    }
+
+    &__signature {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__rule {
+        flex: none;
+        width: 2.5rem;
+        height: 1px;
+        background-color: currentColor;
+    }
+
+    &__portrait {
+        flex: none;
+        width: 3.5rem;
+        border-radius: var(--radius-round);
+    }
+}

@@ -1,0 +1,685 @@
+// --------------------------------------------------
+//		Admin con la identidad de la marca
+//		(los colores del menú, botones y enlaces los pone el esquema «Ashlar»,
+//		src/admin/admin-colors.scss). Aquí: tipografía, Inicio, Opciones y
+//		detalles. Las variables --wp--preset--* las imprime inc/admin.php.
+//
+//		El editor de bloques conserva su interfaz nativa: solo hereda el color
+//		de acento del esquema.
+// --------------------------------------------------
+
+@use "config";
+@use "tools" as *;
+
+// --------------------------------------------------
+//  Tipografía
+// --------------------------------------------------
+
+body.wp-admin:not(.block-editor-page) {
+    #wpcontent,
+    #adminmenu,
+    #wpfooter {
+        font-family: var(--font-family-body);
+    }
+
+    .wrap > h1,
+    .wrap > .wp-heading-inline,
+    .wrap h1.wp-heading-inline,
+    .ashlar-settings__header h1 {
+        font-family: var(--font-family-display);
+        font-size: 2.25rem;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        color: var(--color-stone-950);
+    }
+
+    .wrap h2:not(.screen-reader-text):not(.nav-tab-wrapper) {
+        font-family: var(--font-family-display);
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+
+    // «Add new» junto al título: botón de contorno, como .btn--outline
+    .page-title-action {
+        top: -0.4rem;
+        padding: 0.35rem 1rem;
+        border: 1px solid var(--color-stone-950);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        color: var(--color-stone-950);
+        font-size: 0.8125rem;
+        font-weight: 600;
+
+        &:hover,
+        &:focus {
+            border-color: var(--color-corten-600);
+            background-color: var(--color-corten-600);
+            color: var(--color-stone-50);
+        }
+    }
+
+    // Tablas: cabeceras con el rótulo mono de la marca, filas con aire
+    .wp-list-table {
+        border-color: var(--color-stone-200);
+
+        thead th,
+        tfoot th {
+            @include t-label($size: 0.6875rem);
+            color: var(--color-stone-700);
+        }
+
+        .row-title {
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+    }
+
+    .button-primary {
+        border-radius: var(--radius-sm);
+        padding-inline: 1.25rem;
+    }
+}
+
+// Menú lateral: la entrada actual con un filete corten a la izquierda
+#adminmenu {
+    li.current > a.menu-top,
+    li.wp-has-current-submenu > a.wp-has-current-submenu {
+        box-shadow: inset 3px 0 0 var(--color-corten-300);
+    }
+}
+
+// Barra superior: el nombre del sitio en la tipografía de titulares
+#wpadminbar #wp-admin-bar-site-name > .ab-item {
+    font-family: var(--font-family-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.ashlar-admin-footer a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+// --------------------------------------------------
+//  Inicio
+// --------------------------------------------------
+
+.ashlar-home {
+    max-width: 82rem;
+    margin-top: 1.5rem;
+    color: var(--color-stone-950);
+}
+
+.ashlar-home__hero {
+    display: grid;
+    overflow: hidden;
+    background-color: var(--color-stone-950);
+    color: var(--color-stone-50);
+
+    @include up(lg) {
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        min-height: 22rem;
+    }
+}
+
+.ashlar-home__hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+}
+
+.ashlar-home__date {
+    margin: 0 0 1.25rem;
+    color: var(--color-corten-300);
+    @include t-label;
+}
+
+.ashlar-home__title {
+    margin: 0;
+    font-family: var(--font-family-display);
+    font-size: clamp(2.4rem, 1.6rem + 2.4vw, 4rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+
+    // Como en los titulares del tema: <em> es el tramo en tono apagado, sin cursiva
+    em {
+        font-style: normal;
+        color: var(--color-stone-400);
+    }
+}
+
+.ashlar-home__lead {
+    max-width: 46ch;
+    margin: 1.25rem 0 0;
+    color: var(--color-stone-400);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.ashlar-home__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+
+    // Mismo botón que .btn del tema: rectangular, Hanken SemiBold
+    .button.button-hero {
+        display: inline-flex;
+        align-items: center;
+        min-height: 3rem;
+        padding: 0 1.5rem;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-family-body);
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .ashlar-button-ghost {
+        border: 1px solid var(--color-stone-600);
+        background: transparent;
+        color: var(--color-stone-50);
+
+        &:hover,
+        &:focus {
+            border-color: var(--color-stone-50);
+            background: var(--color-stone-50);
+            color: var(--color-stone-950);
+        }
+    }
+}
+
+.ashlar-home__photo {
+    position: relative;
+    min-height: 14rem;
+    margin: 0;
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    figcaption {
+        position: absolute;
+        left: 1.25rem;
+        bottom: 1.1rem;
+        color: var(--color-stone-400);
+        @include t-label($size: 0.6875rem);
+
+        span {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-family: var(--font-family-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            text-transform: none;
+            color: var(--color-stone-50);
+        }
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, color-mix(in srgb, var(--color-stone-950) 70%, transparent), transparent 50%);
+    }
+
+    figcaption {
+        z-index: 1;
+    }
+}
+
+.ashlar-home__section {
+    margin-top: 2.5rem;
+}
+
+.ashlar-home__heading {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-family-display) !important;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.ashlar-home__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin: 0;
+
+    li {
+        margin: 0;
+    }
+}
+
+.ashlar-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 1.5rem 1.5rem 1.75rem;
+    border: 1px solid var(--color-stone-200);
+    background-color: var(--color-stone-50);
+    color: var(--color-stone-950);
+    text-decoration: none;
+    box-sizing: border-box;
+    transition:
+        border-color 0.4s var(--ease-out),
+        background-color 0.4s var(--ease-out),
+        transform 0.6s var(--ease-out);
+
+    &__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-bottom: 0.75rem;
+        border-radius: var(--radius-round);
+        background-color: var(--color-stone-100);
+        color: var(--color-corten-600);
+        font-size: 1.125rem;
+        line-height: 2.5rem;
+        text-align: center;
+        transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    &__title {
+        font-family: var(--font-family-display);
+        font-size: 1.375rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+
+    &__text {
+        color: var(--color-stone-700);
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    &__arrow {
+        position: absolute;
+        top: 1.6rem;
+        right: 1.5rem;
+        width: 1rem;
+        height: 1rem;
+        color: var(--color-stone-700);
+        transition: transform 0.6s var(--ease-out), color 0.4s ease;
+    }
+
+    &:hover,
+    &:focus {
+        border-color: var(--color-stone-950);
+        color: var(--color-stone-950);
+        transform: translate3d(0, -2px, 0);
+    }
+
+    &:hover &__icon,
+    &:focus &__icon {
+        background-color: var(--color-corten-600);
+        color: var(--color-stone-50);
+    }
+
+    &:hover &__arrow,
+    &:focus &__arrow {
+        color: var(--color-corten-600);
+        transform: translate3d(0.25rem, 0, 0);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-corten-600);
+        outline-offset: 3px;
+        box-shadow: none;
+    }
+}
+
+.ashlar-home__columns {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2.5rem;
+
+    @include up(lg) {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+        align-items: start;
+    }
+}
+
+.ashlar-panel {
+    padding: 1.75rem;
+    border: 1px solid var(--color-stone-200);
+    background-color: var(--color-stone-50);
+
+    &--dark {
+        border-color: var(--color-stone-950);
+        background-color: var(--color-stone-950);
+        color: var(--color-stone-50);
+
+        .ashlar-home__heading {
+            color: var(--color-stone-50);
+        }
+
+        a {
+            color: var(--color-corten-300);
+        }
+    }
+
+    &__note {
+        margin: 1.5rem 0 0;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--color-stone-800);
+        color: var(--color-stone-400);
+        font-size: 0.875rem;
+    }
+}
+
+.ashlar-pages {
+    margin: 0;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0;
+        padding: 0.9rem 0;
+        border-top: 1px solid var(--color-stone-200);
+
+        &:last-child {
+            border-bottom: 1px solid var(--color-stone-200);
+        }
+    }
+
+    &__main {
+        display: grid;
+        gap: 0.2rem;
+        min-width: 0;
+    }
+
+    &__title {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+
+    &__meta {
+        color: var(--color-stone-700);
+        font-size: 0.8125rem;
+    }
+
+    &__links {
+        display: flex;
+        flex: none;
+        gap: 1rem;
+
+        a {
+            color: var(--color-stone-950);
+            @include t-label($size: 0.75rem);
+            text-decoration: none;
+            background-image: linear-gradient(currentColor, currentColor);
+            background-size: 0% 1px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.5s var(--ease-out), color 0.3s ease;
+
+            &:hover,
+            &:focus {
+                color: var(--color-corten-600);
+                background-size: 100% 1px;
+            }
+        }
+    }
+}
+
+.ashlar-badge {
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-corten-600);
+    color: var(--color-stone-50);
+    @include t-label($size: 0.625rem);
+
+    &--muted {
+        background-color: var(--color-stone-100);
+        color: var(--color-stone-700);
+    }
+}
+
+.ashlar-tips {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: tip;
+
+    li {
+        position: relative;
+        margin: 0;
+        padding: 0.9rem 0 0.9rem 2.5rem;
+        border-top: 1px solid var(--color-stone-800);
+        color: var(--color-stone-50);
+        font-size: 0.9375rem;
+        line-height: 1.55;
+        counter-increment: tip;
+
+        &::before {
+            content: counter(tip, decimal-leading-zero);
+            position: absolute;
+            top: 1.05rem;
+            left: 0;
+            color: var(--color-corten-300);
+            @include t-label($size: 0.6875rem);
+            font-variant-numeric: tabular-nums;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Opciones
+// --------------------------------------------------
+
+.ashlar-settings {
+    max-width: 62rem;
+
+    &__header {
+        margin: 1.5rem 0 2rem;
+
+        h1 {
+            margin: 0 0 0.5rem;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+            max-width: 52ch;
+            color: var(--color-stone-700);
+            font-size: 0.9375rem;
+        }
+    }
+
+    &__tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 2.5rem;
+        padding: 0 1rem;
+        border: 1px solid var(--color-stone-200);
+        border-radius: var(--radius-sm);
+        background: var(--color-stone-50);
+        color: var(--color-stone-700);
+        font-family: var(--font-family-body);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+        .dashicons {
+            width: 1rem;
+            height: 1rem;
+            font-size: 1rem;
+        }
+
+        &:hover {
+            border-color: var(--color-stone-950);
+            color: var(--color-stone-950);
+        }
+
+        &[aria-selected="true"] {
+            border-color: var(--color-stone-950);
+            background-color: var(--color-stone-950);
+            color: var(--color-stone-50);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--color-corten-600);
+            outline-offset: 2px;
+        }
+    }
+
+    &__panel {
+        padding: 2rem 2rem 1rem;
+        border: 1px solid var(--color-stone-200);
+        background-color: var(--color-stone-50);
+
+        > h2 {
+            margin: 0 0 0.35rem;
+            font-size: 1.75rem;
+        }
+
+        .form-table th {
+            width: 13rem;
+            padding-top: 1.35rem;
+            font-weight: 500;
+        }
+
+        .form-table td {
+            padding-top: 1rem;
+        }
+
+        input.regular-text,
+        textarea {
+            width: 100%;
+            max-width: 32rem;
+            min-height: 2.75rem;
+            padding: 0.5rem 0.85rem;
+            border-color: var(--color-stone-500);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-stone-50);
+
+            &:focus {
+                border-color: var(--color-corten-600);
+                box-shadow: 0 0 0 1px var(--color-corten-600);
+            }
+        }
+
+        .ashlar-field--short {
+            max-width: 14rem;
+        }
+
+        .description {
+            max-width: 52ch;
+            color: var(--color-stone-700);
+        }
+    }
+
+    &__intro {
+        max-width: 60ch;
+        margin: 0 0 0.5rem;
+        color: var(--color-stone-700);
+    }
+
+    &__actions {
+        position: sticky;
+        bottom: 0;
+        z-index: 2;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+        padding: 1rem 0;
+        // Se funde con el fondo del escritorio (stone-100 en admin-colors.scss)
+        background: linear-gradient(to top, var(--color-stone-100) 70%, transparent);
+
+        .button-primary {
+            min-height: 2.75rem;
+            padding: 0 1.75rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// Campos de imagen (una o varias)
+.ashlar-media-field {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin: 0 0 0.75rem;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__item {
+        position: relative;
+        width: 7.5rem;
+        height: 7.5rem;
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid var(--color-stone-200);
+        background-color: var(--color-stone-100);
+        cursor: grab;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &.ui-sortable-helper {
+            cursor: grabbing;
+            box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--color-stone-950) 25%, transparent);
+        }
+    }
+
+    &__remove {
+        position: absolute;
+        top: 0.35rem;
+        right: 0.35rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        border: 0;
+        border-radius: var(--radius-round);
+        background-color: var(--color-stone-950);
+        color: var(--color-stone-50);
+        font-size: 1.1rem;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+
+        &:focus-visible {
+            opacity: 1;
+            outline: 2px solid var(--color-corten-300);
+        }
+    }
+
+    &__item:hover &__remove {
+        opacity: 1;
+    }
+}

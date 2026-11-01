@@ -1,0 +1,26 @@
+{
+    "_comment": "Configuración del MCP de Playwright para este proyecto. La carga .mcp.json (raíz) con --config. Perfil persistente en .playwright-mcp/profile para no tener que volver a iniciar sesión en wp-admin en cada sesión; salidas (capturas, logs de consola) en .playwright-mcp/, que está en .gitignore.",
+    "browser": {
+        "browserName": "chromium",
+        "isolated": false,
+        "userDataDir": ".playwright-mcp/profile",
+        "launchOptions": {
+            "headless": false
+        },
+        "contextOptions": {
+            "viewport": { "width": 1440, "height": 900 },
+            "ignoreHTTPSErrors": true,
+            "locale": "es-ES"
+        }
+    },
+    "outputDir": ".playwright-mcp",
+    "capabilities": ["vision"],
+    "timeouts": {
+        "action": 8000,
+        "navigation": 60000,
+        "settle": 600
+    },
+    "console": {
+        "level": "warning"
+    }
+}

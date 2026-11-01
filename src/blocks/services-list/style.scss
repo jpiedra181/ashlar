@@ -1,0 +1,171 @@
+// --------------------------------------------------
+//      Block: Services list (ashlar/services-list)
+//      Filas grandes (nombre en H1, 72 px en escritorio) con plazo y precio a
+//      la derecha y flecha. Al pasar el ratón: el nombre en corten, el filete
+//      inferior más fuerte y una foto de 200 × 132 junto al nombre.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.services {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-30);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__note {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__list {
+        border-top: 1px solid var(--line);
+    }
+}
+
+.srow {
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    transition: border-color var(--duration-base) ease;
+
+    &__link {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas:
+            "num name arrow"
+            "num meta arrow";
+        align-items: center;
+        gap: 0.5rem var(--space-30);
+        padding-block: var(--space-30);
+        color: inherit;
+
+        @include up(lg) {
+            grid-template-columns: 4rem minmax(0, 1fr) auto 13.75rem 2rem;
+            grid-template-areas: "num name thumb meta arrow";
+            gap: var(--space-50);
+            padding-block: 1.5rem;
+        }
+    }
+
+    &__num {
+        grid-area: num;
+        align-self: start;
+        padding-top: 0.6em;
+        color: var(--fg-muted);
+        @include t-label;
+
+        @include up(lg) {
+            align-self: center;
+            padding-top: 0;
+        }
+    }
+
+    &__name {
+        grid-area: name;
+        @include t-h3;
+        transition: color var(--duration-base) ease;
+
+        @include up(lg) {
+            @include t-h1;
+        }
+    }
+
+    &__thumb {
+        grid-area: thumb;
+        display: none;
+        width: 12.5rem;
+        aspect-ratio: 200 / 132;
+        opacity: 0;
+        transform: scale(0.94);
+        transition:
+            opacity var(--duration-base) ease,
+            transform var(--duration-slow) var(--ease-out);
+
+        @include up(lg) {
+            display: block;
+        }
+    }
+
+    &__meta {
+        grid-area: meta;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 1rem;
+
+        @include up(lg) {
+            display: grid;
+            gap: 0.25rem;
+        }
+    }
+
+    &__duration {
+        color: var(--fg-muted);
+        @include t-label;
+
+        @include down(lg) {
+            align-self: center;
+        }
+    }
+
+    &__price {
+        font-weight: 600;
+    }
+
+    &__arrow {
+        grid-area: arrow;
+        width: 2rem;
+        height: 2rem;
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            border-bottom-color: var(--line-strong);
+        }
+
+        &:hover &__name {
+            color: var(--accent);
+        }
+
+        &:hover &__thumb {
+            opacity: 1;
+            transform: none;
+        }
+
+        &:hover &__arrow {
+            color: var(--accent);
+            transform: translate3d(0.2rem, -0.2rem, 0);
+        }
+    }
+
+    // Con teclado, el foco marca la fila entera
+    &__link:focus-visible {
+        outline-offset: -2px;
+    }
+}
+
+// En el editor la foto se ve siempre, para poder elegirla.
+.services.is-editing .srow__thumb {
+    opacity: 1;
+    transform: none;
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/boroughs",
+    "version": "1.0.0",
+    "title": "Where we build",
+    "category": "ashlar",
+    "description": "The areas you work in, each with a bar that shows how many projects you have built there.",
+    "keywords": ["areas", "boroughs", "map", "where", "locations", "chart"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "chapterNum": { "type": "string", "default": "" },
+        "chapterLabel": { "type": "string", "default": "Where we build" },
+        "title": { "type": "string", "default": "Five boroughs,<br>close to the yard." },
+        "lede": { "type": "string", "default": "We keep our sites close to our yard in N1, so your site manager is never more than twenty minutes away." },
+        "countFormat": { "type": "string", "default": "{n} projects" },
+        "areas": {
+            "type": "array",
+            "default": [
+                { "name": "Islington", "count": 34 },
+                { "name": "Hackney", "count": 29 },
+                { "name": "Camden", "count": 22 },
+                { "name": "Haringey", "count": 18 },
+                { "name": "Tower Hamlets", "count": 15 }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

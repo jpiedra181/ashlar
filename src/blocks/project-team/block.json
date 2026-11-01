@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-team",
+    "version": "1.0.0",
+    "title": "Project · Who built it",
+    "category": "ashlar",
+    "description": "The people on the job, each with a small photo, their role and one line about what they did, plus the other firms involved.",
+    "keywords": ["project", "team", "people", "credits", "who"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "08" },
+        "chapterLabel": { "type": "string", "default": "Who built it" },
+        "title": { "type": "string", "default": "The people on this job." },
+        "people": {
+            "type": "array",
+            "default": [
+                { "image": {}, "role": "Site manager", "name": "Dan Okafor", "note": "On site every day, 7am to 4pm" },
+                { "image": {}, "role": "Project lead", "name": "Marta Kowalska", "note": "Priced the job and signed off every change" },
+                { "image": {}, "role": "Head carpenter", "name": "Sean Byrne", "note": "Made the oak dining bench" }
+            ]
+        },
+        "credits": { "type": "string", "default": "Architect: Studio Norland · Structural engineer: Fenwick &amp; Ash · Glazing: Calder Stone Co." }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

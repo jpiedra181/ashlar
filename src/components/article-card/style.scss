@@ -1,0 +1,77 @@
+// --------------------------------------------------
+//      Component: Question card (markup en ashlar_article_card(), inc/journal.php)
+//      Tarjeta de texto de un artículo del Journal: tema y minutos en mono,
+//      la pregunta (H4) y la respuesta corta. Sin foto a propósito. Al pasar
+//      el ratón, el filete de arriba se dibuja en corten y la pregunta pasa a
+//      corten.
+// --------------------------------------------------
+
+@use "tools" as *;
+
+.qcard {
+    height: 100%;
+
+    &__link {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 1rem;
+        height: 100%;
+        padding-top: var(--space-30);
+        border-top: 1px solid var(--line);
+        color: inherit;
+
+        // Filete de corten que se dibuja encima del gris
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -1px 0 auto;
+            height: 1px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--duration-slow) var(--ease-out);
+        }
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__title {
+        max-width: 22ch;
+        @include t-h4;
+        transition: color var(--duration-base) ease;
+    }
+
+    &__answer {
+        color: var(--fg-soft);
+        line-height: 1.55;
+    }
+
+    &__arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--accent);
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    @media (hover: hover) {
+        &__link:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        &__link:hover &__title {
+            color: var(--accent);
+        }
+
+        &__link:hover &__arrow {
+            transform: translate3d(0.25rem, 0, 0);
+        }
+    }
+}

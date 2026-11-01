@@ -1,0 +1,518 @@
+// --------------------------------------------------
+//      Block: Quote form (ashlar/quote)
+//      Escritorio (Figma 73:548): columna izquierda 520 (intro, quién
+//      contesta, canales y «What happens next») y tarjeta del formulario 680
+//      que ocupa las dos filas. Móvil (Figma 4:143): intro, formulario y
+//      «Prefer to talk?» (canales y pasos) debajo.
+//      Formulario: preguntas de opción única con radios en forma de chip,
+//      caja «Your ballpark», campos con rótulo Label/Mono y botón a todo el
+//      ancho.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.quote {
+    padding-block: var(--space-60) var(--section);
+
+    &__inner {
+        display: grid;
+        grid-template-areas:
+            "intro"
+            "card"
+            "talk";
+        row-gap: var(--section-gap);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 520fr) minmax(0, 680fr);
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "intro card"
+                "talk card";
+            gap: var(--space-50) var(--space-70);
+        }
+    }
+
+    // Intro
+    &__intro {
+        display: grid;
+        grid-area: intro;
+        align-content: start;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h1;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__who {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        @include up(lg) {
+            gap: 1rem;
+            margin-top: 1.75rem;
+        }
+    }
+
+    &__portrait {
+        flex: none;
+        width: 3rem;
+        aspect-ratio: 1;
+        border-radius: var(--radius-round);
+        background-color: var(--fill);
+
+        @include up(lg) {
+            width: 4rem;
+        }
+    }
+
+    &__who-name {
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    &__who-role {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+
+    // Tarjeta del formulario
+    &__card {
+        grid-area: card;
+        align-self: start;
+        padding: clamp(1.25rem, 0.8rem + 1.9vw, 2.5rem);
+        border: 1px solid var(--line);
+        background-color: var(--surface);
+    }
+
+    // «Prefer to talk?»: canales y pasos
+    &__talk {
+        display: grid;
+        grid-area: talk;
+        align-content: start;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            gap: var(--space-50);
+        }
+    }
+
+    // En escritorio la columna ya se explica sola: el título queda para el
+    // lector de pantalla
+    &__talk-title {
+        color: var(--accent);
+        @include t-label;
+
+        @include up(lg) {
+            @include visually-hidden-rules;
+        }
+    }
+
+    &__channels {
+        margin: 0;
+        border-top: 1px solid var(--line-strong);
+    }
+
+    &__channel {
+        display: grid;
+        gap: 0.25rem;
+        padding-block: 1rem;
+        border-bottom: 1px solid var(--line);
+
+        @include up(lg) {
+            grid-template-columns: 5rem minmax(0, 1fr);
+            align-items: center;
+            column-gap: 1.5rem;
+            padding-block: 1.125rem;
+        }
+    }
+
+    &__channel-label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__channel-value {
+        display: grid;
+        gap: 0.25rem;
+        margin: 0;
+        overflow-wrap: anywhere;
+        @include t-h4;
+    }
+
+    &__channel-link {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+    }
+
+    &__channel-note {
+        color: var(--fg-soft);
+        letter-spacing: 0;
+        @include t-small;
+    }
+
+    &__next {
+        display: grid;
+        gap: 1rem;
+
+        @include up(lg) {
+            gap: 1.25rem;
+        }
+    }
+
+    &__label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__steps {
+        display: grid;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(lg) {
+            gap: 1.25rem;
+        }
+
+        li {
+            display: grid;
+            grid-template-columns: 1.75rem minmax(0, 1fr);
+            align-items: start;
+            gap: 0.75rem;
+
+            @include up(lg) {
+                gap: 1rem;
+            }
+        }
+    }
+
+    &__step-num {
+        display: grid;
+        place-items: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius-round);
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__step-title {
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    &__step-text {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}
+
+// --------------------------------------------------
+//      Formulario
+// --------------------------------------------------
+
+.qform {
+    display: grid;
+    gap: var(--space-40);
+
+    &__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+    }
+
+    &__title {
+        @include t-h3;
+    }
+
+    &__note {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__question {
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    // Leyenda flotante: así queda dentro del fieldset y no sobre su borde
+    &__legend {
+        float: left;
+        width: 100%;
+        margin-bottom: 0.75rem;
+        padding: 0;
+        color: var(--fg-muted);
+        @include t-label;
+
+        + * {
+            clear: both;
+        }
+    }
+
+    &__options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    // Radio real (invisible) encima del chip: clic, teclado y lector de
+    // pantalla funcionan como en cualquier grupo de radios
+    &__option {
+        position: relative;
+        display: inline-flex;
+
+        input {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        input:checked + .chip {
+            border-color: var(--btn-bg);
+            background-color: var(--btn-bg);
+            color: var(--btn-fg);
+        }
+
+        input:focus-visible + .chip {
+            outline: 2px solid var(--focus);
+            outline-offset: 3px;
+        }
+    }
+
+    &__question.is-invalid .chip {
+        border-color: var(--error);
+    }
+
+    &__error {
+        margin-top: 0.5rem;
+        color: var(--error);
+        font-weight: 500;
+        @include t-small;
+    }
+
+    // «Your ballpark»
+    &__ballpark {
+        display: grid;
+        gap: 0.25rem;
+        padding: 1.25rem 1.25rem 1.25rem 1.375rem;
+        border-left: 3px solid var(--btn-bg);
+        background-color: var(--fill);
+    }
+
+    &__ballpark-label {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    // Móvil: precio y, debajo, el plazo en Label/Mono. Escritorio: una línea
+    // «£95k – £160k · 14–24 weeks» en H3.
+    &__figure {
+        display: grid;
+        gap: 0.25rem;
+        @include t-h4;
+
+        @include up(md) {
+            display: block;
+            @include t-h3;
+        }
+    }
+
+    &__time {
+        color: var(--fg-muted);
+        @include t-label;
+
+        @include up(md) {
+            color: inherit;
+            text-transform: none;
+            @include t-h3;
+
+            &::before {
+                content: "· " / "";
+            }
+        }
+    }
+
+    &__basis {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+
+    // Datos de contacto
+    &__contact {
+        padding-top: var(--space-30);
+        border-top: 1px solid var(--line);
+    }
+
+    &__contact &__legend {
+        margin-bottom: var(--space-40);
+    }
+
+    &__fields {
+        display: grid;
+        gap: 1.5rem 1rem;
+
+        @include up(md) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            row-gap: 2rem;
+        }
+    }
+
+    &__check {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        line-height: 1.5;
+        cursor: pointer;
+
+        // 24 px (el Figma dice 22): mínimo de objetivo de WCAG 2.2
+        input {
+            flex: none;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 0;
+            accent-color: var(--btn-bg);
+            cursor: pointer;
+        }
+    }
+
+    // Campo trampa para robots: fuera de la vista y del orden de tabulación
+    &__trap {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    &__submit {
+        width: 100%;
+    }
+
+    &__privacy {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__status {
+        @include t-small;
+
+        &:empty {
+            display: none;
+        }
+
+        &[data-error] {
+            color: var(--error);
+            font-weight: 500;
+        }
+    }
+
+    // Agradecimiento (sustituye al formulario)
+    &__success {
+        display: grid;
+        gap: 1rem;
+        padding-block: var(--space-40);
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__success-eyebrow {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__success-title {
+        @include t-h3;
+    }
+
+    &__success-text {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+}
+
+// Campo con rótulo Label/Mono (componente Input del Figma)
+.field {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+
+    &--wide {
+        grid-column: 1 / -1;
+    }
+
+    &__label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-sm);
+        background-color: var(--surface);
+        color: var(--fg);
+        font: inherit;
+        line-height: 1.5;
+        transition: border-color var(--duration-base) var(--ease-standard);
+
+        &::placeholder {
+            color: var(--fg-muted);
+            opacity: 1;
+        }
+
+        &:hover {
+            border-color: var(--fg-soft);
+        }
+
+        &:focus {
+            border-color: var(--fg);
+        }
+
+        &[aria-invalid="true"] {
+            border-color: var(--error);
+            box-shadow: inset 0 0 0 1px var(--error);
+        }
+    }
+
+    textarea#{&}__input {
+        height: 7.5rem;
+        min-height: 7.5rem;
+        resize: vertical;
+    }
+
+    &__error {
+        color: var(--error);
+        font-weight: 500;
+        @include t-small;
+    }
+}

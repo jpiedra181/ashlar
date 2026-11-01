@@ -1,0 +1,209 @@
+// --------------------------------------------------
+//      Block: Team (ashlar/team)
+//      Escritorio (lg): tres retratos 288×380 y la tarjeta «+ 21 more» (344)
+//      a su altura, con los oficios en filas. Móvil (Figma 91:824): cada
+//      persona en una fila con el retrato pequeño (96×120) y la tarjeta
+//      debajo con los oficios en línea.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.team {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-30);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__grid {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &--more &__grid {
+        @include up(lg) {
+            grid-template-columns: minmax(0, 912fr) minmax(0, 344fr);
+            gap: var(--gap);
+        }
+    }
+
+    &__people {
+        display: grid;
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(lg) {
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column;
+            column-gap: var(--gap);
+        }
+    }
+
+    &__person {
+        display: grid;
+        grid-template-columns: 6rem minmax(0, 1fr);
+        align-items: center;
+        gap: 1rem;
+
+        // align-content: si no, el alto sobrante de la fila se reparte entre
+        // retrato y texto y los nombres quedan a distinta altura
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr);
+            align-content: start;
+            align-items: start;
+        }
+    }
+
+    &__portrait {
+        aspect-ratio: 4 / 5;
+        background-color: var(--fill);
+
+        @include up(lg) {
+            aspect-ratio: 288 / 380;
+        }
+    }
+
+    // El rol va después del nombre en el HTML; aquí sube encima
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        @include up(lg) {
+            gap: 0.5rem;
+        }
+    }
+
+    &__role {
+        order: -1;
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__name {
+        @include t-h4;
+    }
+
+    &__fact {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+
+    // «+ 21 more»
+    &__more {
+        display: grid;
+        align-content: start;
+        gap: 0.75rem;
+        padding: 1.25rem;
+        background-color: var(--fill);
+
+        @include up(lg) {
+            gap: 1.25rem;
+            padding: 1.75rem;
+        }
+    }
+
+    &__more-title {
+        @include t-h4;
+
+        @include up(lg) {
+            @include t-h2;
+        }
+    }
+
+    &__more-text {
+        color: var(--fg-soft);
+        @include t-small;
+
+        @include up(lg) {
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+        }
+    }
+
+    // Oficios: en línea en móvil («5 Site managers · 9 …»), en filas desde lg
+    &__roles {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        color: var(--fg-soft);
+        list-style: none;
+        @include t-small;
+
+        li {
+            display: inline-flex;
+            gap: 0.25em;
+
+            // El gap (0.25em) ya separa por la izquierda
+            &:not(:last-child)::after {
+                content: "·" / "";
+                margin-inline: 0.1em 0.35em;
+            }
+        }
+
+        @include up(lg) {
+            display: block;
+            border-top: 1px solid var(--line);
+
+            li {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 1rem;
+                padding-block: 0.625rem;
+                border-bottom: 1px solid var(--line);
+
+                &:not(:last-child)::after {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    &__trade {
+        @include up(lg) {
+            color: var(--fg);
+        }
+    }
+
+    &__count {
+        order: -1;
+
+        @include up(lg) {
+            order: 0;
+            @include t-label;
+        }
+    }
+}

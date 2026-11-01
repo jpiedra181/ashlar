@@ -1,0 +1,101 @@
+// --------------------------------------------------
+//		Tools: Text — estilos de texto del Figma como mixins
+//		Las mismas recetas que las clases .t-* (elements/_text-styles.scss) y
+//		que los estilos de texto de Figma (Display, Heading/H1…H4, Body/*,
+//		Label/Mono). Sin salida CSS propia: seguro de @use en cualquier bloque.
+// --------------------------------------------------
+
+@mixin t-display {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-display);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+}
+
+@mixin t-h1 {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h1);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+@mixin t-h2 {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    line-height: 1.13;
+    letter-spacing: -0.02em;
+}
+
+@mixin t-h3 {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h3);
+    font-weight: 500;
+    line-height: 1.19;
+    letter-spacing: -0.01em;
+}
+
+@mixin t-h4 {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h4);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+
+/// Body/Large
+@mixin t-lead {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-lead);
+    font-weight: 400;
+    line-height: 1.5;
+    text-wrap: pretty;
+}
+
+/// Body/Small
+@mixin t-small {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
+    line-height: 1.45;
+}
+
+/// UI/Nav
+@mixin t-nav {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+/// Label/Mono: rótulos en versalitas (eyebrows, datos, notas de obra).
+@mixin t-label($size: var(--font-size-xs), $tracking: 0.06em) {
+    font-family: var(--font-family-mono);
+    font-size: $size;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: $tracking;
+    text-transform: uppercase;
+}
+
+/// Antetítulo de sección («Why we started», «Our story»): texto normal en tono
+/// suave tras un sillar de corten, el de la marca. El sillar va en línea (no
+/// flex) para que el rótulo no se estire al alto de la fila de una rejilla.
+/// Lo usan .chapter y los __eyebrow de sección; el mono (t-label) queda para
+/// datos y rótulos de documento.
+@mixin t-chapter {
+    color: var(--fg-soft);
+    font-weight: 500;
+    @include t-small;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        width: 0.875rem;
+        height: 0.5rem;
+        margin-right: 0.625rem;
+        vertical-align: 0.1em;
+        background-color: var(--mark-accent);
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/header-menu",
+    "version": "1.0.0",
+    "title": "Header menu",
+    "category": "ashlar",
+    "icon": "menu-alt",
+    "description": "Header navigation, phone, “Get a rough price” button and the mobile menu. Links are managed in Appearance → Menus; the button and contact details in Options.",
+    "keywords": [
+        "menu",
+        "header",
+        "navigation"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "location": {
+            "type": "string",
+            "default": "primary"
+        },
+        "ariaLabel": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "supports": {
+        "html": false,
+        "reusable": false,
+        "multiple": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/standard",
+    "version": "1.0.0",
+    "title": "Commitments table",
+    "category": "ashlar",
+    "description": "The promises written into every contract, as a table: clause, commitment, what it means in practice and the measure.",
+    "keywords": ["standard", "promises", "commitments", "contract", "table", "guarantee"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "chapterNum": { "type": "string", "default": "" },
+        "chapterLabel": { "type": "string", "default": "The contract" },
+        "title": { "type": "string", "default": "What we put<br>in writing." },
+        "lede": { "type": "string", "default": "These four are clauses in every contract we sign, along with what we owe you if we break one." },
+        "headClause": { "type": "string", "default": "Clause" },
+        "headCommitment": { "type": "string", "default": "Commitment" },
+        "headDetail": { "type": "string", "default": "In practice" },
+        "headMeasure": { "type": "string", "default": "Measure" },
+        "rows": {
+            "type": "array",
+            "default": [
+                { "clause": "§ 01", "commitment": "Fixed price within<br>10 working days", "detail": "One survey visit, then an itemised quote. The figure you sign is the figure you pay unless you change the brief, and any change is priced in writing before work starts.", "measure": "10 days" },
+                { "clause": "§ 02", "commitment": "A site report<br>every Friday", "detail": "Photos, progress against the programme and next week's plan, in your inbox by 5pm.", "measure": "Fri 17:00" },
+                { "clause": "§ 03", "commitment": "Never more than<br>six live sites", "detail": "So the people who priced your job are the ones running it, and your site manager isn't spread thin across the city.", "measure": "≤ 6" },
+                { "clause": "§ 04", "commitment": "Ten-year structural<br>warranty", "detail": "Insurance-backed and transferable if you sell. If something structural fails, we come back and put it right.", "measure": "10 yrs" }
+            ]
+        },
+        "footnote": { "type": "string", "default": "If a Friday report is late, £100 comes off your final invoice. It has happened twice since 2019." }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/timeline",
+    "version": "1.0.0",
+    "title": "Timeline",
+    "category": "ashlar",
+    "description": "The company’s story in milestones: the year, what happened and a line about it. Across the page on desktop, down a rail on mobile.",
+    "keywords": ["timeline", "history", "story", "milestones", "years"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "eyebrow": { "type": "string", "default": "Our story" },
+        "title": { "type": "string", "default": "How we got here." },
+        "lede": { "type": "string", "default": "From one van to two railway arches, with a few lessons learned the hard way." },
+        "items": {
+            "type": "array",
+            "default": [
+                { "year": "2009", "title": "One van, two of us", "text": "Our first job was a kitchen on Mildmay Grove. It came in £200 under the quote, and Priya still brings it up." },
+                { "year": "2012", "title": "The first Friday report", "text": "A client’s mum lived in Leeds and asked for photos every week. We’ve sent every client one since." },
+                { "year": "2015", "title": "The six-site rule", "text": "We took on eleven jobs at once and did none of them well. We haven’t run more than six since." },
+                { "year": "2018", "title": "The yard", "text": "Two railway arches on Wharf Road: timber store, joinery shop and an office with a kettle that works." },
+                { "year": "2021", "title": "Builder of the year", "text": "North London Homes Awards, under-50-staff category. The trophy holds the joinery shop door open." },
+                { "year": "2025", "title": "House 118", "text": "Elm Row, handed over in week 22, the day we said it would be." }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

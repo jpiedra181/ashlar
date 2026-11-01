@@ -1,0 +1,210 @@
+// --------------------------------------------------
+//      Block: Selected work (ashlar/projects-carousel)
+//      Cabecera con pista y flechas, pista horizontal que arranca en el margen
+//      del contenedor y sale por la derecha (tarjetas de 560, final de 420),
+//      barra de progreso y contador.
+//
+//      Dos modos (view.js): scroll horizontal nativo, y en escritorio con
+//      ratón «horizontal scroll» (.is-pinned): la sección se queda fija y el
+//      scroll vertical desplaza la pista.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.carousel {
+    // Margen izquierdo de la pista = el del contenedor centrado
+    --track-inset: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+
+    display: grid;
+    gap: var(--space-50);
+
+    &__head {
+        display: grid;
+        gap: var(--space-30);
+
+        @include up(md) {
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: var(--space-30);
+    }
+
+    &__hint {
+        display: none;
+        color: var(--fg-soft);
+        @include t-label;
+
+        @include up(md) {
+            display: block;
+        }
+    }
+
+    &__btn {
+        display: grid;
+        place-items: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        border: 1px solid var(--fg);
+        border-radius: var(--radius-round);
+        color: var(--fg);
+        transition:
+            background-color var(--duration-base) ease,
+            color var(--duration-base) ease,
+            opacity var(--duration-base) ease;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &:disabled {
+            border-color: var(--line-strong);
+            color: var(--fg-muted);
+            cursor: default;
+        }
+
+        @media (hover: hover) {
+            &:not(:disabled):hover {
+                background-color: var(--fg);
+                color: var(--bg);
+            }
+        }
+    }
+
+    &__track {
+        display: flex;
+        gap: var(--space-40);
+        padding-inline: var(--track-inset);
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--track-inset);
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &.is-dragging {
+            scroll-snap-type: none;
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        &:focus-visible {
+            outline-offset: -2px;
+        }
+    }
+
+    // El hueco que llena render.php no rompe la fila
+    &__slot {
+        display: contents;
+    }
+
+    .pcard,
+    &__end {
+        flex: none;
+        scroll-snap-align: start;
+    }
+
+    .pcard {
+        width: min(85vw, 35rem);
+    }
+
+    &__end {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: var(--space-40);
+        width: min(85vw, 26.25rem);
+        padding: var(--space-50);
+        border-radius: var(--radius-sm);
+    }
+
+    &__end-text {
+        display: grid;
+        gap: 1rem;
+    }
+
+    &__end-eyebrow {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__end-count {
+        @include t-display;
+    }
+
+    &__end-desc {
+        color: var(--fg-soft);
+    }
+
+    &__end-btn {
+        width: 100%;
+    }
+
+    &__progress {
+        display: flex;
+        align-items: center;
+        gap: var(--space-40);
+    }
+
+    &__bar {
+        position: relative;
+        flex: 1;
+        height: 2px;
+        overflow: hidden;
+        background-color: var(--line);
+    }
+
+    &__thumb {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 30%;
+        background-color: var(--fg);
+        transition: transform var(--duration-fast) linear;
+    }
+
+    &__counter {
+        min-width: 4.5ch;
+        font-variant-numeric: tabular-nums;
+        @include t-label;
+        text-align: right;
+    }
+
+    // Horizontal scroll: la pista ya no hace scroll (la mueve GSAP) y lo que
+    // sale por la derecha lo recorta la sección.
+    &.is-pinned {
+        overflow: clip;
+
+        // min-width: 0: sin overflow, un hijo de la rejilla se ensancharía
+        // hasta caber entero y no quedaría recorrido.
+        .carousel__track {
+            min-width: 0;
+            overflow: visible;
+        }
+
+        // Fija en el centro, la sección tiene que caber en la pantalla: en
+        // pantallas bajas la tarjeta encoge. La foto es 560 × 440 (× 1.27 de
+        // alto a ancho); 26rem = cabecera, textos de la tarjeta, huecos,
+        // progreso y aire.
+        .pcard {
+            width: min(35rem, calc((100svh - 26rem) * 1.27));
+        }
+    }
+}

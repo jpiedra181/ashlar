@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/service",
+    "version": "1.0.0",
+    "title": "Service",
+    "category": "ashlar",
+    "description": "One kind of job in full: a photo on one side and, on the other, what it is, typical time, price and size, what’s included, a tip and links to ask about it or see a project.",
+    "keywords": ["service", "job", "extension", "loft", "kitchen", "basement", "restoration"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "imagePosition": { "type": "string", "enum": ["left", "right"], "default": "left" },
+        "image": { "type": "object", "default": {} },
+        "number": { "type": "string", "default": "01 / 05" },
+        "title": { "type": "string", "default": "Extensions" },
+        "summary": { "type": "string", "default": "Rear, side-return and wraparound extensions for Victorian and Edwardian terraces. Most of our work, and what we know best." },
+        "facts": {
+            "type": "array",
+            "default": [
+                { "key": "Typical time", "value": "14–24 weeks" },
+                { "key": "Typical price", "value": "From £95k" },
+                { "key": "Typical size", "value": "20–40 m²" }
+            ]
+        },
+        "includedLabel": { "type": "string", "default": "What’s included" },
+        "included": {
+            "type": "array",
+            "default": [
+                "Measured survey and structural design",
+                "Party wall notices and awards",
+                "Steel-framed glazing and rooflights",
+                "Kitchen fit-out, coordinated with your supplier"
+            ]
+        },
+        "noteLabel": { "type": "string", "default": "Good to know" },
+        "note": { "type": "string", "default": "Most rear extensions don’t need planning permission. We check at the first visit." },
+        "buttonLabel": { "type": "string", "default": "Ask about an extension" },
+        "buttonUrl": { "type": "string", "default": "/contact/" },
+        "linkLabel": { "type": "string", "default": "See Elm Row, NW3" },
+        "linkUrl": { "type": "string", "default": "/projects/elm-row/" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

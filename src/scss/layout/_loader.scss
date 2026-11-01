@@ -1,0 +1,147 @@
+// --------------------------------------------------
+//		Layout: Loader de la primera visita
+//		«Marca en obra»: los tres sillares del logotipo se colocan uno a uno,
+//		sale el nombre y sube el telón. Markup en inc/front.php
+//		(ashlar_loader_markup), animación en src/js/modules/loader.js.
+//
+//		Solo existe mientras <html> lleva .is-loading (lo pone el script de
+//		<head> antes del primer pintado) o mientras sube el telón
+//		(.loader--leaving). Sin JS, con movimiento reducido o en las visitas
+//		siguientes de la sesión, no se ve nunca.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.loader {
+    display: none;
+}
+
+.is-loading {
+    overflow: hidden;
+
+    // La intro CSS de la página (elements/_motion.scss) espera a que suba el
+    // telón: en pausa se queda en su primer fotograma, oculta bajo el loader.
+    .intro-line,
+    [data-intro],
+    [data-intro-zoom] > picture,
+    [data-intro-zoom] > img {
+        animation-play-state: paused;
+    }
+}
+
+.is-loading .loader,
+.loader--leaving {
+    position: fixed;
+    inset: 0 auto 0 0;
+    // 100vw y no inset: 0: al soltar el overflow aparece la barra de scroll y
+    // el loader, con su contenido centrado, saltaría de lado al estrecharse.
+    width: 100vw;
+    // Por encima de la cabecera (100) y de la barra de administración
+    z-index: 100000;
+    display: block;
+    overflow: hidden;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+.loader__inner {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    padding-block: var(--space-40);
+}
+
+.loader__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    color: var(--fg-muted);
+    @include t-label;
+}
+
+.loader__brand {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-40);
+}
+
+// La marca del logotipo (22 × 14) a gran tamaño
+.loader__mark {
+    width: clamp(6.5rem, 4.5rem + 8vw, 11rem);
+    height: auto;
+    aspect-ratio: 22 / 14;
+    overflow: visible;
+}
+
+.loader__block {
+    fill: currentColor;
+
+    &--accent {
+        fill: var(--mark-accent);
+    }
+}
+
+.loader__word-mask {
+    display: block;
+    overflow: clip;
+}
+
+// Como .logo__word, con más aire: el tracking se compensa a la izquierda
+// para que el nombre quede centrado bajo la marca.
+.loader__word {
+    display: block;
+    padding-left: 0.32em;
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+}
+
+.loader__foot {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.loader__status {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    color: var(--fg-soft);
+    @include t-label;
+}
+
+.loader__count {
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+}
+
+// Como la barra de progreso de «On site now» (site-ticker)
+.loader__track {
+    display: block;
+    height: 1px;
+    overflow: hidden;
+    background-color: var(--line);
+}
+
+.loader__fill {
+    display: block;
+    height: 100%;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+// Estados iniciales antes de que llegue el JS (loader.js los anima). El
+// rótulo y la línea se ven desde el primer pintado: nunca un fondo vacío.
+.loader__block {
+    opacity: 0;
+}
+
+.loader__word {
+    transform: translate3d(0, 110%, 0);
+}

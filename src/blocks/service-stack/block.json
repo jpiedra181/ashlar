@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/service-stack",
+    "version": "1.0.0",
+    "title": "Pinned services",
+    "category": "ashlar",
+    "description": "Groups Service sections into one. On desktop it stays on screen while you scroll and moves from one service to the next: the new photo opens over the last one and the text slides in. On phones and short screens the services show one after another.",
+    "keywords": ["services", "pinned", "sticky", "scroll", "stack"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js"
+}

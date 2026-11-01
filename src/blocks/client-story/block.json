@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/client-story",
+    "version": "1.0.0",
+    "title": "Client story",
+    "category": "ashlar",
+    "description": "One client quote, large, with a photo of the people who said it and the project it came from. The photo can sit in the page grid or run to the edge.",
+    "keywords": [
+        "testimonial",
+        "quote",
+        "client",
+        "review",
+        "story"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        },
+        "theme": {
+            "type": "string",
+            "enum": [
+                "light",
+                "subtle",
+                "dark"
+            ],
+            "default": "subtle"
+        },
+        "layout": {
+            "type": "string",
+            "enum": [
+                "framed",
+                "bleed"
+            ],
+            "default": "framed"
+        },
+        "image": {
+            "type": "object",
+            "default": {}
+        },
+        "videoLabel": {
+            "type": "string",
+            "default": "Watch their story · 2:14"
+        },
+        "videoUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "chapterNum": {
+            "type": "string",
+            "default": "07"
+        },
+        "chapterLabel": {
+            "type": "string",
+            "default": "In their words"
+        },
+        "quote": {
+            "type": "string",
+            "default": "“Dan rang us about a problem with the steel before we’d even noticed anything. That was the week we stopped worrying.”"
+        },
+        "name": {
+            "type": "string",
+            "default": "Hannah &amp; James Whitfield"
+        },
+        "project": {
+            "type": "string",
+            "default": "Elm Row, NW3 · Rear extension · 2025"
+        },
+        "linkLabel": {
+            "type": "string",
+            "default": "Read 31 more client stories"
+        },
+        "linkUrl": {
+            "type": "string",
+            "default": "/about/"
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": [
+            "full"
+        ],
+        "anchor": true
+    },
+    "example": {
+        "viewportWidth": 1440
+    },
+    "editorScript": "file:./index.js"
+}

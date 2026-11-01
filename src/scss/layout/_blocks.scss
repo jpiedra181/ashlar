@@ -1,0 +1,19 @@
+// --------------------------------------------------
+//      Layout: separación entre bloques (block-gap)
+//      Las secciones de Ashlar van pegadas: cada bloque ashlar/* trae su propio
+//      padding-block. Se anula el block-gap que WordPress inserta como
+//      margin-block-start entre bloques hermanos. Solo afecta a los bloques
+//      del tema (wp-block-ashlar-*); los bloques core de las páginas legales
+//      conservan su espaciado.
+// --------------------------------------------------
+
+[class*="wp-block-ashlar-"] {
+    margin-block: 0;
+}
+
+// Los grupos que maquetan cabecera y pie tampoco llevan block-gap.
+.site-header__inner > *,
+.site-footer__inner > *,
+.site-footer__grid > * {
+    margin-block: 0;
+}

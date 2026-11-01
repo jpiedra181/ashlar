@@ -1,0 +1,749 @@
+// --------------------------------------------------
+//		Pantalla de acceso (wp-login.php) · base: login.scss de Raíz
+//		Fotos de proyectos a un lado, saludo y formulario al otro, con la
+//		identidad de Ashlar: Archivo seminegrita sin cursivas (el <em> es el
+//		tono apagado), rótulos en Label/Mono, campos con caja y el botón
+//		rectangular en corten con flecha.
+//		Markup: inc/login.php · Pase de fotos: src/admin/login.js
+//
+//		Las variables --wp--preset--* las imprime inc/login.php desde
+//		theme.json; aquí solo se usan los alias del tema.
+// --------------------------------------------------
+
+@use "config";
+@use "tools" as *;
+
+$slide-duration: 7s;
+
+// Flecha del botón (mismo trazo que Icon/Arrow right)
+$arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12H19M13 18L19 12L13 6' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
+
+// --------------------------------------------------
+//  Lienzo
+// --------------------------------------------------
+
+body.ashlar-login {
+    --gutter-login: clamp(1.5rem, 1rem + 2.5vw, 4rem);
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    background-color: var(--color-stone-50);
+    color: var(--color-stone-950);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+
+    @include up(ml) {
+        grid-template-columns: minmax(0, 1.15fr) minmax(30rem, 1fr);
+        grid-template-rows: 1fr auto auto;
+    }
+
+    &,
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    // WordPress deja un <div class="clear"> suelto que en un grid sería una
+    // fila. La política de privacidad se enlaza desde nuestro pie.
+    > .clear,
+    .privacy-policy-page-link {
+        display: none;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    ::selection {
+        background-color: var(--color-corten-500);
+        color: var(--color-white);
+    }
+}
+
+// --------------------------------------------------
+//  Panel de fotos
+// --------------------------------------------------
+
+.ashlar-login__aside {
+    position: relative;
+    height: 44vh;
+    min-height: 19rem;
+    overflow: hidden;
+    background-color: var(--color-stone-950);
+    color: var(--color-stone-50);
+    animation: ashlar-login-curtain 1.6s var(--ease-in-out) both;
+
+    @include up(ml) {
+        position: sticky;
+        top: 0;
+        grid-column: 1;
+        grid-row: 1 / -1;
+        height: 100vh;
+        height: 100svh;
+    }
+}
+
+.ashlar-login__slides {
+    position: absolute;
+    inset: 0;
+}
+
+.ashlar-login__slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 1.6s var(--ease-standard);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &.is-active {
+        opacity: 1;
+
+        img {
+            animation: ashlar-login-drift ($slide-duration + 2s) var(--ease-out) both;
+        }
+    }
+}
+
+// Velo: legibilidad del logotipo arriba y del pie de foto abajo
+.ashlar-login__veil {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, color-mix(in srgb, var(--color-stone-950) 55%, transparent), transparent 28%),
+        linear-gradient(to top, color-mix(in srgb, var(--color-stone-950) 82%, transparent), transparent 55%);
+    pointer-events: none;
+}
+
+// El logotipo del tema (marca + palabra) sobre las fotos
+.ashlar-login__brand {
+    position: absolute;
+    top: var(--gutter-login);
+    left: var(--gutter-login);
+    z-index: 2;
+    background: none;
+
+    // Mismas medidas que en la cabecera (layout/_header.scss), que aquí no se carga
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        color: var(--color-stone-50);
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-logo);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .logo__mark {
+        flex: none;
+        width: 1.375rem;
+        height: 0.875rem;
+    }
+
+    .logo__mark-accent {
+        fill: var(--color-corten-400);
+    }
+
+    .logo__image {
+        width: auto;
+        height: 2.25rem;
+    }
+}
+
+.ashlar-login__caption {
+    position: absolute;
+    right: 9rem;
+    bottom: var(--gutter-login);
+    left: var(--gutter-login);
+    z-index: 2;
+    animation: ashlar-login-rise 1.4s var(--ease-out) 0.7s both;
+}
+
+.ashlar-login__eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--color-corten-300);
+    @include t-label;
+}
+
+.ashlar-login__project {
+    margin: 0;
+    font-family: var(--font-family-display);
+    font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.ashlar-login__place {
+    margin: 0.75rem 0 0;
+    color: var(--color-stone-300);
+    @include t-label;
+}
+
+// Al cambiar de foto, el pie se funde (login.js conmuta .is-changing)
+.ashlar-login__project,
+.ashlar-login__place {
+    transition:
+        opacity 0.6s ease,
+        transform 0.8s var(--ease-out);
+
+    .is-changing & {
+        opacity: 0;
+        transform: translate3d(0, 0.6rem, 0);
+    }
+}
+
+.ashlar-login__progress {
+    position: absolute;
+    right: var(--gutter-login);
+    bottom: var(--gutter-login);
+    z-index: 2;
+    display: grid;
+    justify-items: end;
+    gap: 0.75rem;
+    color: var(--color-stone-300);
+    font-variant-numeric: tabular-nums;
+    @include t-label;
+}
+
+.ashlar-login__count [data-slide-index] {
+    color: var(--color-stone-50);
+}
+
+.ashlar-login__bar {
+    position: relative;
+    width: 4.5rem;
+    height: 1px;
+    background-color: var(--color-stone-700);
+
+    i {
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-corten-300);
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    .is-playing & i {
+        animation: ashlar-login-progress $slide-duration linear both;
+    }
+}
+
+// --------------------------------------------------
+//  Columna del formulario
+// --------------------------------------------------
+
+body.ashlar-login #login {
+    grid-column: 1;
+    width: 100%;
+    max-width: calc(27rem + 2 * var(--gutter-login));
+    margin: 0 auto;
+    padding: var(--space-60) var(--gutter-login) var(--space-40);
+    animation: ashlar-login-rise 1.2s var(--ease-out) 0.35s both;
+
+    @include up(ml) {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        padding-top: var(--space-80);
+    }
+}
+
+// El logotipo de WordPress se oculta a la vista (el de la marca está en las
+// fotos), pero el enlace sigue ahí para lectores de pantalla.
+body.ashlar-login h1.wp-login-logo,
+body.ashlar-login #login > h1 {
+    @include visually-hidden-rules;
+}
+
+.ashlar-login__intro {
+    margin-bottom: var(--space-50);
+}
+
+.ashlar-login__kicker {
+    margin: 0 0 1.25rem;
+    color: var(--color-corten-600);
+    @include t-label;
+}
+
+.ashlar-login__title {
+    margin: 0;
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h1);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+
+    // El acento de Ashlar no es una cursiva: es el tono apagado
+    em {
+        font-style: normal;
+        color: var(--color-stone-600);
+    }
+}
+
+.ashlar-login__text {
+    max-width: 34ch;
+    margin: 1.25rem 0 0;
+    color: var(--color-stone-700);
+    font-size: var(--font-size-lead);
+    line-height: 1.5;
+}
+
+// --------------------------------------------------
+//  Formulario
+// --------------------------------------------------
+
+body.ashlar-login {
+    #loginform,
+    #lostpasswordform,
+    #resetpassform,
+    #registerform {
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        border: 0;
+        background: none;
+        box-shadow: none;
+    }
+
+    #login form p,
+    #login .user-pass-wrap {
+        margin: 0 0 1.5rem;
+    }
+
+    // Ayuda de «Recordarme» (WordPress 6.8+)
+    .wp-tooltip__toggle {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--color-stone-500);
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--color-stone-950);
+        }
+
+        &:focus-visible {
+            border-radius: var(--radius-round);
+            outline: 2px solid var(--color-corten-500);
+            outline-offset: 1px;
+        }
+
+        .dashicons {
+            width: 1rem;
+            height: 1rem;
+            font-size: 1rem;
+        }
+    }
+
+    .wp-tooltip__bubble {
+        max-width: 18rem;
+        padding: 0.85rem 1rem;
+        border: 0;
+        border-radius: var(--radius-sm);
+        background-color: var(--color-stone-950);
+        color: var(--color-stone-50);
+        font-size: var(--font-size-sm);
+        line-height: 1.5;
+    }
+
+    // Rótulos en Label/Mono, como los campos del formulario de presupuesto
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--color-stone-600);
+        @include t-label;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        min-height: 3.5rem;
+        margin: 0;
+        padding: 1rem;
+        border: 1px solid var(--color-stone-500);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-white);
+        box-shadow: none;
+        color: var(--color-stone-950);
+        font-family: var(--font-family-body);
+        font-size: var(--font-size-base);
+        line-height: 1.5;
+        transition: border-color var(--duration-base) var(--ease-standard);
+
+        &:hover {
+            border-color: var(--color-stone-700);
+        }
+
+        &:focus {
+            border-color: var(--color-stone-950);
+            box-shadow: none;
+            outline: 2px solid var(--color-corten-500);
+            outline-offset: 2px;
+        }
+    }
+
+    .wp-pwd {
+        position: relative;
+
+        input {
+            padding-right: 3.5rem;
+        }
+    }
+
+    .button.wp-hide-pw {
+        position: absolute;
+        top: 50%;
+        right: 0.375rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        min-height: 0;
+        border: 0;
+        background: none;
+        color: var(--color-stone-700);
+        transform: translateY(-50%);
+
+        &:hover {
+            color: var(--color-stone-950);
+        }
+
+        &:focus-visible {
+            border-radius: var(--radius-sm);
+            box-shadow: none;
+            outline: 2px solid var(--color-corten-500);
+            outline-offset: 2px;
+        }
+
+        .dashicons {
+            top: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            font-size: 1.25rem;
+        }
+    }
+
+    // Recordarme
+    .forgetmenot {
+        float: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.75rem;
+
+        label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0;
+            color: var(--color-stone-700);
+            font-family: var(--font-family-body);
+            font-size: var(--font-size-sm);
+            font-weight: 400;
+            letter-spacing: 0;
+            text-transform: none;
+            cursor: pointer;
+        }
+    }
+
+    // Casilla nativa en corten (24 px: objetivo mínimo de WCAG 2.2)
+    input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+        accent-color: var(--color-corten-500);
+        appearance: auto;
+
+        &::before {
+            content: none;
+        }
+
+        &:focus-visible {
+            box-shadow: none;
+            outline: 2px solid var(--color-corten-500);
+            outline-offset: 2px;
+        }
+    }
+
+    // Botón principal: el .btn de Ashlar (corten, rectangular, flecha)
+    .submit {
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 1.5rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: var(--color-white);
+            pointer-events: none;
+            mask: $arrow center / 100% no-repeat;
+            transform: translateY(-50%);
+            transition: transform var(--duration-base) var(--ease-out);
+        }
+
+        &:hover::after {
+            transform: translate(0.25rem, -50%);
+        }
+    }
+
+    .button-primary {
+        float: none;
+        width: 100%;
+        min-height: 3.5rem;
+        padding: 1rem 3.5rem 1rem 1.5rem;
+        border: 1px solid var(--color-corten-500);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-corten-500);
+        box-shadow: none;
+        color: var(--color-white);
+        font-family: var(--font-family-body);
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1.5;
+        text-align: left;
+        text-shadow: none;
+        transition:
+            background-color var(--duration-base) var(--ease-standard),
+            border-color var(--duration-base) var(--ease-standard);
+
+        &:hover,
+        &:focus {
+            border-color: var(--color-corten-600);
+            background-color: var(--color-corten-600);
+            color: var(--color-white);
+        }
+
+        &:focus-visible {
+            box-shadow: none;
+            outline: 2px solid var(--color-corten-500);
+            outline-offset: 3px;
+        }
+    }
+
+    // Botones secundarios (generar contraseña…): el «outline» del tema
+    .button-secondary,
+    .button:not(.button-primary):not(.wp-hide-pw) {
+        min-height: 2.75rem;
+        padding: 0 1.25rem;
+        border: 1px solid var(--color-stone-500);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        color: var(--color-stone-950);
+        font-family: var(--font-family-body);
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+    }
+
+    // Enlaces bajo el formulario
+    #nav {
+        margin: 1.5rem 0 0;
+        padding: 0;
+        font-size: var(--font-size-sm);
+
+        a {
+            color: var(--color-stone-700);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.3em;
+            text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+            transition:
+                color var(--duration-base) ease,
+                text-decoration-color var(--duration-base) ease;
+
+            &:hover,
+            &:focus {
+                color: var(--color-stone-950);
+                text-decoration-color: currentColor;
+            }
+        }
+    }
+
+    #backtoblog {
+        display: none;
+    }
+
+    // Avisos: errores, sesión cerrada, correo enviado (como «Good to know»)
+    #login_error,
+    .message,
+    .notice,
+    .success {
+        margin: 0 0 2rem;
+        padding: 1rem 1.25rem;
+        border: 0;
+        border-left: 3px solid var(--color-corten-500);
+        border-radius: 0;
+        background-color: var(--color-stone-100);
+        box-shadow: none;
+        color: var(--color-stone-950);
+        font-size: var(--font-size-sm);
+        line-height: 1.5;
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+    }
+
+    #login_error,
+    .notice-error {
+        border-left-color: var(--color-error);
+    }
+
+    // Medidor de seguridad de la contraseña (restablecer)
+    #pass-strength-result {
+        margin: 0.75rem 0 1.5rem;
+        padding: 0.6rem 0.9rem;
+        border: 0;
+        border-radius: var(--radius-sm);
+        background-color: var(--color-stone-100);
+        color: var(--color-stone-950);
+        font-size: var(--font-size-sm);
+
+        &.short { background-color: var(--color-error-bg); }
+        &.bad { background-color: color-mix(in srgb, var(--color-error-bg) 60%, var(--color-stone-50)); }
+        &.good { background-color: color-mix(in srgb, var(--color-corten-300) 35%, var(--color-stone-50)); }
+        &.strong { background-color: var(--color-success-bg); }
+    }
+
+    .indicator-hint,
+    .description {
+        color: var(--color-stone-700);
+        font-size: var(--font-size-sm);
+    }
+}
+
+// --------------------------------------------------
+//  Pie de la columna
+// --------------------------------------------------
+
+.ashlar-login__footer {
+    grid-column: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    width: 100%;
+    max-width: calc(27rem + 2 * var(--gutter-login));
+    margin: 0 auto;
+    padding: var(--space-30) var(--gutter-login) var(--space-40);
+    border-top: 1px solid var(--color-stone-200);
+    background-clip: content-box;
+
+    @include up(ml) {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .privacy-policy-link {
+        margin-right: 1rem;
+    }
+}
+
+.ashlar-login__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    color: var(--color-stone-950);
+    text-decoration: none;
+    @include t-label;
+
+    &:hover .ashlar-login__back-icon {
+        transform: translate3d(-0.25rem, 0, 0);
+    }
+}
+
+.ashlar-login__back-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ashlar-login__credit {
+    color: var(--color-stone-700);
+    font-size: var(--font-size-xs);
+
+    a {
+        color: var(--color-stone-950);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+}
+
+// --------------------------------------------------
+//  Movimiento
+// --------------------------------------------------
+
+@keyframes ashlar-login-curtain {
+    from {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes ashlar-login-drift {
+    from {
+        transform: scale(1.12);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes ashlar-login-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 1.5rem, 0);
+    }
+}
+
+@keyframes ashlar-login-progress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+// !important a propósito: el movimiento reducido tiene que ganar a todo.
+@media (prefers-reduced-motion: reduce) {
+    body.ashlar-login *,
+    body.ashlar-login *::before,
+    body.ashlar-login *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

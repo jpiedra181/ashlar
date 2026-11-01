@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/article-next",
+    "version": "1.0.0",
+    "title": "Article · Keep reading",
+    "category": "ashlar",
+    "description": "Three more questions at the end of a Journal article: first from the same topic, then the most recent.",
+    "keywords": ["article", "journal", "related", "next", "more"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "title": { "type": "string", "default": "Keep reading" },
+        "linkLabel": { "type": "string", "default": "All the answers" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false, "inserter": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

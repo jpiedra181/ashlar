@@ -1,0 +1,203 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/process",
+    "version": "1.0.0",
+    "title": "How it works",
+    "category": "ashlar",
+    "description": "The process in plain English, step by step: tabs on desktop and an accordion on mobile. Each step says what the client does, what you do, what they get and what they pay.",
+    "keywords": [
+        "process",
+        "how it works",
+        "steps",
+        "stepper",
+        "timeline"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        },
+        "theme": {
+            "type": "string",
+            "enum": [
+                "light",
+                "subtle",
+                "dark"
+            ],
+            "default": "light"
+        },
+        "chapterNum": {
+            "type": "string",
+            "default": ""
+        },
+        "chapterLabel": {
+            "type": "string",
+            "default": "How it works"
+        },
+        "title": {
+            "type": "string",
+            "default": "What happens,<br>and when you pay."
+        },
+        "lede": {
+            "type": "string",
+            "default": "Here’s a typical rear extension, from the first visit to the day we hand it over, with what we’ll need from you along the way and when each payment is due."
+        },
+        "stats": {
+            "type": "array",
+            "default": []
+        },
+        "youDoLabel": {
+            "type": "string",
+            "default": "What you do"
+        },
+        "weDoLabel": {
+            "type": "string",
+            "default": "What we do"
+        },
+        "youGetLabel": {
+            "type": "string",
+            "default": "You get"
+        },
+        "youPayLabel": {
+            "type": "string",
+            "default": "You pay"
+        },
+        "stepTagFormat": {
+            "type": "string",
+            "default": "Step {n} of {total}"
+        },
+        "footnote": {
+            "type": "string",
+            "default": "Typical extension · 22 weeks in total"
+        },
+        "prevLabel": {
+            "type": "string",
+            "default": "Previous"
+        },
+        "lastUrl": {
+            "type": "string",
+            "default": "/contact"
+        },
+        "helpText": {
+            "type": "string",
+            "default": "Still unsure about something?"
+        },
+        "helpLink": {
+            "type": "string",
+            "default": "Ring Marta on 020 7946 0321 and she’ll talk you through it"
+        },
+        "helpUrl": {
+            "type": "string",
+            "default": "tel:02079460321"
+        },
+        "steps": {
+            "type": "array",
+            "default": [
+                {
+                    "when": "Weeks 0–2",
+                    "label": "We visit",
+                    "title": "We come and see your house",
+                    "lede": "We come round for an hour, free, and ask a lot of questions about how you live and what’s driving you mad about the house. If you want to go ahead, we come back and measure everything properly.",
+                    "youDo": [
+                        "Tell us what you want and roughly what you can spend",
+                        "Show us the bits that annoy you about the house"
+                    ],
+                    "weDo": [
+                        "Measure everything and check the structure",
+                        "Tell you honestly if it needs planning permission"
+                    ],
+                    "youGet": "A written brief and survey drawings",
+                    "youPay": "First visit free. Survey £950, taken off your build if you go ahead.",
+                    "next": "Next: fixed price",
+                    "image": {}
+                },
+                {
+                    "when": "Weeks 2–6",
+                    "label": "Fixed price",
+                    "title": "You get one fixed price",
+                    "lede": "We draw it up with your architect, or ours, and Priya prices it line by line, so you can see exactly where the money goes before you sign anything.",
+                    "youDo": [
+                        "Pick finishes from a short, sensible list",
+                        "Approve the drawings when you are happy"
+                    ],
+                    "weDo": [
+                        "Price every item, line by line",
+                        "Plan the build week by week and give you a start date"
+                    ],
+                    "youGet": "Fixed price, start date and a week-by-week plan",
+                    "youPay": "10% deposit to book your start date.",
+                    "next": "Next: we build",
+                    "image": {}
+                },
+                {
+                    "when": "Weeks 6–20",
+                    "label": "We build",
+                    "title": "We build",
+                    "lede": "One site manager runs your job from the first day to the last, and you get their mobile number.",
+                    "youDo": [
+                        "Answer the odd decision, always with a deadline",
+                        "Carry on living your life"
+                    ],
+                    "weDo": [
+                        "Run the site and keep it tidy every day",
+                        "Price any change in writing before we do it"
+                    ],
+                    "youGet": "A report every Friday, with photos",
+                    "youPay": "Monthly, only for work that is already done.",
+                    "next": "Next: keys",
+                    "image": {}
+                },
+                {
+                    "when": "Week 22",
+                    "label": "Keys",
+                    "title": "You get your keys",
+                    "lede": "We walk round the finished house with you and write down anything that isn’t right, down to a sticky drawer. Then we come back and fix the lot.",
+                    "youDo": [
+                        "Walk round with us and point out anything you spot",
+                        "Move back in"
+                    ],
+                    "weDo": [
+                        "Fix every snag within 10 working days",
+                        "Hand over certificates and a manual for your house"
+                    ],
+                    "youGet": "Keys, building control sign-off, house manual",
+                    "youPay": "Final payment, minus 2.5% we hold until every snag is fixed.",
+                    "next": "Next: aftercare",
+                    "image": {}
+                },
+                {
+                    "when": "10 years",
+                    "label": "Aftercare",
+                    "title": "We’re still around for ten years",
+                    "lede": "We ring you at six months and again at a year to ask how the house is behaving. If anything structural goes wrong in the next ten years, we come back and fix it.",
+                    "youDo": [
+                        "Enjoy having a kitchen again",
+                        "Call us if something doesn’t feel right"
+                    ],
+                    "weDo": [
+                        "Check in at 6 and 12 months",
+                        "Fix anything structural, at our cost"
+                    ],
+                    "youGet": "10-year insurance-backed warranty",
+                    "youPay": "Nothing.",
+                    "next": "Book your first visit",
+                    "image": {}
+                }
+            ]
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": [
+            "full"
+        ],
+        "anchor": true
+    },
+    "example": {
+        "viewportWidth": 1440
+    },
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js"
+}

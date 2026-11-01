@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/team",
+    "version": "1.0.0",
+    "title": "Team",
+    "category": "ashlar",
+    "description": "The people clients will meet: a portrait, their role and years, their name and one line about them. Optionally, a card with how many more people there are and their trades.",
+    "keywords": ["team", "people", "staff", "about", "portraits"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "eyebrow": { "type": "string", "default": "The team" },
+        "title": { "type": "string", "default": "The people you’ll actually meet." },
+        "lede": { "type": "string", "default": "These are the people who price, plan and build your house. You’ll have their numbers from the first week." },
+        "people": {
+            "type": "array",
+            "default": [
+                { "image": {}, "role": "Site manager · since 2011", "name": "Dan Okafor", "fact": "Ran Elm Row and Calder Road. Usually first on site and the last to lock up." },
+                { "image": {}, "role": "Project lead · since 2013", "name": "Marta Kowalska", "fact": "Reads every enquiry and rings back the next working day. Trained as an engineer in Kraków." },
+                { "image": {}, "role": "Head carpenter · since 2011", "name": "Sean Byrne", "fact": "Worked alongside Tom on other people’s jobs for years. Made the Gibson Square stair by hand, tread by tread." }
+            ]
+        },
+        "moreTitle": { "type": "string", "default": "+ 21 more" },
+        "moreText": { "type": "string", "default": "All on our payroll, most of them for more than five years." },
+        "roles": {
+            "type": "array",
+            "default": [
+                { "label": "Site managers", "count": "5" },
+                { "label": "Carpenters &amp; joiners", "count": "9" },
+                { "label": "Bricklayers", "count": "4" },
+                { "label": "Decorators", "count": "2" },
+                { "label": "Office manager", "count": "1" }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,79 @@
+// --------------------------------------------------
+//      Block: Project · Next project (ashlar/project-next)
+//      Texto a la izquierda (título en H1) y foto a sangre a la derecha
+//      (640 × 460). Toda la franja enlaza.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.project-next {
+    &__link {
+        display: grid;
+        color: inherit;
+        text-decoration: none;
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 44.4%);
+            min-height: clamp(23.75rem, 18rem + 10vw, 28.75rem);
+        }
+    }
+
+    &__body {
+        display: grid;
+        align-content: center;
+        gap: 1rem;
+        padding: var(--space-70) var(--gutter);
+
+        @include up(lg) {
+            padding-right: var(--space-60);
+            padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+        }
+    }
+
+    &__label,
+    &__meta {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__title {
+        @include t-h1;
+        transition: color var(--duration-base) ease;
+    }
+
+    &__cta {
+        margin-top: 0.5rem;
+    }
+
+    &__media {
+        order: -1;
+        aspect-ratio: 16 / 10;
+        background-color: var(--fill);
+
+        @include up(lg) {
+            order: 0;
+            aspect-ratio: auto;
+
+            // La foto llena la fila sin imponer su alto natural.
+            img {
+                position: absolute;
+                inset: 0;
+            }
+        }
+
+        img {
+            transition: transform var(--duration-slow) var(--ease-out);
+        }
+    }
+
+    @media (hover: hover) {
+        &__link:hover &__title {
+            color: var(--accent);
+        }
+
+        &__link:hover &__media img {
+            transform: scale(1.03);
+        }
+    }
+}

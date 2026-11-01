@@ -1,0 +1,46 @@
+// --------------------------------------------------
+//      Component: Chip
+//      Píldora del Figma (filtros de Projects, «Jump to» de Services).
+//      .chip.is-active (o aria-current / aria-pressed="true") = rellena en corten.
+// --------------------------------------------------
+
+@use "tools" as *;
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.125rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--fg);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background-color var(--duration-base) var(--ease-standard),
+        border-color var(--duration-base) var(--ease-standard),
+        color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+        border-color: var(--fg);
+    }
+
+    &.is-active,
+    &[aria-current="true"],
+    &[aria-pressed="true"] {
+        border-color: var(--btn-bg);
+        background-color: var(--btn-bg);
+        color: var(--btn-fg);
+    }
+
+    &__count {
+        font-variant-numeric: tabular-nums;
+    }
+}

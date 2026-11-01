@@ -1,0 +1,106 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/before-after",
+    "version": "1.0.0",
+    "title": "Before & after",
+    "category": "ashlar",
+    "description": "Two photos of the same job from the same spot. Visitors drag, tap the labels or use the keyboard to compare. Up to three notes on what changed.",
+    "keywords": [
+        "before",
+        "after",
+        "compare",
+        "slider",
+        "transformation"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        },
+        "theme": {
+            "type": "string",
+            "enum": [
+                "light",
+                "subtle",
+                "dark"
+            ],
+            "default": "subtle"
+        },
+        "chapterNum": {
+            "type": "string",
+            "default": ""
+        },
+        "chapterLabel": {
+            "type": "string",
+            "default": "Before &amp; after"
+        },
+        "title": {
+            "type": "string",
+            "default": "Elm Row, eight months apart."
+        },
+        "buttonLabel": {
+            "type": "string",
+            "default": "See the full project"
+        },
+        "buttonUrl": {
+            "type": "string",
+            "default": "/projects/elm-row/"
+        },
+        "aside": {
+            "type": "string",
+            "default": ""
+        },
+        "before": {
+            "type": "object",
+            "default": {}
+        },
+        "after": {
+            "type": "object",
+            "default": {}
+        },
+        "beforeLabel": {
+            "type": "string",
+            "default": "Before · March 2025"
+        },
+        "afterLabel": {
+            "type": "string",
+            "default": "After · November 2025"
+        },
+        "hint": {
+            "type": "string",
+            "default": "Drag or tap to compare"
+        },
+        "sliderLabel": {
+            "type": "string",
+            "default": "Compare before and after"
+        },
+        "changes": {
+            "type": "array",
+            "default": [
+                {
+                    "text": "The 1970s lean-to came down; a 4.2 m steel-framed extension went up in its place."
+                },
+                {
+                    "text": "Kitchen moved to the garden side. Ground floor grew from 41 to 64 m²."
+                },
+                {
+                    "text": "Garden re-laid in reclaimed York stone, drained properly for the first time in about a hundred years."
+                }
+            ]
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": [
+            "full"
+        ],
+        "anchor": true
+    },
+    "example": {
+        "viewportWidth": 1440
+    },
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js"
+}

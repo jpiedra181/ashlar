@@ -1,0 +1,83 @@
+// --------------------------------------------------
+//      Block: Pinned services (ashlar/service-stack)
+//      Contenedor de bloques Service. Sin JS, en móvil, en pantallas bajas o
+//      con movimiento reducido no pinta nada: los servicios van uno tras otro.
+//
+//      .is-pinned (view.js, escritorio): la sección ocupa la pantalla bajo la
+//      cabecera y los servicios se apilan en la misma celda. view.js les quita
+//      su tono y les pone el lado de foto del primero, y pasa el tono del
+//      primero a la sección. Versión compacta (huecos más cortos y la foto, como
+//      mucho, del alto libre) para que quepa en portátiles de 768 px de alto.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.service-stack {
+    // Aire bajo la cabecera y al pie en el modo fijo
+    --stack-pad: var(--space-30);
+    --stack-h: calc(100vh - var(--wp-admin--admin-bar--height, 0px));
+
+    &.is-pinned {
+        position: relative;
+        display: grid;
+        align-items: center;
+        height: var(--stack-h);
+        // La cabecera se esconde al bajar y vuelve al subir: su hueco se
+        // reserva siempre para que el contenido no salte.
+        padding-block: calc(var(--header-h) + var(--stack-pad)) var(--stack-pad);
+        background-color: var(--bg);
+
+        > .service {
+            grid-area: 1 / 1;
+            // !important: gana al padding en línea que WordPress escribe si se
+            // fija uno en el editor (soporte spacing, inc/blocks.php). Apilados,
+            // todos tienen que ocupar lo mismo para que las fotos coincidan.
+            padding-block: 0 !important;
+        }
+
+        // Los que no se ven están encima del activo: que no se lleven los clics
+        > .service:not(.is-active) {
+            pointer-events: none;
+        }
+
+        .service__media {
+            max-height: calc(var(--stack-h) - var(--header-h) - 2 * var(--stack-pad));
+        }
+
+        .service__content {
+            gap: var(--space-20);
+        }
+
+        .service__heading {
+            gap: 0.75rem;
+        }
+
+        .service__fact {
+            padding-block: 0.75rem;
+        }
+
+        .service__list {
+            gap: 0.5rem;
+        }
+    }
+
+    // Barra de avance sobre el borde inferior de la foto (la crea y la coloca
+    // view.js). Va sobre la foto, no sobre el fondo: blanco en cualquier tono,
+    // como el tirador de before-after.
+    &__progress {
+        position: absolute;
+        z-index: 1;
+        height: 0.25rem;
+        translate: 0 -100%;
+        background-color: color-mix(in srgb, var(--color-white) 15%, transparent);
+        pointer-events: none;
+    }
+
+    &__bar {
+        height: 100%;
+        background-color: var(--color-white);
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+    }
+}

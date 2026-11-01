@@ -1,0 +1,268 @@
+// --------------------------------------------------
+//      Block: Before & after (ashlar/before-after)
+//      Cabecera con botón, comparador de 1280 × 640 (358 × 440 en móvil) y
+//      hasta tres notas numeradas con filete. En móvil el botón baja al final
+//      (la cabecera se «disuelve» con display: contents) y las etiquetas del
+//      comparador pierden la fecha.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.before-after {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: contents;
+
+        @include up(md) {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+            gap: var(--space-30);
+        }
+    }
+
+    &__action {
+        order: 1;
+
+        .btn {
+            width: 100%;
+        }
+
+        @include up(md) {
+            order: 0;
+
+            .btn {
+                width: auto;
+            }
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    // Nota en lugar del botón («March 2025 → November 2025»)
+    &__aside {
+        color: var(--fg-soft);
+        @include t-label;
+
+        @include up(md) {
+            padding-bottom: 0.5rem;
+        }
+    }
+
+    .before-after__action &__aside {
+        margin-top: 0.75rem;
+    }
+
+    &__changes {
+        display: grid;
+        gap: var(--space-40) var(--space-30);
+        list-style: none;
+
+        @include up(md) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    &__change {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: baseline;
+        gap: 1rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line-strong);
+        font-size: var(--font-size-base);
+        line-height: 1.6;
+
+        @include up(md) {
+            grid-template-columns: minmax(0, 1fr);
+            align-content: start;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            @include t-lead;
+        }
+    }
+
+    &__num {
+        color: var(--accent);
+        @include t-label;
+    }
+}
+
+// --------------------------------------------------
+//  Comparador
+// --------------------------------------------------
+
+.compare {
+    --pos: 50%;
+
+    position: relative;
+    aspect-ratio: 358 / 440;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    user-select: none;
+    touch-action: pan-y;
+
+    @include up(md) {
+        aspect-ratio: 2 / 1;
+    }
+
+    &__after,
+    &__before {
+        position: absolute;
+        inset: 0;
+    }
+
+    // Lo que queda a la izquierda del tirador es el «antes»
+    &__before {
+        clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+    }
+
+    &__line {
+        position: absolute;
+        inset: 0 auto 0 var(--pos);
+        width: 2px;
+        margin-left: -1px;
+        background-color: var(--color-stone-50);
+        pointer-events: none;
+    }
+
+    &__handle {
+        position: absolute;
+        top: 50%;
+        left: var(--pos);
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: var(--radius-round);
+        background-color: var(--color-stone-50);
+        color: var(--color-stone-950);
+        box-shadow: 0 2px 12px rgb(21 19 17 / 0.25);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+
+        svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    // Las etiquetas pulsan para llevar el tirador al extremo (44 px de alto)
+    &__tag {
+        position: absolute;
+        top: var(--space-30);
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        padding-inline: 0.75rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        @include t-label;
+
+        &--before {
+            left: var(--space-30);
+            background-color: var(--color-stone-950);
+            color: var(--color-stone-50);
+        }
+
+        &--after {
+            right: var(--space-30);
+            background-color: var(--color-corten-500);
+            color: var(--color-white);
+        }
+
+        &:focus-visible {
+            outline-color: var(--color-stone-50);
+        }
+    }
+
+    &__tag-more {
+        display: none;
+        white-space: pre;
+
+        @include up(md) {
+            display: inline;
+        }
+    }
+
+    // El control de verdad: transparente, encima de las fotos y debajo de las
+    // etiquetas. El pulgar invisible ocupa todo el alto para poder arrastrar
+    // desde cualquier punto.
+    &__range {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        cursor: ew-resize;
+        appearance: none;
+
+        &::-webkit-slider-thumb {
+            width: 3rem;
+            height: 100vh;
+            appearance: none;
+        }
+
+        &::-moz-range-thumb {
+            width: 3rem;
+            height: 100vh;
+            border: 0;
+        }
+    }
+
+    // El foco del range se dibuja en el tirador (el input es invisible)
+    &:has(.compare__range:focus-visible) .compare__handle {
+        outline: 2px solid var(--color-corten-300);
+        outline-offset: 3px;
+    }
+
+    &__hint {
+        position: absolute;
+        bottom: var(--space-30);
+        left: 50%;
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius-sm);
+        background-color: rgb(21 19 17 / 0.85);
+        color: var(--color-stone-50);
+        transform: translateX(-50%);
+        white-space: nowrap;
+        pointer-events: none;
+        transition: opacity var(--duration-base) ease;
+        @include t-label;
+    }
+
+    &.is-touched &__hint {
+        opacity: 0;
+    }
+
+    // Etiquetas: transición de 450 ms (Smart Animate del prototipo)
+    &.is-animating &__before {
+        transition: clip-path 450ms var(--ease-out);
+    }
+
+    &.is-animating &__line,
+    &.is-animating &__handle {
+        transition: left 450ms var(--ease-out);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &.is-animating * {
+            transition: none !important; // gana a las transiciones de arriba
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-hero",
+    "version": "1.0.0",
+    "title": "Project · Main photo",
+    "category": "ashlar",
+    "description": "The project’s main photo, edge to edge, with two optional site notes on top: a dimension and the room it shows.",
+    "keywords": ["project", "photo", "hero", "image"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "dimension": { "type": "string", "default": "4 200 · Steel-framed doors to the garden" },
+        "caption": { "type": "string", "default": "Kitchen &amp; dining · 35 m²" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/journal-grid",
+    "version": "1.0.0",
+    "title": "Journal articles",
+    "category": "ashlar",
+    "description": "Every published article, filled in automatically: filters by topic, the latest one in large and the rest as question cards with their short answer, with “Load more”.",
+    "keywords": ["journal", "articles", "blog", "questions", "answers"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "showFilters": { "type": "boolean", "default": true },
+        "showCounts": { "type": "boolean", "default": true },
+        "allLabel": { "type": "string", "default": "All" },
+        "filtersLabel": { "type": "string", "default": "Filter articles by topic" },
+        "showFeatured": { "type": "boolean", "default": true },
+        "featuredTag": { "type": "string", "default": "Latest" },
+        "answerLabel": { "type": "string", "default": "The short answer" },
+        "featuredButton": { "type": "string", "default": "Read the full answer" },
+        "perPage": { "type": "number", "default": 7 },
+        "step": { "type": "number", "default": 6 },
+        "showingFormat": { "type": "string", "default": "Showing {shown} of {total}" },
+        "moreFormat": { "type": "string", "default": "Load {n} more" },
+        "emptyText": { "type": "string", "default": "No articles on this topic yet." }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true, "multiple": false },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

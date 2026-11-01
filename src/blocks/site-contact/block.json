@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/site-contact",
+    "version": "1.0.0",
+    "title": "Contact details",
+    "category": "ashlar",
+    "icon": "location",
+    "description": "The contact details you choose (address, hours, email, phone). Values are edited in Options → Contact.",
+    "keywords": [
+        "contact",
+        "address",
+        "phone",
+        "email",
+        "footer"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": [
+                "email",
+                "phone"
+            ]
+        }
+    },
+    "supports": {
+        "html": false,
+        "reusable": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

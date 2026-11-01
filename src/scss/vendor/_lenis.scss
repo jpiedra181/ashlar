@@ -1,0 +1,21 @@
+// --------------------------------------------------
+//		Vendor: Lenis (smooth scroll)
+//		CSS recomendado por Lenis para que el scroll nativo no compita.
+// --------------------------------------------------
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+    overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}

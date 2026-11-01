@@ -1,0 +1,32 @@
+// --------------------------------------------------
+//		Tools: Breakpoints Mixins [up and down]
+// --------------------------------------------------
+
+@use "../config" as *;
+@use "sass:map";
+
+/// Min-width media query
+/// @param {string} $size - Key from $breakpoints map (xs, sm, md, lg, xl, xxl, xxxl)
+@mixin up($size) {
+    @if map.has-key($breakpoints, $size) {
+        @media (min-width: #{map.get($breakpoints, $size) * 1px}) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint `#{$size}` not found in $breakpoints map.";
+    }
+}
+
+/// Max-width media query (one pixel below the breakpoint)
+/// @param {string} $size - Key from $breakpoints map
+@mixin down($size) {
+    @if map.has-key($breakpoints, $size) {
+        $size-down: (map.get($breakpoints, $size) - 1) * 1px;
+
+        @media (max-width: $size-down) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint `#{$size}` not found in $breakpoints map.";
+    }
+}

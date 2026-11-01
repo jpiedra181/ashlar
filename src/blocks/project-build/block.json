@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-build",
+    "version": "1.0.0",
+    "title": "Project · On site",
+    "category": "ashlar",
+    "description": "Four site photos with captions and the build programme: what was planned week by week against what actually happened, with notes on any delay.",
+    "keywords": ["project", "site", "photos", "programme", "gantt", "timeline", "weeks"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "chapterNum": { "type": "string", "default": "04" },
+        "chapterLabel": { "type": "string", "default": "On site" },
+        "title": { "type": "string", "default": "The build, as it happened." },
+        "lede": { "type": "string", "default": "Photos from the Friday reports, and the programme we promised against what actually happened." },
+        "photos": {
+            "type": "array",
+            "default": [
+                { "image": {}, "caption": "Week 21 — limestone threshold, laid to 2 mm" },
+                { "image": {}, "caption": "Week 12 — steels lifted in and packed" },
+                { "image": {}, "caption": "Week 1 — measured survey" },
+                { "image": {}, "caption": "Week 22 — keys handed over" }
+            ]
+        },
+        "showProgramme": { "type": "boolean", "default": true },
+        "programmeTitle": { "type": "string", "default": "Site programme" },
+        "programmeSummary": { "type": "string", "default": "Planned 22 weeks · Delivered in 22" },
+        "plannedLabel": { "type": "string", "default": "Planned" },
+        "actualLabel": { "type": "string", "default": "Actual" },
+        "weekLabel": { "type": "string", "default": "Week" },
+        "weekShort": { "type": "string", "default": "Wk" },
+        "weeks": { "type": "number", "default": 22 },
+        "tasks": {
+            "type": "array",
+            "default": [
+                { "name": "Party wall &amp; set-up", "planStart": 1, "planEnd": 3, "actualStart": 1, "actualEnd": 3, "note": "" },
+                { "name": "Demolition &amp; groundworks", "planStart": 4, "planEnd": 7, "actualStart": 4, "actualEnd": 8, "note": "Wk 7: nine days of rain, one week lost" },
+                { "name": "Steel &amp; structure", "planStart": 8, "planEnd": 11, "actualStart": 9, "actualEnd": 12, "note": "" },
+                { "name": "Roof &amp; glazing", "planStart": 12, "planEnd": 14, "actualStart": 13, "actualEnd": 14, "note": "Wk 13: second roof crew, week won back" },
+                { "name": "First fix: electrics &amp; plumbing", "planStart": 15, "planEnd": 17, "actualStart": 15, "actualEnd": 17, "note": "" },
+                { "name": "Plaster &amp; finishes", "planStart": 18, "planEnd": 21, "actualStart": 18, "actualEnd": 21, "note": "" },
+                { "name": "Snagging &amp; handover", "planStart": 22, "planEnd": 22, "actualStart": 22, "actualEnd": 22, "note": "" }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

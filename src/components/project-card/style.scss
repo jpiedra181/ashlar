@@ -1,0 +1,72 @@
+// --------------------------------------------------
+//      Component: Project card (markup en ashlar_project_card(), inc/projects.php)
+//      Foto 560 × 440 · «Rear extension · 2025» y m² · título H4 con flecha ·
+//      «22 weeks · +0.8% on fixed price». Al pasar el ratón: la foto se acerca
+//      y el título pasa a corten (estado Hover del Figma).
+// --------------------------------------------------
+
+@use "tools" as *;
+
+.pcard {
+    &__link {
+        display: grid;
+        gap: 1.25rem;
+        color: inherit;
+    }
+
+    &__media {
+        border-radius: var(--radius-sm);
+
+        img {
+            transition: transform var(--duration-slow) var(--ease-out);
+        }
+    }
+
+    &__info {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        @include t-h4;
+        transition: color var(--duration-base) ease;
+    }
+
+    &__arrow {
+        flex: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &__outcome {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+
+    @media (hover: hover) {
+        &__link:hover &__media img {
+            transform: scale(1.04);
+        }
+
+        &__link:hover &__title {
+            color: var(--accent);
+        }
+
+        &__link:hover &__arrow {
+            transform: translate3d(0.15rem, -0.15rem, 0);
+        }
+    }
+}

@@ -1,0 +1,148 @@
+// --------------------------------------------------
+//      Block: Timeline (ashlar/timeline)
+//      Escritorio (lg): eje horizontal (línea, un punto corten al principio
+//      de cada columna, tres marcas entre puntos y flecha al final) y los
+//      hitos en columnas. Móvil y tableta (Figma 91:737): carril vertical,
+//      punto en cada hito y el texto a la derecha.
+//      --count (style del bloque) = número de hitos.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.timeline {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-30);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    // Eje de escritorio. Capas (de arriba abajo): puntos cada columna,
+    // marcas solo entre el primer y el último punto, y la línea.
+    &__axis {
+        display: none;
+
+        @include up(lg) {
+            --pitch: calc((100% + var(--gap)) / var(--count));
+            // Nº de marcas (cuatro tramos entre puntos). Va aparte: el
+            // minificador reescribía mal el calc() anidado.
+            --ticks: calc((var(--count) - 1) * 4);
+
+            position: relative;
+            display: block;
+            height: 2.5rem;
+            margin-bottom: var(--section-gap);
+            background:
+                radial-gradient(circle at 5.5px 50%, var(--mark-accent) 5px, transparent 5.5px) 0 0 / var(--pitch) 100% repeat-x,
+                repeating-linear-gradient(to right, var(--line-strong) 0 1px, transparent 1px calc(100% / var(--ticks))) 0 50% / calc(var(--pitch) * (var(--count) - 1)) 6px no-repeat,
+                linear-gradient(var(--line-strong), var(--line-strong)) 0 50% / 100% 1px no-repeat;
+
+            // Flecha «ahora» al final de la línea
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 0;
+                width: 0.625rem;
+                height: 0.625rem;
+                background-color: var(--line-strong);
+                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                translate: 0 -50%;
+            }
+        }
+    }
+
+    &__list {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(lg) {
+            grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+            column-gap: var(--gap);
+        }
+    }
+
+    // Móvil: punto y tramo de carril en cada hito
+    &__item {
+        position: relative;
+        display: grid;
+        align-content: start;
+        gap: 0.5rem;
+        padding: 0 0 1.75rem 1.75rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0.125rem;
+            left: 0;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: var(--radius-round);
+            background-color: var(--mark-accent);
+        }
+
+        &:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 0.875rem;
+            bottom: -0.125rem;
+            left: calc(0.375rem - 0.5px);
+            width: 1px;
+            background-color: var(--line-strong);
+        }
+
+        @include up(lg) {
+            gap: 0.75rem;
+            padding: 0;
+
+            &::before,
+            &:not(:last-child)::after {
+                content: none;
+            }
+        }
+    }
+
+    &__year {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__item-title {
+        @include t-h4;
+    }
+
+    &__text {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}

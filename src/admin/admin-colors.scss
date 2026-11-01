@@ -1,0 +1,108 @@
+// --------------------------------------------------
+//		Esquema de color del admin «Ashlar»
+//
+//		Se compila con los mismos SCSS que usan los esquemas nativos de
+//		WordPress (src/admin/scss/wp-colors/, copiados de wp-admin/css/colors,
+//		GPL), así que cubre TODO el admin: menú lateral, barra superior,
+//		botones, enlaces, formularios, avisos… Lo registra inc/admin.php.
+//
+//		⚠️ Los esquemas de WordPress calculan tonos en tiempo de compilación
+//		(color.adjust), así que aquí los colores van en hexadecimal. Son un
+//		ESPEJO de la paleta de theme.json: si cambia la marca, cambia aquí.
+// --------------------------------------------------
+
+@use "sass:color";
+
+// Espejo de theme.json (stone / corten)
+$stone-950: #151311;
+$stone-900: #221f1c;
+$stone-400: #a89d8c;
+$stone-100: #efebe4;
+$stone-50: #f7f5f1;
+$corten: #b85a28; // corten-500: botones y acento (blanco encima 4,6:1)
+$corten-ink: #974620; // corten-600: enlaces sobre stone-100 (5,5:1; el 500 daría 3,9:1)
+$corten-soft: #e1966a; // corten-300: avisos y foco sobre el menú oscuro
+
+@use "scss/wp-colors/admin" with (
+    $scheme-name: "ashlar",
+    $base-color: $stone-950,
+    $text-color: $stone-50,
+    $icon-color: $stone-400,
+    $highlight-color: $corten,
+    $notification-color: $corten-soft,
+    $body-background: $stone-100,
+    $link: $corten-ink,
+    $link-focus: color.adjust($corten-ink, $lightness: -8%),
+    $button-color: $corten,
+    $form-checked: $corten,
+    $menu-highlight-text: $stone-50,
+    $menu-highlight-icon: $stone-50,
+    $menu-submenu-background: $stone-900,
+    $menu-submenu-text: color.mix($stone-50, $stone-950, 72%),
+    $menu-submenu-focus-text: $corten-soft,
+    $menu-bubble-text: $stone-950,
+    $dashboard-accent-1: $stone-900,
+    $dashboard-accent-2: $stone-950
+);
+
+// Color de acento del editor de bloques y de los componentes de WordPress
+// (selección de bloque, focos, conmutadores, botón Publicar/Actualizar).
+@function rgb-channels($color) {
+    @return color.channel($color, "red", $space: rgb), color.channel($color, "green", $space: rgb), color.channel($color, "blue", $space: rgb);
+}
+
+$darker-10: color.adjust($corten, $lightness: -5%);
+$darker-20: color.adjust($corten, $lightness: -10%);
+$corten-tint: color.mix($corten, #fff, 12%);
+$corten-veil: color.mix($corten, #fff, 30%);
+
+/// Tokens de marca y acento de WordPress (clásicos y del sistema de diseño
+/// --wpds-* de WordPress 7). Los neutros (grises, avisos) no se tocan.
+@mixin brand-tokens($important: null) {
+    --wp-admin-theme-color: #{$corten} #{$important};
+    --wp-admin-theme-color--rgb: #{rgb-channels($corten)} #{$important};
+    --wp-admin-theme-color-darker-10: #{$darker-10} #{$important};
+    --wp-admin-theme-color-darker-10--rgb: #{rgb-channels($darker-10)} #{$important};
+    --wp-admin-theme-color-darker-20: #{$darker-20} #{$important};
+    --wp-admin-theme-color-darker-20--rgb: #{rgb-channels($darker-20)} #{$important};
+    --wp-components-color-accent: #{$corten} #{$important};
+    --wp-components-color-accent-darker-10: #{$darker-10} #{$important};
+    --wp-components-color-accent-darker-20: #{$darker-20} #{$important};
+
+    --wpds-color-background-interactive-brand-strong: #{$corten} #{$important};
+    --wpds-color-background-interactive-brand-strong-active: #{$darker-10} #{$important};
+    --wpds-color-background-interactive-brand-weak-active: #{$corten-tint} #{$important};
+    --wpds-color-foreground-interactive-brand: #{$corten} #{$important};
+    --wpds-color-foreground-interactive-brand-active: #{$darker-20} #{$important};
+    --wpds-color-foreground-interactive-brand-strong: #{$stone-50} #{$important};
+    --wpds-color-foreground-interactive-brand-strong-active: #{$stone-50} #{$important};
+    --wpds-color-background-thumb-brand: #{$corten} #{$important};
+    --wpds-color-background-thumb-brand-active: #{$darker-10} #{$important};
+    --wpds-color-stroke-focus: #{$corten} #{$important};
+    --wpds-color-stroke-interactive-brand: #{$corten} #{$important};
+    --wpds-color-stroke-interactive-brand-active: #{$darker-20} #{$important};
+    --wpds-color-stroke-surface-brand-strong: #{$corten} #{$important};
+    --wpds-color-stroke-surface-brand: #{$corten-veil} #{$important};
+    --wpds-color-background-surface-brand: #{$corten-tint} #{$important};
+}
+
+// Todo el admin y lo que se pinta fuera del editor (ventanas, menús
+// desplegables): heredan del <body>.
+body.admin-color-ashlar {
+    @include brand-tokens;
+}
+
+// --------------------------------------------------
+//  Editor de bloques (WordPress 7+)
+//  El editor se envuelve en un ThemeProvider que escribe EN LÍNEA todo su
+//  sistema de color (--wpds-*) a partir de un color primario. Ese color sale
+//  de un mapa fijo de esquemas del núcleo (admin-ui/admin-theme-colors) y un
+//  esquema propio cae al azul por defecto. Hasta que WordPress permita
+//  registrar el color de un esquema propio, se sobrescriben aquí los tokens de
+//  marca y acento sobre esos contenedores; !important es la única forma de
+//  ganar a un estilo en línea.
+// --------------------------------------------------
+
+body.admin-color-ashlar [style*="--wp-admin-theme-color:"] {
+    @include brand-tokens(!important);
+}

@@ -1,0 +1,389 @@
+// --------------------------------------------------
+//      Block: Home hero (ashlar/home-hero)
+//      Tono oscuro con la foto y sus cotas. Abajo, el titular Display, la
+//      frase, los botones y la disponibilidad; a la derecha (debajo en móvil),
+//      el cartel de obra (site-board.js), que sustituye al ticker.
+//
+//      Móvil: la foto es un bloque arriba (--photo-h) que se funde con el
+//      fondo, y el titular se monta sobre su borde inferior; así el texto
+//      nunca queda encima de la parte clara de la foto.
+//      ≥ 1024: la foto es el fondo de todo el hero (alto de la pantalla menos
+//      la cabecera, entre 600 y 840 px).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.home-hero {
+    --photo-h: clamp(13rem, 55svh, 30rem);
+
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    isolation: isolate;
+
+    @include up(lg) {
+        display: flex;
+        align-items: flex-end;
+        min-height: clamp(37.5rem, calc(100svh - var(--header-h)), 52.5rem);
+    }
+
+    &__media {
+        z-index: -2;
+        height: var(--photo-h);
+
+        @include up(lg) {
+            position: absolute;
+            inset: 0;
+            height: auto;
+        }
+    }
+
+    // Móvil: de transparente al fondo del tono, para que el titular se lea
+    // sobre el borde de la foto. ≥ 1024: los dos degradados del Figma, de
+    // arriba abajo (para el titular) y desde la izquierda (para el texto).
+    &__scrim {
+        position: absolute;
+        inset: 0 0 auto;
+        z-index: -1;
+        height: var(--photo-h);
+        pointer-events: none;
+        background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 10%, transparent) 35%, var(--bg));
+
+        @include up(lg) {
+            inset: 0;
+            height: auto;
+            background:
+                linear-gradient(to right, color-mix(in srgb, var(--bg) 45%, transparent), transparent 62.5%),
+                linear-gradient(to bottom, color-mix(in srgb, var(--bg) 15%, transparent), color-mix(in srgb, var(--bg) 20%, transparent) 45%, color-mix(in srgb, var(--bg) 88%, transparent));
+        }
+    }
+
+    &__content {
+        display: grid;
+        gap: var(--space-60);
+        margin-top: calc(var(--space-70) * -1);
+        padding-bottom: var(--space-60);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) 24rem;
+            align-items: end;
+            margin-top: 0;
+            padding-top: var(--space-80);
+        }
+    }
+
+    &__main {
+        display: grid;
+        gap: var(--space-40);
+    }
+
+    &__title {
+        @include t-display;
+    }
+
+    &__statement {
+        max-width: 34rem;
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__actions {
+        display: grid;
+        gap: 0.75rem;
+
+        @include up(sm) {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn--outline {
+            --b-border: color-mix(in srgb, var(--fg) 40%, transparent);
+        }
+    }
+
+    &__capacity {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    // --------------------------------------------------
+    //  Cotas
+    // --------------------------------------------------
+
+    &__survey {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        color: color-mix(in srgb, var(--fg) 85%, transparent);
+        pointer-events: none;
+
+        // ≥ 1024 con poca altura, el cartel sube hasta donde van las cotas
+        @include up(lg) {
+            @media (max-height: 52.4375rem) {
+                display: none;
+            }
+        }
+
+        svg {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1;
+        }
+    }
+
+    &__dim,
+    &__point,
+    &__point-label {
+        position: absolute;
+    }
+
+    &__dim {
+        top: var(--space-70);
+        right: clamp(1rem, 3.5vw, 3.125rem);
+        display: grid;
+        gap: 0.5rem;
+        width: clamp(9.375rem, 16.7vw, 15rem);
+
+        svg {
+            width: 100%;
+            height: 1rem;
+        }
+    }
+
+    &__dim-label,
+    &__point-label {
+        @include t-label;
+    }
+
+    // A la izquierda de la cota y a su altura: debajo está el cartel de obra
+    &__point {
+        top: var(--space-70);
+        right: calc(clamp(1rem, 3.5vw, 3.125rem) + clamp(9.375rem, 16.7vw, 15rem) + var(--space-50));
+        display: none;
+        width: 2.5rem;
+        height: 2.5rem;
+
+        @include up(lg) {
+            display: block;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__point-label {
+        top: calc(100% + 0.25rem);
+        right: -1.5rem;
+        display: grid;
+        gap: 0.25rem;
+        white-space: nowrap;
+    }
+}
+
+// --------------------------------------------------
+//  Cartel de obra: tablero claro (tono light dentro del hero oscuro) con
+//  cabecera negra y la marca, como los que se cuelgan en la valla. Los cuatro
+//  tornillos de las esquinas son lo único «físico»; el resto, tipografía.
+// --------------------------------------------------
+
+.site-board {
+    --screw: 0.375rem;
+    --screw-inset: 0.5rem;
+
+    position: relative;
+    display: grid;
+    max-width: 28rem;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+
+    // Tornillos de abajo (los de arriba van en la cabecera)
+    &::before,
+    &::after,
+    &__head::before,
+    &__head::after {
+        content: "";
+        position: absolute;
+        width: var(--screw);
+        height: var(--screw);
+        border-radius: var(--radius-round);
+        background-color: var(--line-strong);
+    }
+
+    &::before,
+    &::after {
+        bottom: var(--screw-inset);
+    }
+
+    &::before,
+    &__head::before {
+        left: var(--screw-inset);
+    }
+
+    &::after,
+    &__head::after {
+        right: var(--screw-inset);
+    }
+
+    &__head {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        padding: 1rem 1.5rem;
+        background-color: var(--btn2-bg);
+        color: var(--btn2-fg);
+
+        &::before,
+        &::after {
+            top: var(--screw-inset);
+            background-color: color-mix(in srgb, var(--btn2-fg) 30%, transparent);
+        }
+    }
+
+    &__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+    }
+
+    &__mark {
+        flex: none;
+        width: 1.375rem;
+        height: 0.875rem;
+    }
+
+    &__mark-accent {
+        fill: var(--mark-accent);
+    }
+
+    &__brand-name {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-logo);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    // A la izquierda cuando baja de línea (móvil); a la derecha si cabe
+    &__meta {
+        display: grid;
+        color: color-mix(in srgb, var(--btn2-fg) 70%, transparent);
+        @include t-label;
+
+        @include up(sm) {
+            text-align: right;
+        }
+    }
+
+    &__body {
+        display: grid;
+        gap: var(--space-30);
+        padding: 1.5rem 1.5rem 2rem;
+    }
+
+    // «On site now» con el punto que late, como el ticker
+    &__tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        color: var(--accent);
+        @include t-label;
+
+        &::before {
+            content: "";
+            flex: none;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: var(--radius-round);
+            background-color: var(--btn-bg);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            &::before {
+                animation: ticker-pulse 2.4s var(--ease-in-out) infinite;
+            }
+        }
+    }
+
+    &__where {
+        display: grid;
+        gap: 0.25rem;
+    }
+
+    &__site {
+        @include t-h3;
+    }
+
+    &__job {
+        color: var(--fg-soft);
+    }
+
+    &__progress {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.5rem 1rem;
+    }
+
+    &__week {
+        grid-column: 1 / -1;
+        @include t-small;
+    }
+
+    &__track {
+        position: relative;
+        height: 0.25rem;
+        background-color: var(--line);
+    }
+
+    &__fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: var(--ticker-progress, 0%);
+        background-color: var(--btn-bg);
+    }
+
+    &__pct {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__rows {
+        display: grid;
+        border-top: 1px solid var(--line);
+    }
+
+    // Etiqueta encima del valor en móvil estrecho (a 320 el horario se partía)
+    &__row {
+        display: grid;
+        gap: 0.125rem 1rem;
+
+        @include up(xs) {
+            grid-template-columns: 7.5rem minmax(0, 1fr);
+        }
+
+        align-items: baseline;
+        padding-block: 0.625rem;
+        border-bottom: 1px solid var(--line);
+
+        dt {
+            color: var(--fg-muted);
+            @include t-label;
+        }
+
+        dd {
+            @include t-small;
+        }
+    }
+
+    &__note {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}

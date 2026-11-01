@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-next",
+    "version": "1.0.0",
+    "title": "Project · Next project",
+    "category": "ashlar",
+    "description": "A large link to the next project in the list, with its main photo. The last one links back to the first.",
+    "keywords": ["project", "next", "navigation"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "label": { "type": "string", "default": "Next project" },
+        "linkLabel": { "type": "string", "default": "See the project" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false, "inserter": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

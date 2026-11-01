@@ -1,0 +1,148 @@
+// --------------------------------------------------
+//      Block: Commitments table (ashlar/standard)
+//      Cabecera a dos columnas y tabla de cuatro (120 · 440 · 404 · 220 en el
+//      Figma). En móvil cada fila es una ficha apilada.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.standard {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+
+        thead {
+            // En móvil la cabecera sobra (cada dato lleva su rótulo), pero
+            // se mantiene para los lectores de pantalla.
+            @include down(lg) {
+                @include visually-hidden-rules;
+            }
+        }
+
+        th,
+        td {
+            font-weight: inherit;
+            vertical-align: top;
+        }
+    }
+
+    &__col {
+        padding-block: 0.75rem;
+        border-bottom: 1px solid var(--line-strong);
+        color: var(--fg-soft);
+        @include t-label;
+
+        &--measure {
+            text-align: right;
+        }
+    }
+
+    &__row {
+        display: grid;
+        gap: 0.75rem;
+        padding-block: var(--space-40);
+        border-bottom: 1px solid var(--line);
+
+        @include up(lg) {
+            display: table-row;
+            padding: 0;
+
+            > * {
+                padding-block: var(--space-50);
+                padding-inline-end: var(--space-50);
+            }
+
+            > :last-child {
+                padding-inline-end: 0;
+            }
+        }
+    }
+
+    &__clause {
+        color: var(--fg-muted);
+        @include t-label;
+
+        @include up(lg) {
+            width: 10.5%;
+            // alinear con la primera línea del titular de la fila
+            padding-top: calc(var(--space-50) + 0.5rem);
+        }
+    }
+
+    &__commitment {
+        @include t-h4;
+
+        @include up(lg) {
+            width: 34%;
+        }
+    }
+
+    &__detail {
+        color: var(--fg-soft);
+    }
+
+    &__measure,
+    &__measure-cell {
+        color: var(--accent);
+        @include t-h2;
+        white-space: nowrap;
+
+        @include up(lg) {
+            text-align: right;
+        }
+    }
+
+    // Rótulo del dato en la ficha móvil
+    @include down(lg) {
+        &__detail::before,
+        &__measure::before {
+            content: attr(data-label);
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--fg-muted);
+            @include t-label;
+        }
+    }
+
+    &__footnote {
+        color: var(--fg-soft);
+        @include t-label;
+        text-transform: none;
+        letter-spacing: 0.04em;
+
+        @include up(md) {
+            text-transform: uppercase;
+        }
+    }
+}

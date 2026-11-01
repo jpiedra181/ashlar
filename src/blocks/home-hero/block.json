@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/home-hero",
+    "version": "1.0.0",
+    "title": "Home hero",
+    "category": "ashlar",
+    "description": "Opening of the home page: a full-width site photo with the headline, a short statement, two buttons and the site board of the job you’re on now (week, site manager, phone and a note for the neighbours).",
+    "keywords": ["hero", "home", "headline", "intro"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "metaTop": { "type": "string", "default": "Design &amp; build" },
+        "metaBottom": { "type": "string", "default": "London N1 · Since 2009" },
+        "statement": { "type": "string", "default": "We’re a small building firm in Islington. We do extensions, lofts, basements and whole-house restorations, mostly in old terraced houses within twenty minutes of our yard." },
+        "image": { "type": "object", "default": {} },
+        "headline": { "type": "string", "default": "We ring you<br>before you<br>ring us." },
+        "primaryLabel": { "type": "string", "default": "Get a rough price" },
+        "primaryUrl": { "type": "string", "default": "/contact" },
+        "secondaryLabel": { "type": "string", "default": "See the houses" },
+        "secondaryUrl": { "type": "string", "default": "/projects" },
+        "capacity": { "type": "string", "default": "6 of 6 sites running · Next start: March 2027" },
+        "boardBrand": { "type": "string", "default": "Ashlar" },
+        "boardTag": { "type": "string", "default": "On site now" },
+        "boardSite": { "type": "string", "default": "Highbury Hill, N5" },
+        "boardJob": { "type": "string", "default": "Rear extension" },
+        "weekCurrent": { "type": "number", "default": 9 },
+        "weekTotal": { "type": "number", "default": 22 },
+        "weekFormat": { "type": "string", "default": "Week {current} of {total}" },
+        "boardRows": {
+            "type": "array",
+            "default": [
+                { "key": "Site manager", "value": "Dan Okafor" },
+                { "key": "Phone", "value": "07700 900461" },
+                { "key": "Hours", "value": "Mon–Fri, 8am–5.30pm" }
+            ]
+        },
+        "boardNote": { "type": "string", "default": "Noise, dust or a van in your way? Ring Dan first. He’d rather hear it from you." },
+        "survey": { "type": "boolean", "default": true },
+        "dimLabel": { "type": "string", "default": "440 · Course 14" },
+        "pointCode": { "type": "string", "default": "SP-03" },
+        "pointLevel": { "type": "string", "default": "+31.420 m AOD" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true, "multiple": false },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

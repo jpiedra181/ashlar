@@ -1,0 +1,74 @@
+# Integración continua
+# --------------------
+# Se ejecuta en los servidores de GitHub (no en el ordenador de nadie del equipo),
+# siempre sobre el mismo Ubuntu limpio. Da igual quién trabaje en Windows o en Linux.
+#
+# Qué hace hoy: comprueba que el proyecto COMPILA. Si alguien sube algo que rompe
+# el build, el Pull Request se marca en rojo antes de fusionar.
+#
+# Qué NO hace todavía: desplegar. El resultado de la compilación se descarta.
+# Cuando se decida cómo llegan los ficheros al servidor, se añade aquí un paso final.
+#
+# Por qué importa especialmente en este proyecto:
+#   · Ubuntu distingue mayúsculas y minúsculas en los nombres de fichero; Windows no.
+#     Un `import Tag from './tag'` cuando el fichero se llama `Tag.js` funciona en
+#     Windows y falla en Linux. Aquí se detecta antes de fusionar.
+#   · Compila SOLO con lo que hay en el repositorio: si alguien olvida commitear un
+#     fichero nuevo, el build falla aquí aunque en su máquina funcione.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Compilar y verificar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          # Lee la versión de .nvmrc: una sola fuente de verdad para el equipo y para CI.
+          node-version-file: '.nvmrc'
+          # Cachea las dependencias entre ejecuciones para que no tarde varios minutos.
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        # `ci` en vez de `install`: usa las versiones exactas de package-lock.json.
+        run: npm ci
+
+      - name: Compilar
+        # Este es el paso que de verdad importa. Si falla, el PR se bloquea.
+        run: npm run build
+
+      # ------------------------------------------------------------------
+      # Linters: informativos, NO bloquean.
+      #
+      # A día de hoy el proyecto acumula ~17.000 avisos, TODOS de formato
+      # (el código usa 4 espacios y la config de WordPress espera tabuladores).
+      # No hay ningún error funcional entre ellos.
+      #
+      # Si se pusieran como bloqueantes ahora, todos los PR saldrían en rojo
+      # desde el primer día y el equipo se acostumbraría a ignorar el CI.
+      #
+      # Para activarlos de verdad, cuando se quiera:
+      #   1. Ejecutar una vez `npx wp-scripts lint-js --fix` y
+      #      `npx wp-scripts lint-style --fix` (arregla ~98% automáticamente).
+      #   2. Commitear ese reformateo SOLO, sin mezclarlo con otros cambios.
+      #   3. Borrar las dos líneas `continue-on-error: true` de aquí abajo.
+      # ------------------------------------------------------------------
+
+      - name: Lint JS (informativo)
+        run: npm run lint:js
+        continue-on-error: true
+
+      - name: Lint CSS (informativo)
+        run: npm run lint:css
+        continue-on-error: true

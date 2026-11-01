@@ -1,0 +1,53 @@
+// --------------------------------------------------
+//		Elements: Typography base
+//		Archivo (titulares), Hanken Grotesk (texto e interfaz) e IBM Plex Mono
+//		(rótulos, datos, notas de obra). Los tamaños por nivel (h1…h6) los pone
+//		theme.json → styles.elements.
+// --------------------------------------------------
+
+body {
+    font-family: var(--font-family-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-family-display);
+    text-wrap: balance;
+}
+
+// Lo marcado en cursiva dentro de un titular no se inclina: es la segunda
+// parte de la frase en el tono apagado («…the opposite: *one fixed price*»).
+h1 em,
+h2 em,
+h3 em,
+.t-display em,
+.t-h1 em,
+.t-h2 em,
+.t-lead em {
+    font-style: normal;
+    color: var(--fg-muted);
+}
+
+p {
+    text-wrap: pretty;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+address {
+    font-style: normal;
+}
+
+// Cifras alineadas en datos (semanas, precios, m²)
+.num,
+time {
+    font-variant-numeric: tabular-nums;
+}

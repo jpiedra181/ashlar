@@ -1,0 +1,111 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/quote",
+    "version": "1.0.0",
+    "title": "Quote form",
+    "category": "ashlar",
+    "description": "The contact page: headline, who answers, your phone, email and address (from Options → Contact), what happens next and the quote form with a live ballpark. Enquiries arrive by email and stay in Messages.",
+    "keywords": ["quote", "contact", "form", "enquiry", "estimate", "ballpark"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "eyebrow": { "type": "string", "default": "Contact" },
+        "title": { "type": "string", "default": "Tell us about<br>your house." },
+        "lede": { "type": "string", "default": "Tell me a bit about the house and what you’re after, and you’ll get a rough price on screen straight away. I’ll ring you the next working day to talk it through. If we’re not the right builder for it, I’ll say so, and usually point you to someone who is. — Marta" },
+        "portrait": { "type": "object", "default": {} },
+        "whoName": { "type": "string", "default": "Marta Kowalska, project lead" },
+        "whoText": { "type": "string", "default": "Prices every job we do. Trained as an engineer in Kraków." },
+        "talkTitle": { "type": "string", "default": "Prefer to talk?" },
+        "phoneLabel": { "type": "string", "default": "Phone" },
+        "emailLabel": { "type": "string", "default": "Email" },
+        "emailNote": { "type": "string", "default": "Replies within one working day" },
+        "addressLabel": { "type": "string", "default": "Yard" },
+        "addressNote": { "type": "string", "default": "Visits by appointment" },
+        "nextLabel": { "type": "string", "default": "What happens next" },
+        "steps": {
+            "type": "array",
+            "default": [
+                { "title": "Marta calls you", "text": "Within one working day, to talk it through." },
+                { "title": "A free first visit", "text": "About an hour at your house, usually within a week." },
+                { "title": "A fixed price in 10 days", "text": "After the survey, itemised line by line." }
+            ]
+        },
+        "formTitle": { "type": "string", "default": "Your project" },
+        "formNote": { "type": "string", "default": "Takes about 2 minutes" },
+        "serviceLabel": { "type": "string", "default": "01 — What are you planning?" },
+        "sizeLabel": { "type": "string", "default": "02 — Roughly how big?" },
+        "startLabel": { "type": "string", "default": "03 — When would you like to start?" },
+        "contactLabel": { "type": "string", "default": "04 — Where should I reach you?" },
+        "services": {
+            "type": "array",
+            "default": [
+                { "value": "rear-extension", "label": "Rear extension", "plural": "rear extensions" },
+                { "value": "loft", "label": "Loft conversion", "plural": "loft conversions" },
+                { "value": "kitchen", "label": "Kitchen &amp; refurb", "plural": "kitchens and refurbs" },
+                { "value": "basement", "label": "Basement", "plural": "basements" },
+                { "value": "whole-house", "label": "Whole house", "plural": "whole-house restorations" },
+                { "value": "not-sure", "label": "Not sure yet", "plural": "" }
+            ]
+        },
+        "sizes": {
+            "type": "array",
+            "default": [
+                { "value": "under-20", "label": "Under 20 m²", "phrase": "under 20 m²" },
+                { "value": "20-40", "label": "20–40 m²", "phrase": "20–40 m²" },
+                { "value": "40-plus", "label": "40 m² +", "phrase": "over 40 m²" },
+                { "value": "not-sure", "label": "Not sure", "phrase": "" }
+            ]
+        },
+        "starts": {
+            "type": "array",
+            "default": [
+                { "value": "asap", "label": "As soon as possible" },
+                { "value": "6-months", "label": "Within 6 months" },
+                { "value": "next-year", "label": "Next year" },
+                { "value": "exploring", "label": "Just exploring" }
+            ]
+        },
+        "estimates": {
+            "type": "array",
+            "default": [
+                { "service": "rear-extension", "size": "under-20", "price": "£70k – £105k", "time": "12–18 weeks", "jobs": "11" },
+                { "service": "rear-extension", "size": "20-40", "price": "£95k – £160k", "time": "14–24 weeks", "jobs": "18" },
+                { "service": "rear-extension", "size": "40-plus", "price": "£150k – £240k", "time": "20–30 weeks", "jobs": "7" },
+                { "service": "rear-extension", "size": "any", "price": "£70k – £240k", "time": "12–30 weeks", "jobs": "36" },
+                { "service": "loft", "size": "under-20", "price": "£55k – £80k", "time": "8–12 weeks", "jobs": "6" },
+                { "service": "loft", "size": "20-40", "price": "£70k – £110k", "time": "10–14 weeks", "jobs": "14" },
+                { "service": "loft", "size": "40-plus", "price": "£105k – £150k", "time": "12–18 weeks", "jobs": "4" },
+                { "service": "loft", "size": "any", "price": "£55k – £150k", "time": "8–18 weeks", "jobs": "24" },
+                { "service": "kitchen", "size": "under-20", "price": "£45k – £75k", "time": "8–12 weeks", "jobs": "12" },
+                { "service": "kitchen", "size": "20-40", "price": "£65k – £110k", "time": "10–16 weeks", "jobs": "15" },
+                { "service": "kitchen", "size": "40-plus", "price": "£95k – £140k", "time": "14–20 weeks", "jobs": "6" },
+                { "service": "kitchen", "size": "any", "price": "£45k – £140k", "time": "8–20 weeks", "jobs": "33" },
+                { "service": "basement", "size": "under-20", "price": "£180k – £260k", "time": "20–28 weeks", "jobs": "2" },
+                { "service": "basement", "size": "20-40", "price": "£220k – £340k", "time": "22–30 weeks", "jobs": "4" },
+                { "service": "basement", "size": "40-plus", "price": "£250k – £450k", "time": "24–36 weeks", "jobs": "6" },
+                { "service": "basement", "size": "any", "price": "£180k – £450k", "time": "20–36 weeks", "jobs": "12" },
+                { "service": "whole-house", "size": "any", "price": "£1.6k – £2.4k / m²", "time": "30–50 weeks", "jobs": "9" }
+            ]
+        },
+        "ballparkLabel": { "type": "string", "default": "Your ballpark" },
+        "ballparkPrompt": { "type": "string", "default": "Choose what you’re planning and roughly how big, and your ballpark appears here." },
+        "ballparkBasis": { "type": "string", "default": "Based on {jobs} {work} of {size} we’ve built since 2022. Your fixed price comes after the survey." },
+        "ballparkBasisAny": { "type": "string", "default": "Based on the {jobs} {work} we’ve built since 2022. Your fixed price comes after the survey." },
+        "ballparkUnsure": { "type": "string", "default": "Every house is different. I’ll give you a ballpark when I ring." },
+        "messageLabel": { "type": "string", "default": "Anything we should know? (optional)" },
+        "messagePlaceholder": { "type": "string", "default": "Listed building? Tight access? Already have drawings? Tell us here." },
+        "reportLabel": { "type": "string", "default": "Send me a real Friday report from a live site, so I can see what I’d get." },
+        "submitLabel": { "type": "string", "default": "Send and book a free visit" },
+        "privacy": { "type": "string", "default": "We only use your details to reply to this enquiry. They don’t go on a mailing list, and they don’t go to anyone else." },
+        "successEyebrow": { "type": "string", "default": "Enquiry sent" },
+        "successTitle": { "type": "string", "default": "Thanks. I’ve got it." },
+        "successText": { "type": "string", "default": "I’ll ring you by the end of the next working day to talk it through and book a time to come and see the house. — Marta" },
+        "preview": { "type": "string", "default": "" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false, "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,205 @@
+// --------------------------------------------------
+//      Block: Cost guide (ashlar/cost-guide)
+//      Escritorio (lg): tabla a cuatro columnas (obra 380 · medida 200 ·
+//      plazo 200 · precio a la derecha) y pie con la nota y el botón.
+//      Móvil y tableta (Figma 75:603): cada fila en dos líneas, obra y precio
+//      (corten) arriba, «medida · plazo» debajo; botón a todo el ancho.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.cost-guide {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: 1rem;
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1rem;
+
+        @include up(lg) {
+            gap: 1.25rem;
+        }
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    // Tabla: en móvil y tableta, bloques; desde lg, tabla de verdad
+    &__table {
+        display: block;
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 1px solid var(--line-strong);
+
+        tbody {
+            display: block;
+        }
+
+        @include up(lg) {
+            display: table;
+            border-top: 0;
+
+            tbody {
+                display: table-row-group;
+            }
+        }
+    }
+
+    // Móvil: flex en dos líneas. El ::before (ancho completo, alto 0) fuerza
+    // el salto entre «obra · precio» y «medida · plazo» sin que compartan
+    // columnas (con rejilla, a 320 px no cabían).
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        padding-block: 1rem;
+        border-bottom: 1px solid var(--line);
+
+        &::before {
+            content: "";
+            order: 3;
+            flex-basis: 100%;
+        }
+
+        > * {
+            display: block;
+            padding: 0;
+            text-align: left;
+        }
+
+        @include up(lg) {
+            display: table-row;
+
+            // En una fila de tabla sería una celda vacía más
+            &::before {
+                content: none;
+            }
+
+            > * {
+                display: table-cell;
+                padding: 1.5rem 2rem 1.5rem 0;
+                vertical-align: baseline;
+            }
+        }
+    }
+
+    &__work {
+        flex: 1 1 0;
+        order: 1;
+        min-width: 0;
+        font-weight: 600;
+        line-height: 1.5;
+
+        @include up(lg) {
+            width: 29.7%;
+            @include t-h4;
+        }
+    }
+
+    &__price {
+        flex: none;
+        order: 2;
+        padding-left: 1rem;
+        color: var(--accent);
+        font-weight: 600;
+        line-height: 1.5;
+        white-space: nowrap;
+
+        .cost-guide__row > & {
+            text-align: right;
+        }
+
+        @include up(lg) {
+            color: var(--fg);
+            @include t-h3;
+
+            .cost-guide__row > & {
+                padding-right: 0;
+            }
+        }
+    }
+
+    &__size,
+    &__time {
+        margin-top: 0.25rem;
+        color: var(--fg-muted);
+        @include t-label;
+
+        @include up(lg) {
+            width: 15.6%;
+            margin-top: 0;
+        }
+    }
+
+    &__size {
+        order: 4;
+    }
+
+    // «20–40 m² · 14–24 weeks»: el punto solo existe en móvil y no se lee
+    &__time {
+        order: 5;
+
+        &::before {
+            content: "·" / "";
+            margin-inline: 0.5em;
+
+            @include up(lg) {
+                content: none;
+            }
+        }
+    }
+
+    &__foot {
+        display: grid;
+        gap: 1.5rem;
+
+        @include up(lg) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+    }
+
+    &__note {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__button {
+        width: 100%;
+
+        @include up(sm) {
+            justify-self: start;
+            width: auto;
+        }
+
+        @include up(lg) {
+            flex: none;
+        }
+    }
+}

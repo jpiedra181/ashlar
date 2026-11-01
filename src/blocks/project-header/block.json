@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-header",
+    "version": "1.0.0",
+    "title": "Project · Header",
+    "category": "ashlar",
+    "description": "Breadcrumb, project number, type of job, the street name and the summary. It all comes from the project details.",
+    "keywords": ["project", "header", "title", "breadcrumb"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "projectsLabel": { "type": "string", "default": "Projects" },
+        "breadcrumbLabel": { "type": "string", "default": "Breadcrumb" },
+        "showPosition": { "type": "boolean", "default": true },
+        "positionFormat": { "type": "string", "default": "Project {n} of {total}" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false, "inserter": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

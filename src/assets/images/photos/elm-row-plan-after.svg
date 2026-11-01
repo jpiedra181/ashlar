@@ -1,0 +1,36 @@
+<svg width="562" height="780" viewBox="0 0 562 780" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Ground floor plan</title>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="170" y="18.875">STREET &#x2191;</tspan></text>
+<rect x="170" y="40" width="210" height="168" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="186" y="68.875">FRONT ROOM&#10;</tspan><tspan x="186" y="84.875">17 M&#xb2;</tspan></text>
+<rect x="170" y="208" width="210" height="147" stroke="#151311" stroke-width="3"/>
+<text fill="#4F4840" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="186" y="236.875">LIVING&#10;</tspan><tspan x="186" y="252.875">12 M&#xb2;</tspan></text>
+<rect x="170.75" y="481.75" width="107.7" height="103.5" stroke="#857A6A" stroke-width="1.5" stroke-dasharray="6 5"/>
+<rect x="279.45" y="355.25" width="0.5" height="125.5" stroke="#857A6A" stroke-width="0.5" stroke-dasharray="6 5"/>
+<rect x="380" y="355" width="1" height="302.4" stroke="#B85A28" stroke-width="5"/>
+<rect x="170" y="481" width="1" height="176.4" stroke="#B85A28" stroke-width="5"/>
+<rect x="170" y="355" width="1" height="126" stroke="#151311" stroke-width="3"/>
+<rect x="170.75" y="654.15" width="208.5" height="6.5" fill="#F7F5F1" stroke="#B85A28" stroke-width="1.5"/>
+<rect x="296.5" y="368.1" width="66.2" height="276.2" stroke="#974620" stroke-dasharray="3 3"/>
+<text fill="#151311" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="186" y="383.875">KITCHEN &#38;&#10;</tspan><tspan x="186" y="399.875">DINING&#10;</tspan><tspan x="186" y="415.875">35 M&#xb2;</tspan></text>
+<text fill="#974620" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="302" y="388.875">ROOF-&#10;</tspan><tspan x="302" y="404.875">LIGHT</tspan></text>
+<g clip-path="url(#clip0_64_363)">
+<path d="M170.5 679.4V691.4M379.5 679.4V691.4M170.5 685.4H379.5M168 688.4L173 682.4M377 688.4L382 682.4" stroke="#685F52"/>
+</g>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="257" y="708.275">5 000</tspan></text>
+<g clip-path="url(#clip1_64_363)">
+<path d="M398 481.5H410M398 656.9H410M404 481.5V656.9M401 479L407 484M401 654.4L407 659.4" stroke="#685F52"/>
+</g>
+<text fill="#974620" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="416" y="569.475">4 200 NEW</tspan></text>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="500" letter-spacing="0.06em"><tspan x="170" y="734.275">GARDEN &#x2193;</tspan></text>
+<path d="M512 10L520 32H504L512 10Z" fill="#685F52"/>
+<text fill="#685F52" style="white-space: pre" xml:space="preserve" font-family="Hanken Grotesk, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0em"><tspan x="508" y="43.6364">N</tspan></text>
+<defs>
+<clipPath id="clip0_64_363">
+<rect width="210" height="12" fill="white" transform="translate(170 679.4)"/>
+</clipPath>
+<clipPath id="clip1_64_363">
+<rect width="12" height="176.4" fill="white" transform="translate(398 481)"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/site-social",
+    "version": "1.0.0",
+    "title": "Social links",
+    "category": "ashlar",
+    "icon": "share",
+    "description": "Links to the social profiles in Options → Social.",
+    "keywords": [
+        "social",
+        "instagram",
+        "linkedin"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "variant": {
+            "type": "string",
+            "enum": [
+                "text",
+                "icons"
+            ],
+            "default": "text"
+        },
+        "ariaLabel": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "supports": {
+        "html": false,
+        "reusable": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

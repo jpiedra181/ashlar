@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/footer-wall",
+    "version": "1.0.0",
+    "title": "Footer wall",
+    "category": "ashlar",
+    "icon": "grid-view",
+    "description": "The stone wall that closes the footer, with the site name cut into its bottom course. The name comes from Settings → General.",
+    "keywords": [
+        "footer",
+        "wall",
+        "brand"
+    ],
+    "textdomain": "ashlar",
+    "supports": {
+        "html": false,
+        "reusable": false,
+        "multiple": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

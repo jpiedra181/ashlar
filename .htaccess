@@ -1,0 +1,10 @@
+# Ficheros de desarrollo del tema: Apache no los sirve por HTTP.
+# .claude/ (notas e informes), .playwright-mcp/ (perfil del navegador de
+# pruebas, con la sesión de wp-admin), .git*, .env… y node_modules/.
+# RedirectMatch (mod_alias) funciona con el AllowOverride que ya pide
+# WordPress para los enlaces permanentes. En Nginx, regla equivalente en el
+# servidor. No sustituye a un .distignore al empaquetar el tema.
+<IfModule mod_alias.c>
+    RedirectMatch 404 /\.[^/]+
+    RedirectMatch 404 /node_modules/
+</IfModule>

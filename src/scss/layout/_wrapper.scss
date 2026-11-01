@@ -1,0 +1,81 @@
+// --------------------------------------------------
+//		Layout: Wrapper
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+html {
+    background-color: var(--color-stone-50);
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    background-color: var(--bg);
+    color: var(--fg);
+    overflow-x: clip;
+}
+
+// Contenedor raíz del front (FSE). Cabecera, contenido y pie van pegados: la
+// separación la pone cada sección con su propio padding, no el blockGap.
+.wp-site-blocks {
+    width: 100%;
+
+    > * {
+        margin-block: 0;
+    }
+}
+
+.wp-block-template-part {
+    width: 100%;
+}
+
+.site-main {
+    // Destino del skip link: recibe el foco sin pintar el anillo.
+    &:focus {
+        outline: none;
+    }
+}
+
+// Primitivas de layout
+.section {
+    padding-block: var(--section);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--gap);
+
+    @include up(md) {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+
+    @include up(lg) {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+}
+
+.rule {
+    height: 1px;
+    border: 0;
+    margin: 0;
+    background-color: var(--line);
+}
+
+// Barra de administración en la web (solo con sesión iniciada)
+#wpadminbar {
+    background-color: var(--color-stone-950);
+}
+
+// Aviso que pintan los bloques dinámicos en el editor cuando les falta un
+// dato (menú sin asignar, opción vacía). En el front nunca aparece.
+.ashlar-notice {
+    padding: 1rem 1.25rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
+    color: var(--fg-soft);
+}

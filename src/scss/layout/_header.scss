@@ -1,0 +1,359 @@
+// --------------------------------------------------
+//		Layout: Header
+//		Barra de 80 px (64 en móvil): logotipo · navegación · «Get a rough price»
+//		(y el teléfono, si se activa en Options → Header). Pegada arriba con fondo de cristal (translúcido + blur) y un filete; se esconde
+//		al bajar y vuelve al subir (src/js/modules/header.js).
+//
+//		Markup: template part `header` + bloques ashlar/logo y ashlar/header-menu.
+//		El menú móvil (<dialog class="menu">) también vive aquí.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--line);
+    color: var(--fg);
+    transition: transform var(--duration-slow) var(--ease-out);
+
+    // Efecto cristal: fondo translúcido que desenfoca lo que pasa por debajo
+    // al hacer scroll. El 80 % de opacidad mantiene ≥ 4,5:1 en los enlaces
+    // (--fg-soft) aunque pase por debajo una sección oscura. Sin soporte (o
+    // sin color-mix) se queda el fondo sólido. El menú móvil es un <dialog>
+    // modal (top layer): el backdrop-filter no altera su position: fixed.
+    // Solo la propiedad sin prefijo: el build quita el -webkit- (browserslist
+    // ya no lo necesita) y un Safari antiguo quedaría translúcido sin blur.
+    @supports (backdrop-filter: blur(1px)) and (background-color: color-mix(in srgb, red 50%, transparent)) {
+        background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+        backdrop-filter: blur(1rem) saturate(1.5);
+
+        // «Reducir transparencia» del sistema: vuelve al fondo sólido.
+        @media (prefers-reduced-transparency: reduce) {
+            background-color: var(--bg);
+            backdrop-filter: none;
+        }
+    }
+
+    // Con la barra de administración (usuario conectado), la cabecera se
+    // pega justo debajo de ella.
+    .admin-bar & {
+        top: var(--wp-admin--admin-bar--height, 0px);
+    }
+
+    &.is-hidden {
+        transform: translate3d(0, -100%, 0);
+    }
+
+    &:focus-within {
+        transform: none;
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-40);
+        height: 100%;
+    }
+
+    // El bloque del menú reparte sus piezas como hijas directas de la fila.
+    &__menu {
+        display: contents;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-50);
+    }
+
+    &__phone {
+        display: none;
+        align-items: center;
+        min-height: 2.75rem;
+        @include t-label;
+
+        @include up(lg) {
+            display: inline-flex;
+        }
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
+
+    // Más específico que .btn (los componentes se cargan después del layout)
+    & &__cta {
+        display: none;
+
+        @include up(md) {
+            display: inline-flex;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Logotipo: la marca (tres sillares) + ASHLAR en Archivo
+// --------------------------------------------------
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    color: inherit;
+
+    &__mark {
+        flex: none;
+        width: 1.375rem;
+        height: 0.875rem;
+    }
+
+    &__mark-accent {
+        fill: var(--mark-accent);
+    }
+
+    &__word {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-logo);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    &__image {
+        width: auto;
+        height: 1.75rem;
+    }
+}
+
+// --------------------------------------------------
+//  Navegación de escritorio (≥1024)
+// --------------------------------------------------
+
+.site-nav {
+    display: none;
+
+    @include up(lg) {
+        display: block;
+    }
+
+    &__list {
+        display: flex;
+        gap: var(--space-50);
+    }
+
+    &__link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        color: var(--fg-soft);
+        transition: color var(--duration-base) ease;
+        @include t-nav;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0.55rem;
+            height: 1px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--duration-slow) var(--ease-out);
+        }
+
+        &:hover,
+        &[aria-current] {
+            color: var(--fg);
+        }
+
+        &:hover::after,
+        &[aria-current]::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    }
+}
+
+// --------------------------------------------------
+//  Botones de abrir y cerrar el menú (iconos, 48 × 48)
+// --------------------------------------------------
+
+.menu-toggle,
+.menu-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-inline-end: -0.75rem;
+    color: inherit;
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.menu-toggle {
+    @include up(lg) {
+        display: none;
+    }
+}
+
+// --------------------------------------------------
+//  Menú móvil (<dialog>, tono oscuro)
+// --------------------------------------------------
+
+.menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    &::backdrop {
+        background: transparent;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding-bottom: var(--space-50);
+    }
+
+    // Fija arriba: en móvil apaisado el menú hace scroll y la X se perdía
+    &__top {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        flex: none;
+        background-color: var(--bg);
+        align-items: center;
+        justify-content: space-between;
+        height: var(--header-h);
+        border-bottom: 1px solid var(--line);
+    }
+
+    &__nav {
+        flex: 1;
+        padding-block: var(--space-40);
+    }
+
+    &__item {
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+    }
+
+    &__link {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--space-30);
+        padding-block: 1.125rem;
+    }
+
+    &__num {
+        align-self: start;
+        padding-top: 0.6em;
+        color: var(--accent);
+        font-variant-numeric: tabular-nums;
+        @include t-label;
+    }
+
+    &__text {
+        display: grid;
+        gap: 0.25rem;
+    }
+
+    &__label {
+        font-family: var(--font-family-display);
+        font-size: min(var(--font-size-menu), 6.5svh);
+        font-weight: 600;
+        line-height: 1.19;
+        letter-spacing: -0.01em;
+    }
+
+    &__sub {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--fg-soft);
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &__link[aria-current] &__label {
+        color: var(--accent);
+    }
+
+    @media (hover: hover) {
+        &__link:hover &__arrow {
+            transform: translate3d(0.25rem, 0, 0);
+        }
+    }
+
+    &__footer {
+        display: grid;
+        flex: none;
+        gap: 1.25rem;
+    }
+
+    &__live {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--fg-soft);
+        @include t-label;
+
+        &::before {
+            content: "";
+            flex: none;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: var(--radius-round);
+            background-color: var(--btn-bg);
+        }
+    }
+
+    &__cta {
+        width: 100%;
+    }
+
+    &__contact {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem 1.5rem;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+        }
+
+        a:first-child {
+            font-weight: 600;
+        }
+    }
+}

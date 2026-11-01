@@ -1,0 +1,81 @@
+// --------------------------------------------------
+//		Elements: Tonos de sección
+//		Ashlar alterna secciones claras (stone-50), beige (stone-100) y oscuras
+//		(stone-950). Son los modos Light / Dark de la colección Color del Figma:
+//		cada tono redefine las mismas variables SEMÁNTICAS y todo lo de dentro
+//		(texto, filetes, botones) se adapta solo.
+//
+//		  --bg --surface --fill --fill-contrast --fg --fg-soft --fg-muted --accent --line --line-strong
+//		  (--fill: relleno suave de cajas sobre --surface; --fill-contrast: caja en
+//		  el tono contrario al fondo, beige sobre claro y claro sobre beige)
+//		  --btn-bg --btn-bg-hover --btn-fg (botón principal)
+//		  --btn2-bg --btn2-bg-hover --btn2-fg (botón secundario) --focus
+//		  --error (borde y texto de los errores de formulario) --success (en plazo, enviado)
+//
+//		Contrastes auditados (WCAG 2.2 AA) en los dos modos: texto ≥ 4,5:1,
+//		bordes de controles y anillo de foco ≥ 3:1.
+// --------------------------------------------------
+
+:root,
+.theme-light,
+.theme-subtle {
+    --bg: var(--color-stone-50);
+    --surface: var(--color-white);
+    --fill: var(--color-stone-100);
+    --fill-contrast: var(--color-stone-100);
+    --fg: var(--color-stone-950);
+    --fg-soft: var(--color-stone-700);
+    --fg-muted: var(--color-stone-600);
+    --accent: var(--color-corten-600);
+    --line: var(--color-stone-200);
+    --line-strong: var(--color-stone-500);
+    --btn-bg: var(--color-corten-500);
+    --btn-bg-hover: var(--color-corten-600);
+    --btn-fg: var(--color-white);
+    --btn2-bg: var(--color-stone-950);
+    --btn2-bg-hover: var(--color-stone-800);
+    --btn2-fg: var(--color-stone-50);
+    --focus: var(--color-corten-500);
+    --mark-accent: var(--color-corten-500);
+    --error: var(--color-error);
+    --success: var(--color-success);
+
+    color-scheme: light;
+}
+
+.theme-subtle {
+    --bg: var(--color-stone-100);
+    --fill-contrast: var(--color-stone-50);
+}
+
+.theme-dark {
+    --bg: var(--color-stone-950);
+    --surface: var(--color-stone-900);
+    --fill: var(--color-stone-800);
+    --fill-contrast: var(--color-stone-900);
+    --fg: var(--color-stone-50);
+    --fg-soft: var(--color-stone-300);
+    --fg-muted: var(--color-stone-400);
+    --accent: var(--color-corten-300);
+    --line: var(--color-stone-800);
+    --line-strong: var(--color-stone-500);
+    --btn-bg: var(--color-corten-400);
+    --btn-bg-hover: var(--color-corten-300);
+    --btn-fg: var(--color-stone-950);
+    --btn2-bg: var(--color-stone-50);
+    --btn2-bg-hover: var(--color-stone-200);
+    --btn2-fg: var(--color-stone-950);
+    --focus: var(--color-corten-300);
+    --mark-accent: var(--color-corten-400);
+    --error: var(--color-error-soft);
+    --success: var(--color-success-soft);
+
+    color-scheme: dark;
+}
+
+.theme-light,
+.theme-subtle,
+.theme-dark {
+    background-color: var(--bg);
+    color: var(--fg);
+}

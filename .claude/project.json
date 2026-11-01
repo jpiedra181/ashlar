@@ -1,0 +1,15 @@
+{
+    "_comment": "Parámetros del proyecto que leen los hooks, skills y scripts de .claude/. Es lo ÚNICO que hay que cambiar al copiar la carpeta a otro tema.",
+    "name": "ashlar",
+    "themeFolder": "ashlar",
+    "textDomain": "ashlar",
+    "blockNamespace": "ashlar",
+    "localUrl": "http://ashlar.local",
+    "liveUrl": "",
+    "liveNotes": "",
+    "designSource": "Figma: https://www.figma.com/design/XRdk3LtiAg84GOAvCgmKCh/Ashlar (páginas Desktop y Mobile; variables en Foundations).",
+    "audit": {
+        "pages": ["/", "/services/", "/projects/", "/about/", "/contact/"],
+        "breakpoints": [320, 390, 834, 1024, 1280, 1440, 1920]
+    }
+}

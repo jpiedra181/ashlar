@@ -1,0 +1,48 @@
+// --------------------------------------------------
+//      Block: Partners (ashlar/partners)
+//      Rótulo mono y nombres en Archivo Medium (H4) repartidos a lo ancho.
+//      En móvil, en línea y más pequeños.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.partners {
+    padding-block: var(--section-gap);
+
+    &__inner {
+        display: grid;
+        gap: var(--space-40);
+    }
+
+    &__label {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include up(lg) {
+            justify-content: space-between;
+            gap: 1rem 2rem;
+        }
+    }
+
+    &__name {
+        color: var(--fg-soft);
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-lead);
+        font-weight: 500;
+        line-height: 1.25;
+
+        @include up(lg) {
+            @include t-h4;
+        }
+    }
+}

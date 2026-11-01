@@ -1,0 +1,8 @@
+// --------------------------------------------------
+//		Tools: Border mixin
+// --------------------------------------------------
+
+/// Filete fino con el color de línea del tema activo (claro, lino u oscuro).
+@mixin hairline($side: top, $color: var(--line)) {
+    border-#{$side}: 1px solid $color;
+}

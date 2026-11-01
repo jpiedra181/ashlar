@@ -1,0 +1,109 @@
+// --------------------------------------------------
+//		Panel «Ficha del proyecto» (src/admin/project-panel.js)
+//		Documento del editor, sin tokens del tema: espejo de la paleta.
+// --------------------------------------------------
+
+$hairline: #ddd3c3;
+$linen: #eae2d5;
+$ink-soft: #5c5349;
+
+.ashlar-project-panel {
+    .components-base-control,
+    .components-toggle-control {
+        margin-bottom: 20px;
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    &__chips {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+        margin: -12px 0 20px;
+        color: $ink-soft;
+        font-size: 12px;
+    }
+
+    &__note {
+        margin: 8px 0 0;
+        color: $ink-soft;
+        font-size: 12px;
+    }
+}
+
+.ashlar-materials {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 12px;
+
+    &__item {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    &__swatch.components-button {
+        padding: 0;
+        min-width: 0;
+    }
+}
+
+.ashlar-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 0 0 12px;
+
+    &__item {
+        position: relative;
+        margin: 0;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 1px solid $hairline;
+        background: $linen;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        inset: auto 0 0;
+        display: flex;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.92);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &__item:hover &__actions,
+    &__item:focus-within &__actions {
+        opacity: 1;
+    }
+}
+
+// Foto suelta (antes / después)
+.ashlar-project-panel__image {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 2px;
+    }
+}

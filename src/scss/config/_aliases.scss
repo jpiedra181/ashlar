@@ -1,0 +1,78 @@
+// --------------------------------------------------
+//		WordPress Custom Properties → alias cortos
+//		Mapea las variables que WordPress genera desde theme.json a nombres
+//		cortos para el SCSS del tema.
+//		⚠️ theme.json es la fuente de verdad (se genera con
+//		tools/build/theme-json.mjs): si cambia un slug allí, cambia aquí.
+// --------------------------------------------------
+
+$palette: "stone-50", "stone-100", "stone-200", "stone-300", "stone-400", "stone-500", "stone-600", "stone-700", "stone-800",
+	"stone-900", "stone-950", "corten-300", "corten-400", "corten-500", "corten-600", "white", "error", "error-soft", "error-bg",
+	"success", "success-soft", "success-bg";
+$spacing: 10, 20, 30, 40, 50, 60, 70, 80, section;
+
+// Alias → slug tal como lo escribe WordPress en la variable. WP pasa los slugs
+// a kebab-case y separa letras de números: «h1» → «h-1».
+$font-sizes: (
+	"display": "display",
+	"h1": "h-1",
+	"h2": "h-2",
+	"h3": "h-3",
+	"h4": "h-4",
+	"lead": "lead",
+	"base": "base",
+	"sm": "sm",
+	"xs": "xs"
+);
+
+:root {
+	// Colores → --color-{slug}
+	@each $slug in $palette {
+		--color-#{$slug}: var(--wp--preset--color--#{$slug});
+	}
+
+	// Tamaños de fuente → --font-size-{slug}
+	@each $alias, $wp-slug in $font-sizes {
+		--font-size-#{$alias}: var(--wp--preset--font-size--#{$wp-slug});
+	}
+
+	// Tamaños de componente que el cliente no elige (logo, menú)
+	--font-size-logo: var(--wp--custom--type--logo);
+	--font-size-menu: var(--wp--custom--type--menu);
+
+	// Espaciado fluido → --space-{slug}
+	@each $slug in $spacing {
+		--space-#{$slug}: var(--wp--preset--spacing--#{$slug});
+	}
+
+	// Familias
+	--font-family-display: var(--wp--preset--font-family--display);
+	--font-family-body: var(--wp--preset--font-family--body);
+	--font-family-mono: var(--wp--preset--font-family--mono);
+
+	// Layout
+	--max: var(--wp--custom--layout--max);
+	--gutter: var(--wp--custom--layout--gutter);
+	--gap: var(--wp--custom--layout--gap);
+	--stack: var(--wp--custom--layout--stack);
+	--section: var(--wp--preset--spacing--section);
+	--section-gap: var(--wp--custom--layout--section-gap);
+	--header-h: var(--wp--custom--layout--header-h);
+
+	// Radios
+	--radius-sm: var(--wp--custom--radius--sm);
+	--radius-md: var(--wp--custom--radius--md);
+	--radius-lg: var(--wp--custom--radius--lg);
+	--radius-pill: var(--wp--custom--radius--pill);
+	--radius-round: var(--wp--custom--radius--round);
+
+	// Movimiento
+	--ease-out: var(--wp--custom--ease--out);
+	--ease-in-out: var(--wp--custom--ease--in-out);
+	--ease-standard: var(--wp--custom--ease--standard);
+	--ease-fill: var(--wp--custom--ease--fill); // relleno direccional de los botones
+	--duration-fast: var(--wp--custom--duration--fast);
+	--duration-base: var(--wp--custom--duration--base);
+	--duration-slow: var(--wp--custom--duration--slow);
+	--duration-reveal: var(--wp--custom--duration--reveal);
+}

@@ -1,0 +1,339 @@
+// --------------------------------------------------
+//      Block: Project · On site (ashlar/project-build)
+//      Mosaico de fotos (412 alta · 844 ancha · 410 + 410 pequeñas) con pies
+//      en mono y el programa de obra en una lámina blanca: eje de semanas,
+//      barra planificada (hueca) y real (corten) y notas de retraso.
+//      Móvil: fotos apiladas y, en el programa, cada tarea con su pista debajo.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.project-build {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    // ---------- Fotos ----------
+
+    &__photos {
+        display: grid;
+        gap: var(--space-40) var(--gap);
+
+        @include up(sm) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include up(lg) {
+            grid-template-columns: 412fr 410fr 410fr;
+            grid-template-rows: auto auto;
+            align-items: start;
+        }
+    }
+
+    &__photo {
+        display: grid;
+        gap: 0.75rem;
+        margin: 0;
+
+        figcaption {
+            color: var(--fg-soft);
+            @include t-label;
+        }
+
+        // Ancha: arriba del todo en móvil, a dos columnas en escritorio.
+        &--2 {
+            order: -1;
+
+            @include up(sm) {
+                grid-column: 1 / -1;
+            }
+
+            @include up(lg) {
+                order: 0;
+                grid-column: 2 / 4;
+                grid-row: 1;
+            }
+        }
+
+        &--1 {
+            @include up(lg) {
+                grid-column: 1;
+                grid-row: 1 / 3;
+            }
+        }
+    }
+
+    &__media {
+        aspect-ratio: 4 / 3;
+        background-color: var(--fill);
+    }
+
+    @include up(lg) {
+        &__photo--1 &__media {
+            aspect-ratio: 412 / 668;
+        }
+
+        &__photo--2 &__media {
+            aspect-ratio: 844 / 420;
+        }
+
+        &__photo--3 &__media,
+        &__photo--4 &__media {
+            aspect-ratio: 410 / 180;
+        }
+    }
+}
+
+// ---------- Programa de obra ----------
+
+.programme {
+    display: grid;
+    gap: 1.5rem;
+    padding: var(--space-40) var(--space-30);
+    border: 1px solid var(--line);
+    background-color: var(--surface);
+
+    @include up(md) {
+        padding: var(--space-40);
+    }
+
+    &__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+    }
+
+    &__heading {
+        display: grid;
+        gap: 0.375rem;
+    }
+
+    &__title {
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-h4);
+        font-weight: 500;
+    }
+
+    &__summary {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__key {
+        display: flex;
+        gap: 1.5rem;
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__key-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__swatch {
+        display: inline-block;
+        width: 1.25rem;
+        height: 0.625rem;
+
+        &--plan {
+            border: 1px solid var(--fg-muted);
+        }
+
+        &--actual {
+            background-color: var(--color-corten-500);
+        }
+    }
+
+    // Eje (solo escritorio): rótulo «Week» en la columna de tareas.
+    &__axis {
+        display: none;
+
+        @include up(lg) {
+            display: grid;
+            grid-template-columns: minmax(0, 12.5rem) minmax(0, 1fr);
+            column-gap: 1.5rem;
+            color: var(--fg-soft);
+            @include t-label;
+        }
+    }
+
+    &__ticks {
+        position: relative;
+        height: 1rem;
+
+        span {
+            position: absolute;
+            transform: translateX(-50%);
+        }
+    }
+
+    &__rows {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__row {
+        position: relative;
+        display: grid;
+        gap: 0.625rem;
+        padding-block: 0.875rem;
+        border-bottom: 1px solid var(--line);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 12.5rem) minmax(0, 1fr);
+            align-items: center;
+            column-gap: 1.5rem;
+            padding-block: 0.625rem;
+            border-bottom: 0;
+        }
+    }
+
+    &__task {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: var(--font-size-sm);
+    }
+
+    &__weeks {
+        color: var(--fg-soft);
+        white-space: nowrap;
+        @include t-label;
+
+        &.is-late {
+            color: var(--accent);
+        }
+
+        @include up(lg) {
+            display: none;
+        }
+    }
+
+    // Pista: una columna por semana (rejilla vertical en escritorio).
+    &__track {
+        position: relative;
+        display: block;
+        height: 1.5rem;
+
+        @include up(lg) {
+            height: 1.75rem;
+            background-image: repeating-linear-gradient(
+                to right,
+                var(--line) 0 1px,
+                transparent 1px calc(100% / var(--weeks))
+            );
+        }
+    }
+
+    &__bar {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &--plan {
+            height: 1.25rem;
+            border: 1px solid var(--fg-muted);
+            background-color: var(--surface);
+        }
+
+        &--actual {
+            height: 0.5rem;
+            background-color: var(--color-corten-500);
+        }
+    }
+
+    // Nota de retraso: en escritorio, junto al final de la barra; en móvil,
+    // una línea en corten debajo.
+    &__note {
+        display: block;
+        color: var(--accent);
+        @include t-label;
+
+        @include up(lg) {
+            position: absolute;
+            top: 50%;
+            left: var(--note-left);
+            margin: 0 0 0 0.75rem;
+            padding-left: 1rem;
+            transform: translateY(-50%);
+            // Cabe en lo que queda de pista: si no, parte en dos líneas (a 1024 se salía)
+            width: max-content;
+            max-width: calc(100% - var(--note-left) - 1.75rem);
+            text-wrap: balance;
+            // Fondo de la hoja: las líneas de semana no atraviesan el texto
+            padding-right: 0.375rem;
+            background-color: var(--surface);
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 0.4375rem;
+                height: 0.4375rem;
+                border-radius: var(--radius-round);
+                background-color: currentcolor;
+                transform: translateY(-50%);
+            }
+
+            &.is-flipped {
+                max-width: calc(var(--note-left) - 1rem);
+                margin: 0;
+                padding: 0 1rem 0 0;
+                transform: translate(-100%, -50%);
+
+                &::before {
+                    right: 0;
+                    left: auto;
+                }
+            }
+        }
+    }
+
+    // En móvil la nota se coloca debajo de la pista (no dentro).
+    @include down(lg) {
+        &__row.has-note &__track {
+            margin-bottom: 1.5rem;
+        }
+
+        &__note {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.375rem;
+        }
+    }
+}

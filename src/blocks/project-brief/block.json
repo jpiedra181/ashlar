@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-brief",
+    "version": "1.0.0",
+    "title": "Project · The brief",
+    "category": "ashlar",
+    "description": "What the client asked for, in their words, and two short lists side by side: what you found and what you did.",
+    "keywords": ["project", "brief", "quote", "found", "did"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "01" },
+        "chapterLabel": { "type": "string", "default": "The brief" },
+        "quote": { "type": "string", "default": "“We wanted a kitchen we could all sit in, and light at the back of the house. And we really didn’t want to move out for six months.”" },
+        "cite": { "type": "string", "default": "Hannah Whitfield, at the first visit" },
+        "foundLabel": { "type": "string", "default": "What we found" },
+        "found": {
+            "type": "array",
+            "default": [
+                "A dark galley kitchen in a 1970s lean-to with a leaking roof",
+                "The rear wall shared with No. 14, so a party wall award was needed",
+                "Clay soil and a Victorian drain running under the garden"
+            ]
+        },
+        "didLabel": { "type": "string", "default": "What we did" },
+        "did": {
+            "type": "array",
+            "default": [
+                "Took the lean-to down and built a 4.2 m steel-framed extension",
+                "Agreed the party wall award in week 3, before any digging",
+                "Re-routed the drain and piled the new footings",
+                "Kept a working kitchen at the front so the family never moved out"
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

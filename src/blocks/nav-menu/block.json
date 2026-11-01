@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/nav-menu",
+    "version": "1.0.0",
+    "title": "Menu column",
+    "category": "ashlar",
+    "icon": "menu",
+    "description": "The links of a menu location (Appearance → Menus) as a footer column.",
+    "keywords": [
+        "menu",
+        "footer",
+        "links"
+    ],
+    "textdomain": "ashlar",
+    "attributes": {
+        "location": {
+            "type": "string",
+            "default": "footer"
+        },
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "showTitle": {
+            "type": "boolean",
+            "default": true
+        },
+        "ariaLabel": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "supports": {
+        "html": false,
+        "reusable": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Compilado: se regenera con `npm run build`
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Kit de Claude: SÍ se versiona (hooks, skills, reglas, agentes).
+# Fuera solo lo que genera cada máquina:
+.claude/reports/
+.claude/settings.local.json
+
+# Playwright (verificación visual): capturas y perfil del navegador con sesión
+.playwright-mcp/

@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/cost-guide",
+    "version": "1.0.0",
+    "title": "Cost guide",
+    "category": "ashlar",
+    "description": "What each kind of job really costs: a table with typical size, time and price range, a note on what isn’t included and a button.",
+    "keywords": ["cost", "price", "prices", "guide", "table", "budget"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "eyebrow": { "type": "string", "default": "Cost guide · London 2026 · ex VAT" },
+        "title": { "type": "string", "default": "What things really cost." },
+        "lede": { "type": "string", "default": "These ranges come from our last 40 jobs, so they’re what people actually paid. Your own fixed price comes after the survey, within ten working days. — Priya" },
+        "workLabel": { "type": "string", "default": "Type of work" },
+        "sizeLabel": { "type": "string", "default": "Typical size" },
+        "timeLabel": { "type": "string", "default": "Typical time" },
+        "priceLabel": { "type": "string", "default": "Price range" },
+        "rows": {
+            "type": "array",
+            "default": [
+                { "work": "Rear extension", "size": "20–40 m²", "time": "14–24 weeks", "price": "£95k – £160k" },
+                { "work": "Side-return extension", "size": "12–20 m²", "time": "12–18 weeks", "price": "£75k – £120k" },
+                { "work": "Loft conversion, dormer", "size": "25–35 m²", "time": "10–14 weeks", "price": "£70k – £110k" },
+                { "work": "Kitchen &amp; refurbishment", "size": "Any size", "time": "8–20 weeks", "price": "£45k – £140k" },
+                { "work": "Basement", "size": "40–70 m²", "time": "24–36 weeks", "price": "£250k – £450k" },
+                { "work": "Whole-house restoration", "size": "120–250 m²", "time": "30–50 weeks", "price": "£1.6k – £2.4k / m²" }
+            ]
+        },
+        "note": { "type": "string", "default": "Not included: architect fees, loose furniture, appliances you choose yourself." },
+        "buttonLabel": { "type": "string", "default": "Get a rough price in two minutes" },
+        "buttonUrl": { "type": "string", "default": "/contact/" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,53 @@
+// --------------------------------------------------
+//		Templates: Página legal
+//		Aviso legal, privacidad, cookies: título + texto corrido con los
+//		bloques del core, a medida de lectura.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.legal-page {
+    padding-block: calc(var(--header-h) + var(--space-70)) var(--section);
+
+    &__title {
+        max-width: 18ch;
+        margin-bottom: var(--space-60);
+        @include t-h1;
+    }
+
+    &__content {
+        // ~70 caracteres por línea (.prose da 62ch, unos 90 en DM Sans)
+        max-width: 48ch;
+
+        h2 {
+            margin-top: 2em;
+            font-size: var(--font-size-h3);
+        }
+
+        h3 {
+            margin-top: 1.5em;
+            font-size: var(--font-size-h4);
+        }
+
+        ul,
+        ol {
+            padding-left: 1.25em;
+            list-style: revert;
+        }
+
+        a {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.25em;
+        }
+
+        // Aviso destacado al principio («Ashlar is not a real company»):
+        // párrafo con la clase adicional legal-notice
+        .legal-notice {
+            padding: var(--space-30) var(--space-40);
+            border-left: 2px solid var(--accent);
+            background: var(--fill-contrast);
+        }
+    }
+}

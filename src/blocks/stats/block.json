@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/stats",
+    "version": "1.0.0",
+    "title": "Key figures",
+    "category": "ashlar",
+    "description": "A row of big numbers, each with a short line under it: the year you started, houses built, people on the payroll…",
+    "keywords": ["numbers", "figures", "stats", "facts", "counter"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "attached": { "type": "boolean", "default": false },
+        "heading": { "type": "string", "default": "In numbers" },
+        "items": {
+            "type": "array",
+            "default": [
+                { "value": "2009", "label": "founded in Islington" },
+                { "value": "118", "label": "houses built or restored" },
+                { "value": "24", "label": "people on our payroll" },
+                { "value": "≤ 6", "label": "live sites, ever" },
+                { "value": "4.9", "label": "from 96 client reviews" }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

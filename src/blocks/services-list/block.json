@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/services-list",
+    "version": "1.0.0",
+    "title": "Services list",
+    "category": "ashlar",
+    "description": "The kinds of job you do, as large rows with duration and starting price. On hover a photo of that kind of job appears.",
+    "keywords": ["services", "what we build", "prices", "list"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "" },
+        "chapterLabel": { "type": "string", "default": "What we build" },
+        "title": { "type": "string", "default": "What we build, and<br>roughly what it costs." },
+        "note": { "type": "string", "default": "Typical London prices, 2026, ex VAT" },
+        "services": {
+            "type": "array",
+            "default": [
+                { "name": "Extensions", "duration": "14–24 weeks", "price": "From £95k", "url": "/services/#extensions", "image": {} },
+                { "name": "Loft conversions", "duration": "10–14 weeks", "price": "From £70k", "url": "/services/#lofts", "image": {} },
+                { "name": "Kitchens &amp; refurbishment", "duration": "8–20 weeks", "price": "From £45k", "url": "/services/#kitchens", "image": {} },
+                { "name": "Basements", "duration": "24–36 weeks", "price": "From £250k", "url": "/services/#basements", "image": {} },
+                { "name": "Whole-house restoration", "duration": "30–50 weeks", "price": "Priced after survey", "url": "/services/#restoration", "image": {} }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

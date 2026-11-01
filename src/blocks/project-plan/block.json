@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/project-plan",
+    "version": "1.0.0",
+    "title": "Project · The plan",
+    "category": "ashlar",
+    "description": "The floor plan before and after, side by side, with a key to the lines and the scale. Upload each plan as an image (SVG or PNG).",
+    "keywords": ["project", "plan", "drawing", "floor plan", "before after"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "chapterNum": { "type": "string", "default": "03" },
+        "chapterLabel": { "type": "string", "default": "The plan" },
+        "title": { "type": "string", "default": "41 m<sup>2</sup> became 64 m<sup>2</sup>." },
+        "lede": { "type": "string", "default": "Ground floor, as surveyed in week 1 and as built. Drawn to scale from our measured survey." },
+        "plans": {
+            "type": "array",
+            "default": [
+                { "title": "Before", "label": "Ground floor · 41 m²", "image": {} },
+                { "title": "After", "label": "Ground floor · 64 m²", "image": {} }
+            ]
+        },
+        "legend": {
+            "type": "array",
+            "default": [
+                { "type": "existing", "label": "Existing walls" },
+                { "type": "new", "label": "New structure" },
+                { "type": "removed", "label": "Removed" },
+                { "type": "rooflight", "label": "Rooflight above" }
+            ]
+        },
+        "scale": { "type": "string", "default": "Scale 1:100 at A3" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

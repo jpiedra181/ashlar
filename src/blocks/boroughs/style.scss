@@ -1,0 +1,105 @@
+// --------------------------------------------------
+//      Block: Where we build (ashlar/boroughs)
+//      Filas: nombre (H4) · barra corten proporcional · «34 projects».
+//      Móvil: nombre y número arriba, barra debajo.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.boroughs {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+    }
+
+    &__head {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 28.75rem);
+            align-items: end;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line-strong);
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "name count"
+            "bar bar";
+        align-items: center;
+        gap: 0.75rem 1rem;
+        padding-block: 1.125rem;
+        border-bottom: 1px solid var(--line);
+
+        @include up(md) {
+            grid-template-columns: minmax(0, 12.5rem) minmax(0, 1fr) minmax(0, 7.5rem);
+            grid-template-areas: "name bar count";
+            gap: 2rem;
+        }
+    }
+
+    &__name {
+        grid-area: name;
+        font-family: var(--font-family-display);
+        font-size: var(--font-size-lead);
+        font-weight: 500;
+
+        @include up(md) {
+            font-size: var(--font-size-h4);
+        }
+    }
+
+    &__bar {
+        grid-area: bar;
+        display: block;
+        height: 0.375rem;
+
+        span {
+            display: block;
+            height: 100%;
+            background-color: var(--mark-accent);
+            transform-origin: left;
+        }
+    }
+
+    &__count {
+        grid-area: count;
+        color: var(--fg-soft);
+        text-align: right;
+        @include t-label;
+    }
+}
+
+// Las barras crecen al aparecer (solo con movimiento permitido).
+html.motion .boroughs__list[data-reveal] .boroughs__bar span {
+    transform: scaleX(0);
+    transition: transform 900ms var(--ease-out);
+}
+
+html.motion .boroughs__list[data-reveal].is-in .boroughs__bar span {
+    transform: scaleX(1);
+}

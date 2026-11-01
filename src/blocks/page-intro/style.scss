@@ -1,0 +1,163 @@
+// --------------------------------------------------
+//      Block: Page intro (ashlar/page-intro)
+//      Rótulo, <h1> (H1 del Figma) y entradilla a la derecha (460 px).
+//      Opcional: enlaces rápidos en píldoras (Services) y foto ancha con pie
+//      (About). La entradilla se alinea abajo (Projects) o arriba (About).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.page-intro {
+    padding-block: var(--space-50) var(--space-60);
+
+    &__inner {
+        display: grid;
+        gap: var(--space-40);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 28.75rem);
+            align-items: end;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &--top &__inner {
+        @include up(lg) {
+            align-items: start;
+        }
+    }
+
+    &--top &__lede {
+        @include up(lg) {
+            padding-top: 2.75rem;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    // Con enlaces rápidos (Services), en móvil el bloque del titular se
+    // «disuelve» en la rejilla para que la entradilla quede antes de las
+    // píldoras (Figma 75:355). Desde lg vuelve la columna de la izquierda.
+    &__inner:has(.page-intro__links) {
+        row-gap: 1rem;
+
+        @include up(lg) {
+            row-gap: var(--space-40);
+        }
+    }
+
+    &__inner:has(.page-intro__links) &__heading {
+        display: contents;
+
+        @include up(lg) {
+            display: grid;
+        }
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h1;
+    }
+
+    &__lede {
+        color: var(--fg-soft);
+        @include t-lead;
+
+        @include up(lg) {
+            padding-bottom: 0.25rem;
+        }
+    }
+
+    // Móvil: píldoras en una fila deslizable que sale del margen (como los
+    // filtros de projects-grid). Desde md, en varias líneas con el rótulo.
+    &__links {
+        order: 1;
+        // Sin esto la fila de píldoras (que no se parte) ensancha la rejilla
+        min-width: 0;
+        margin-top: 1rem;
+
+        @include up(md) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem 1rem;
+        }
+
+        @include up(lg) {
+            margin-top: var(--space-30);
+        }
+
+        ul {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0 calc(var(--gutter) * -1);
+            padding: 0 var(--gutter) 0.25rem;
+            list-style: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            @include up(md) {
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+                overflow: visible;
+            }
+        }
+    }
+
+    // En móvil sobra a la vista: el <nav> ya se anuncia con ese mismo nombre
+    // (aria-label), así que ocultarlo no quita nada al lector de pantalla.
+    &__links-label {
+        display: none;
+        color: var(--fg-soft);
+        @include t-label;
+
+        @include up(md) {
+            display: inline;
+        }
+    }
+
+    &__figure {
+        display: grid;
+        order: 2;
+        gap: 1rem;
+        margin: var(--space-30) 0 0;
+
+        @include up(lg) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    // Móvil: la foto va a sangre (Figma 91:719); el pie conserva el margen
+    &__media {
+        aspect-ratio: 4 / 3;
+        margin-inline: calc(var(--gutter) * -1);
+        background-color: var(--fill);
+
+        @include up(md) {
+            aspect-ratio: 1280 / 620;
+            margin-inline: 0;
+        }
+    }
+
+    &__caption {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    // Solo en el editor
+    &__add-photo {
+        order: 2;
+
+        @include up(lg) {
+            grid-column: 1 / -1;
+        }
+    }
+}

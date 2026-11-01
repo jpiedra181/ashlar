@@ -1,0 +1,145 @@
+// --------------------------------------------------
+//      Block: Client story (ashlar/client-story)
+//      Escritorio: foto 520 (4:5) + 96 de aire + cita 664. Móvil: foto
+//      arriba y cita debajo.
+//      --bleed (ficha de proyecto): foto a sangre a la izquierda (620 × 720)
+//      y la cita centrada en el resto, sin padding de sección.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.client-story {
+    &__inner {
+        display: grid;
+        gap: var(--space-60);
+        align-items: center;
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 32.5rem) minmax(0, 41.5rem);
+            justify-content: space-between;
+            column-gap: clamp(3rem, -1rem + 6.25vw, 6rem);
+        }
+    }
+
+    &__visual {
+        position: relative;
+    }
+
+    &__media {
+        aspect-ratio: 4 / 5;
+        background-color: var(--fill);
+    }
+
+    &__video {
+        position: absolute;
+        left: 1.5rem;
+        bottom: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-height: 2.5rem;
+        padding: 0.5rem 1.25rem 0.5rem 1rem;
+        background-color: var(--surface);
+        color: var(--fg);
+        text-decoration: none;
+        @include t-label;
+
+        &.is-inactive {
+            opacity: 0.6;
+        }
+
+        &:hover .client-story__play {
+            transform: scale(1.15);
+        }
+    }
+
+    &__play {
+        width: 1rem;
+        height: 1rem;
+        color: var(--mark-accent);
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &__body {
+        display: grid;
+        gap: var(--space-40);
+        margin: 0;
+    }
+
+    &__quote {
+        margin: 0;
+
+        p {
+            @include t-h2;
+            text-wrap: pretty;
+        }
+    }
+
+    &__caption {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    &__name {
+        font-size: var(--font-size-base);
+        font-weight: 500;
+    }
+
+    &__project {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__more {
+        margin-top: 0.5rem;
+    }
+
+    // ---------- Foto a sangre ----------
+
+    &--bleed &__inner {
+        max-width: none;
+        padding-inline: 0;
+        gap: 0;
+
+        @include up(lg) {
+            grid-template-columns: 43fr 57fr;
+            align-items: stretch;
+            justify-content: stretch;
+            column-gap: 0;
+        }
+    }
+
+    &--bleed &__media {
+        @include up(lg) {
+            height: 100%;
+            min-height: clamp(37.5rem, 25rem + 20vw, 45rem);
+            aspect-ratio: auto;
+
+            img {
+                position: absolute;
+                inset: 0;
+            }
+        }
+    }
+
+    &--bleed &__video {
+        @include up(lg) {
+            left: var(--space-60);
+            bottom: var(--space-50);
+        }
+    }
+
+    &--bleed &__body {
+        align-content: center;
+        padding: var(--space-70) var(--gutter);
+
+        @include up(lg) {
+            padding: var(--space-80) var(--gutter) var(--space-80) var(--space-80);
+        }
+
+        > * {
+            max-width: 41.5rem;
+        }
+    }
+}

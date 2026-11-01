@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/callout",
+    "version": "1.0.0",
+    "title": "Callout strip",
+    "category": "ashlar",
+    "description": "A short strip with a label, one line, a detail and a button. For a job opening, an announcement or a link to another page.",
+    "keywords": ["callout", "banner", "strip", "hiring", "jobs", "careers", "announcement"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "subtle" },
+        "eyebrow": { "type": "string", "default": "We’re hiring" },
+        "title": { "type": "string", "default": "Site manager, north London" },
+        "text": { "type": "string", "default": "Full-time · £58k–£65k · van and tools included · apprenticeships every September" },
+        "buttonLabel": { "type": "string", "default": "See the role" },
+        "buttonUrl": { "type": "string", "default": "/careers/" },
+        "buttonVariant": { "type": "string", "enum": ["primary", "secondary", "outline"], "default": "secondary" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

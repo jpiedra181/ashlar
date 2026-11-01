@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/case-study",
+    "version": "1.0.0",
+    "title": "Case study",
+    "category": "ashlar",
+    "description": "One project told big: photo on one side, and on a dark panel the name, a summary, the key facts and a link.",
+    "keywords": ["case study", "project", "featured", "facts"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "image": { "type": "object", "default": {} },
+        "eyebrow": { "type": "string", "default": "Case study · Grade II listed" },
+        "title": { "type": "string", "default": "Gibson Square" },
+        "summary": { "type": "string", "default": "A Georgian townhouse that had been chopped into bedsits in the 1970s. We put it back together as one family home, hid the new steel behind lime plaster and repaired the original stair instead of replacing it." },
+        "specs": {
+            "type": "array",
+            "default": [
+                { "key": "Architect", "value": "Reid Architects" },
+                { "key": "Programme", "value": "34 weeks" },
+                { "key": "Fixed price", "value": "£612,000" },
+                { "key": "Final account", "value": "+1.6% (client changes)" },
+                { "key": "Conservation", "value": "Grade II · Islington" }
+            ]
+        },
+        "buttonLabel": { "type": "string", "default": "Read the case study" },
+        "buttonUrl": { "type": "string", "default": "/projects/" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

@@ -1,0 +1,83 @@
+// --------------------------------------------------
+//      Block: Case study (ashlar/case-study)
+//      Escritorio: foto 760 + panel oscuro 680, 900 de alto. Móvil: foto
+//      arriba (4:3) y panel debajo.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.case-study {
+    display: grid;
+
+    @include up(lg) {
+        grid-template-columns: 53fr 47fr;
+        min-height: clamp(43.75rem, 30rem + 25vw, 56.25rem);
+    }
+
+    &__media {
+        aspect-ratio: 4 / 3;
+        background-color: var(--color-stone-900);
+
+        @include up(lg) {
+            aspect-ratio: auto;
+        }
+    }
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-50);
+        padding: var(--space-70) var(--gutter);
+
+        @include up(lg) {
+            padding: var(--space-80) var(--gutter) var(--space-80) var(--space-80);
+        }
+
+        > * {
+            max-width: 32.5rem;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h1;
+    }
+
+    &__summary {
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__specs {
+        width: 100%;
+        border-top: 1px solid var(--line);
+    }
+
+    &__spec {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 1rem;
+        border-bottom: 1px solid var(--line);
+
+        dt {
+            color: var(--fg-muted);
+            @include t-label;
+        }
+
+        dd {
+            text-align: right;
+        }
+    }
+}

@@ -1,0 +1,114 @@
+// --------------------------------------------------
+//		Elements: Text styles
+//		Clases tipográficas de Ashlar. Las mismas recetas existen como mixins
+//		en tools/_text.scss para usarlas dentro del SCSS de un bloque.
+// --------------------------------------------------
+
+@use "tools" as *;
+
+.t-display { @include t-display; }
+.t-h1 { @include t-h1; }
+.t-h2 { @include t-h2; }
+.t-h3 { @include t-h3; }
+.t-h4 { @include t-h4; }
+.t-lead { @include t-lead; }
+.t-small { @include t-small; }
+.t-label { @include t-label; }
+
+.t-soft {
+    color: var(--fg-soft);
+}
+
+.t-muted {
+    color: var(--fg-muted);
+}
+
+.t-accent {
+    color: var(--accent);
+}
+
+.eyebrow {
+    @include t-label;
+}
+
+// Marcador de capítulo («Why we started», o «02 — The brief» con número):
+// mismo estilo que los antetítulos de sección (mixin t-chapter).
+.chapter {
+    display: block;
+    @include t-chapter;
+
+    &__num {
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+.prose {
+    max-width: 62ch;
+
+    > * + * {
+        margin-top: 1.25em;
+    }
+}
+
+// Enlace en línea dentro de texto corrido
+.text-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    transition: text-decoration-color var(--duration-base) ease;
+
+    &:hover {
+        text-decoration-color: currentColor;
+    }
+}
+
+// Enlace con flecha («Call Marta on 020…, she'll explain it in plain English →»)
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 1.5rem;
+    color: var(--accent);
+    font-weight: 500;
+
+    svg {
+        flex: none;
+        width: 1.125rem;
+        height: 1.125rem;
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.25em;
+    }
+
+    @media (hover: hover) {
+        &:hover svg {
+            transform: translate3d(0.2rem, 0, 0);
+        }
+    }
+}
+
+// Lista con raya corten (bloques de la ficha de proyecto: «What we found»…)
+.dash-list {
+    display: grid;
+    gap: 0.875rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        position: relative;
+        padding-left: 1.375rem;
+        line-height: 1.6;
+
+        &::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--mark-accent);
+        }
+    }
+}

@@ -1,0 +1,36 @@
+# Finales de línea
+# ----------------
+# Windows y Linux guardan los saltos de línea con caracteres distintos (CRLF vs LF).
+# Sin esta configuración, un mismo fichero editado en sistemas distintos aparece en
+# Git como "todas las líneas modificadas", lo que ensucia los diffs de los PR y
+# provoca conflictos falsos.
+#
+# `text=auto eol=lf` normaliza: en el repositorio todo se guarda con LF, y cada
+# sistema trabaja en local con lo que le corresponda. No hay que hacer nada más.
+
+* text=auto eol=lf
+
+# Ficheros que Git NO debe tocar (son binarios: convertirlos los corrompe)
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.mp4   binary
+*.webm  binary
+
+# Los SVG son texto (XML), así que se normalizan como el resto.
+
+# Ficheros con finales de línea obligatorios por su formato
+*.sh    text eol=lf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf

@@ -1,0 +1,155 @@
+// --------------------------------------------------
+//      Block: Questions (ashlar/faq)
+//      Escritorio: titular a la izquierda (420) y la lista al lado, con
+//      filete fuerte arriba. Cada pregunta: H4 y un botón redondo de 36 px
+//      (+ con borde; abierta, − sobre corten). Móvil: titular arriba.
+//      Base: el bloque faq de Raíz (<details> nativo).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.faq {
+    &__inner {
+        display: grid;
+        gap: var(--section-gap);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 26.25rem) minmax(0, 1fr);
+            align-items: start;
+            gap: 0;
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+
+        @include up(lg) {
+            padding-right: var(--space-60);
+        }
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__list {
+        border-top: 1px solid var(--line-strong);
+    }
+
+    &__item {
+        border-bottom: 1px solid var(--line);
+    }
+
+    &__summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding-block: 1.5rem;
+        list-style: none;
+        cursor: pointer;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        @media (hover: hover) {
+            &:hover .faq__question {
+                color: var(--accent);
+            }
+        }
+    }
+
+    &__question {
+        @include t-h4;
+        transition: color var(--duration-base) var(--ease-standard);
+    }
+
+    // Botón redondo: + (cerrada) / − (abierta, relleno corten)
+    &__icon {
+        position: relative;
+        flex: none;
+        width: 2.25rem;
+        height: 2.25rem;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-round);
+        transition:
+            background-color var(--duration-base) var(--ease-standard),
+            border-color var(--duration-base) var(--ease-standard),
+            color var(--duration-base) var(--ease-standard);
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.875rem;
+            height: 1.5px;
+            background-color: currentColor;
+            translate: -50% -50%;
+            transition: rotate var(--duration-slow) var(--ease-out);
+        }
+
+        &::after {
+            rotate: 90deg;
+        }
+    }
+
+    &__item[open] &__icon,
+    &__item.is-open &__icon {
+        border-color: var(--btn-bg);
+        background-color: var(--btn-bg);
+        color: var(--btn-fg);
+
+        &::after {
+            rotate: 0deg;
+        }
+    }
+
+    &__answer {
+        padding-bottom: 1.5rem;
+        color: var(--fg-soft);
+
+        p {
+            max-width: 62ch;
+        }
+
+        // El hueco del botón solo desde tableta: en móvil dejaría muy pocas
+        // palabras por línea
+        @include up(md) {
+            padding-right: 6rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+    }
+
+    // Apertura suave donde el navegador lo permite
+    @supports (interpolate-size: allow-keywords) {
+        &__item {
+            interpolate-size: allow-keywords;
+        }
+
+        &__item::details-content {
+            height: 0;
+            overflow: clip;
+            transition:
+                height var(--duration-slow) var(--ease-out),
+                content-visibility var(--duration-slow) allow-discrete;
+        }
+
+        &__item[open]::details-content {
+            height: auto;
+        }
+    }
+}

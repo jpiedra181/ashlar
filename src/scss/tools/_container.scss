@@ -1,0 +1,16 @@
+// --------------------------------------------------
+//		Tools: Container
+//		El contenedor de Ashlar: ancho máximo --max (105rem) con el gutter
+//		fluido --gutter DENTRO. Es el `.wrap` del diseño original.
+//
+//		Úsalo en el wrapper interior del bloque; el fondo a sangre va en el
+//		contenedor exterior (la sección).
+// --------------------------------------------------
+
+/// @param {Length} $max - ancho máximo total, gutter incluido (default --max)
+@mixin container($max: var(--max)) {
+    width: 100%;
+    max-width: $max;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}

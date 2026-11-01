@@ -1,0 +1,536 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": false,
+        "color": {
+            "custom": false,
+            "customGradient": false,
+            "customDuotone": false,
+            "defaultPalette": false,
+            "defaultGradients": false,
+            "defaultDuotone": false,
+            "gradients": [],
+            "duotone": [],
+            "palette": [
+                {
+                    "slug": "stone-50",
+                    "name": "Stone 50",
+                    "color": "#f7f5f1"
+                },
+                {
+                    "slug": "stone-100",
+                    "name": "Stone 100",
+                    "color": "#efebe4"
+                },
+                {
+                    "slug": "stone-200",
+                    "name": "Stone 200",
+                    "color": "#e0dad0"
+                },
+                {
+                    "slug": "stone-300",
+                    "name": "Stone 300",
+                    "color": "#c9c0b2"
+                },
+                {
+                    "slug": "stone-400",
+                    "name": "Stone 400",
+                    "color": "#a89d8c"
+                },
+                {
+                    "slug": "stone-500",
+                    "name": "Stone 500",
+                    "color": "#857a6a"
+                },
+                {
+                    "slug": "stone-600",
+                    "name": "Stone 600",
+                    "color": "#685f52"
+                },
+                {
+                    "slug": "stone-700",
+                    "name": "Stone 700",
+                    "color": "#4f4840"
+                },
+                {
+                    "slug": "stone-800",
+                    "name": "Stone 800",
+                    "color": "#36312c"
+                },
+                {
+                    "slug": "stone-900",
+                    "name": "Stone 900",
+                    "color": "#221f1c"
+                },
+                {
+                    "slug": "stone-950",
+                    "name": "Stone 950",
+                    "color": "#151311"
+                },
+                {
+                    "slug": "corten-300",
+                    "name": "Corten 300",
+                    "color": "#e1966a"
+                },
+                {
+                    "slug": "corten-400",
+                    "name": "Corten 400",
+                    "color": "#d27541"
+                },
+                {
+                    "slug": "corten-500",
+                    "name": "Corten 500",
+                    "color": "#b85a28"
+                },
+                {
+                    "slug": "corten-600",
+                    "name": "Corten 600",
+                    "color": "#974620"
+                },
+                {
+                    "slug": "white",
+                    "name": "White",
+                    "color": "#ffffff"
+                },
+                {
+                    "slug": "error",
+                    "name": "Error",
+                    "color": "#b3322a"
+                },
+                {
+                    "slug": "error-soft",
+                    "name": "Error (dark)",
+                    "color": "#ec8f86"
+                },
+                {
+                    "slug": "error-bg",
+                    "name": "Error background",
+                    "color": "#f8dedb"
+                },
+                {
+                    "slug": "success",
+                    "name": "Success",
+                    "color": "#3a7448"
+                },
+                {
+                    "slug": "success-soft",
+                    "name": "Success (dark)",
+                    "color": "#8cc69a"
+                },
+                {
+                    "slug": "success-bg",
+                    "name": "Success background",
+                    "color": "#ddeedf"
+                }
+            ]
+        },
+        "typography": {
+            "customFontSize": false,
+            "defaultFontSizes": false,
+            "dropCap": false,
+            "fontStyle": false,
+            "fontWeight": true,
+            "letterSpacing": false,
+            "lineHeight": false,
+            "textDecoration": false,
+            "textTransform": false,
+            "writingMode": false,
+            "fluid": false,
+            "fontFamilies": [
+                {
+                    "slug": "display",
+                    "name": "Archivo",
+                    "fontFamily": "\"Archivo\", \"Archivo Fallback\", Arial, sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Archivo",
+                            "fontWeight": "100 900",
+                            "fontStyle": "normal",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./src/assets/fonts/archivo.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "slug": "body",
+                    "name": "Hanken Grotesk",
+                    "fontFamily": "\"Hanken Grotesk\", \"Hanken Grotesk Fallback\", Arial, sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Hanken Grotesk",
+                            "fontWeight": "100 900",
+                            "fontStyle": "normal",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./src/assets/fonts/hanken-grotesk.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "slug": "mono",
+                    "name": "IBM Plex Mono",
+                    "fontFamily": "\"IBM Plex Mono\", \"IBM Plex Mono Fallback\", \"Courier New\", monospace",
+                    "fontFace": [
+                        {
+                            "fontFamily": "IBM Plex Mono",
+                            "fontWeight": "400",
+                            "fontStyle": "normal",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./src/assets/fonts/ibm-plex-mono-400.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "IBM Plex Mono",
+                            "fontWeight": "500",
+                            "fontStyle": "normal",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./src/assets/fonts/ibm-plex-mono-500.woff2"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "fontSizes": [
+                {
+                    "slug": "display",
+                    "name": "Display",
+                    "size": "clamp(3rem, 1.7rem + 5.3333vw, 6.5rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "h1",
+                    "name": "Heading 1",
+                    "size": "clamp(2.5rem, 1.7571rem + 3.0476vw, 4.5rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "h2",
+                    "name": "Heading 2",
+                    "size": "clamp(2rem, 1.6286rem + 1.5238vw, 3rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "h3",
+                    "name": "Heading 3",
+                    "size": "clamp(1.5rem, 1.3143rem + 0.7619vw, 2rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "h4",
+                    "name": "Heading 4",
+                    "size": "clamp(1.25rem, 1.1571rem + 0.381vw, 1.5rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "lead",
+                    "name": "Lead",
+                    "size": "clamp(1.125rem, 1.0786rem + 0.1905vw, 1.25rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "base",
+                    "name": "Body",
+                    "size": "clamp(1rem, 0.9768rem + 0.0952vw, 1.0625rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "sm",
+                    "name": "Small",
+                    "size": "clamp(0.875rem, 0.8518rem + 0.0952vw, 0.9375rem)",
+                    "fluid": false
+                },
+                {
+                    "slug": "xs",
+                    "name": "Label",
+                    "size": "clamp(0.75rem, 0.7268rem + 0.0952vw, 0.8125rem)",
+                    "fluid": false
+                }
+            ]
+        },
+        "spacing": {
+            "padding": false,
+            "margin": false,
+            "blockGap": false,
+            "customSpacingSize": false,
+            "defaultSpacingSizes": false,
+            "units": [
+                "rem",
+                "%",
+                "vw",
+                "vh",
+                "px"
+            ],
+            "spacingSizes": [
+                {
+                    "slug": "10",
+                    "name": "XS",
+                    "size": "0.5rem"
+                },
+                {
+                    "slug": "20",
+                    "name": "S",
+                    "size": "clamp(0.75rem, 0.6571rem + 0.381vw, 1rem)"
+                },
+                {
+                    "slug": "30",
+                    "name": "M",
+                    "size": "clamp(1rem, 0.8143rem + 0.7619vw, 1.5rem)"
+                },
+                {
+                    "slug": "40",
+                    "name": "L",
+                    "size": "clamp(1.5rem, 1.3143rem + 0.7619vw, 2rem)"
+                },
+                {
+                    "slug": "50",
+                    "name": "XL",
+                    "size": "clamp(2rem, 1.6286rem + 1.5238vw, 3rem)"
+                },
+                {
+                    "slug": "60",
+                    "name": "2XL",
+                    "size": "clamp(2.5rem, 1.9429rem + 2.2857vw, 4rem)"
+                },
+                {
+                    "slug": "70",
+                    "name": "3XL",
+                    "size": "clamp(3rem, 2.2571rem + 3.0476vw, 5rem)"
+                },
+                {
+                    "slug": "80",
+                    "name": "4XL",
+                    "size": "clamp(4rem, 3.2571rem + 3.0476vw, 6rem)"
+                },
+                {
+                    "slug": "section",
+                    "name": "Section",
+                    "size": "min(clamp(4rem, 2.5143rem + 6.0952vw, 8rem), 14svh)"
+                }
+            ]
+        },
+        "layout": {
+            "contentSize": "48rem",
+            "wideSize": "90rem"
+        },
+        "border": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        },
+        "shadow": {
+            "defaultPresets": false
+        },
+        "custom": {
+            "layout": {
+                "max": "90rem",
+                "gutter": "clamp(1rem, -0.4857rem + 6.0952vw, 5rem)",
+                "gap": "clamp(1rem, 0.8143rem + 0.7619vw, 1.5rem)",
+                "stack": "clamp(1rem, 0.8143rem + 0.7619vw, 1.5rem)",
+                "section-gap": "clamp(2.5rem, 1.9429rem + 2.2857vw, 4rem)",
+                "header-h": "clamp(4rem, 3.6286rem + 1.5238vw, 5rem)"
+            },
+            "type": {
+                "logo": "1.25rem",
+                "menu": "clamp(2rem, 1.6286rem + 1.5238vw, 3rem)"
+            },
+            "radius": {
+                "sm": "2px",
+                "md": "4px",
+                "lg": "8px",
+                "pill": "999px",
+                "round": "50%"
+            },
+            "ease": {
+                "out": "cubic-bezier(0.16, 1, 0.3, 1)",
+                "in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+                "standard": "cubic-bezier(0.2, 0, 0, 1)",
+                "fill": "cubic-bezier(0.625, 0.05, 0, 1)"
+            },
+            "duration": {
+                "fast": "150ms",
+                "base": "300ms",
+                "slow": "600ms",
+                "reveal": "900ms"
+            }
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "var:preset|color|stone-50",
+            "text": "var:preset|color|stone-950"
+        },
+        "typography": {
+            "fontFamily": "var:preset|font-family|body",
+            "fontSize": "var:preset|font-size|base",
+            "fontWeight": "400",
+            "lineHeight": "1.53"
+        },
+        "spacing": {
+            "blockGap": "1.25em"
+        },
+        "elements": {
+            "heading": {
+                "typography": {
+                    "fontFamily": "var:preset|font-family|display",
+                    "fontWeight": "600",
+                    "lineHeight": "1.1",
+                    "letterSpacing": "-0.02em"
+                }
+            },
+            "h1": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|h1",
+                    "lineHeight": "1.06",
+                    "letterSpacing": "-0.025em"
+                }
+            },
+            "h2": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|h2",
+                    "lineHeight": "1.13",
+                    "letterSpacing": "-0.02em"
+                }
+            },
+            "h3": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|h3",
+                    "fontWeight": "500",
+                    "lineHeight": "1.19",
+                    "letterSpacing": "-0.01em"
+                }
+            },
+            "h4": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|h4",
+                    "fontWeight": "500",
+                    "lineHeight": "1.25",
+                    "letterSpacing": "-0.005em"
+                }
+            },
+            "h5": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|lead",
+                    "fontWeight": "500"
+                }
+            },
+            "h6": {
+                "typography": {
+                    "fontSize": "var:preset|font-size|base",
+                    "fontWeight": "600"
+                }
+            },
+            "link": {
+                "color": {
+                    "text": "currentColor"
+                },
+                "typography": {
+                    "textDecoration": "underline"
+                },
+                ":hover": {
+                    "color": {
+                        "text": "var:preset|color|corten-600"
+                    }
+                }
+            },
+            "button": {
+                "color": {
+                    "background": "var:preset|color|corten-500",
+                    "text": "var:preset|color|white"
+                },
+                "border": {
+                    "radius": "var:custom|radius|sm"
+                },
+                "spacing": {
+                    "padding": {
+                        "top": "1rem",
+                        "bottom": "1rem",
+                        "left": "1.5rem",
+                        "right": "1.5rem"
+                    }
+                },
+                "typography": {
+                    "fontFamily": "var:preset|font-family|body",
+                    "fontSize": "var:preset|font-size|base",
+                    "fontWeight": "600",
+                    "lineHeight": "1.5"
+                },
+                ":hover": {
+                    "color": {
+                        "background": "var:preset|color|corten-600",
+                        "text": "var:preset|color|white"
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "core/paragraph": {
+                "typography": {
+                    "lineHeight": "1.53"
+                }
+            },
+            "core/list": {
+                "typography": {
+                    "lineHeight": "1.53"
+                }
+            },
+            "core/quote": {
+                "typography": {
+                    "fontFamily": "var:preset|font-family|display",
+                    "fontSize": "var:preset|font-size|h4",
+                    "fontWeight": "500"
+                },
+                "border": {
+                    "left": {
+                        "color": "var:preset|color|corten-500",
+                        "width": "2px",
+                        "style": "solid"
+                    }
+                },
+                "spacing": {
+                    "padding": {
+                        "left": "var:preset|spacing|30"
+                    }
+                }
+            },
+            "core/separator": {
+                "color": {
+                    "text": "var:preset|color|stone-200"
+                }
+            }
+        }
+    },
+    "customTemplates": [
+        {
+            "name": "page-legal",
+            "title": "Legal page",
+            "postTypes": [
+                "page"
+            ]
+        }
+    ],
+    "templateParts": [
+        {
+            "name": "header",
+            "title": "Header",
+            "area": "header"
+        },
+        {
+            "name": "footer",
+            "title": "Footer",
+            "area": "footer"
+        },
+        {
+            "name": "footer-short",
+            "title": "Footer (short, without the closing call to action)",
+            "area": "footer"
+        }
+    ]
+}

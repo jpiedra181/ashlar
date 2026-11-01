@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/footer-brand",
+    "version": "1.0.0",
+    "title": "Footer brand",
+    "category": "ashlar",
+    "icon": "id",
+    "description": "The short sentence about the company in the first footer column. It is edited in Options → Footer.",
+    "keywords": ["footer", "brand", "about"],
+    "textdomain": "ashlar",
+    "supports": {
+        "html": false,
+        "reusable": false,
+        "multiple": false
+    },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

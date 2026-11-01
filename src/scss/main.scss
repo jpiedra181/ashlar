@@ -1,0 +1,33 @@
+// --------------------------------------------------
+//		Style structure
+// --------------------------------------------------
+
+// Config (variables, tokens, fontface)
+@use "config";
+
+// Tools (mixins, functions — no output CSS)
+@use "tools";
+
+// Elements (reset, typography base)
+@use "elements";
+
+// Layout (wrapper, header, footer, menus)
+@use "layout";
+
+// Components (atomic UI pieces)
+@use "components";
+
+// Blocks (block-level styles)
+@use "blocks";
+
+// Parts (composite card patterns)
+@use "parts";
+
+// Vendor (third-party overrides)
+@use "vendor";
+
+// Helper (utility classes)
+@use "helper";
+
+// Templates (page-level overrides)
+@use "templates";

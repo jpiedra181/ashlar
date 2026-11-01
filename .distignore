@@ -1,0 +1,17 @@
+# Lo que NO va en el zip del tema (wp dist-archive y herramientas similares).
+# src/ sí va: el tema sirve fuentes y fotos de src/assets/ y la demo las importa.
+.claude/
+.playwright-mcp/
+.github/
+.git/
+.gitignore
+.gitattributes
+.distignore
+.nvmrc
+.editorconfig
+node_modules/
+package.json
+package-lock.json
+webpack.config.js
+*.md
+*.log

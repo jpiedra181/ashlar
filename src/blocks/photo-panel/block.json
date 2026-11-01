@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/photo-panel",
+    "version": "1.0.0",
+    "title": "Photo and panel",
+    "category": "ashlar",
+    "description": "An edge-to-edge photo on one side and, on a coloured panel, a label, a headline, a short text and a button, with an optional note beside it. For the yard, an open day or any invitation.",
+    "keywords": ["photo", "image", "panel", "feature", "invitation", "visit", "open house"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "dark" },
+        "imagePosition": { "type": "string", "enum": ["left", "right"], "default": "left" },
+        "image": { "type": "object", "default": {} },
+        "eyebrow": { "type": "string", "default": "The yard · 14 Wharf Road, N1" },
+        "title": { "type": "string", "default": "Come and touch<br>the materials." },
+        "text": { "type": "string", "default": "Two railway arches where Sean makes the staircases and we keep reclaimed brick and limestone. Come and handle the finishes before you choose them, and bring the kids if you like. Nelson, the yard dog, will want to say hello." },
+        "buttonLabel": { "type": "string", "default": "Book a visit to the yard" },
+        "buttonUrl": { "type": "string", "default": "/contact/" },
+        "buttonVariant": { "type": "string", "enum": ["primary", "secondary", "outline"], "default": "outline" },
+        "note": { "type": "string", "default": "" }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

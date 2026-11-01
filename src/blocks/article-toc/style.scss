@@ -1,0 +1,79 @@
+// --------------------------------------------------
+//      Block: Article · Contents (ashlar/article-toc)
+//      «In this article» con los apartados numerados (01, 02…) y, debajo, la
+//      llamada al presupuesto. En escritorio va pegado bajo la cabecera de la
+//      web (la colocación en la rejilla, en templates/_article.scss).
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.article-toc {
+    display: grid;
+    align-content: start;
+    gap: var(--space-50);
+
+    @include up(lg) {
+        position: sticky;
+        top: calc(var(--header-h) + var(--space-40));
+    }
+
+    &__nav {
+        display: grid;
+        gap: 1rem;
+    }
+
+    &__title {
+        color: var(--fg-soft);
+        @include t-label;
+    }
+
+    &__list {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--line);
+        list-style: none;
+    }
+
+    &__link {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: 0.5rem;
+        padding-block: 0.75rem;
+        border-bottom: 1px solid var(--line);
+        color: var(--fg-soft);
+        font-size: var(--font-size-sm);
+        line-height: 1.4;
+        transition: color var(--duration-base) ease;
+
+        &:hover,
+        &[aria-current] {
+            color: var(--fg);
+        }
+
+        // El apartado que se está leyendo: número en corten
+        &[aria-current] .article-toc__num {
+            color: var(--accent);
+        }
+    }
+
+    &__num {
+        padding-top: 0.15em;
+        color: var(--fg-muted);
+        font-variant-numeric: tabular-nums;
+        transition: color var(--duration-base) ease;
+        @include t-label;
+    }
+
+    &__cta {
+        display: grid;
+        gap: 0.5rem;
+        justify-items: start;
+    }
+
+    &__cta-text {
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}

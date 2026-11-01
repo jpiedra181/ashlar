@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/article-header",
+    "version": "1.0.0",
+    "title": "Article · Header",
+    "category": "ashlar",
+    "description": "The top of a Journal article: breadcrumb, reading time and date, the question, its short answer (the excerpt) and the featured image.",
+    "keywords": ["article", "journal", "header", "question"],
+    "textdomain": "ashlar",
+    "usesContext": ["postId", "postType"],
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "journalLabel": { "type": "string", "default": "Journal" },
+        "breadcrumbLabel": { "type": "string", "default": "Breadcrumb" },
+        "answerLabel": { "type": "string", "default": "The short answer" }
+    },
+    "supports": { "html": false, "align": ["full"], "multiple": false, "inserter": false },
+    "editorScript": "file:./index.js",
+    "render": "file:./render.php"
+}

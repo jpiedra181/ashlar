@@ -1,0 +1,10 @@
+// --------------------------------------------------
+//		Components
+//		Componentes reutilizables colocados en src/components/ (JS + estilos juntos).
+// --------------------------------------------------
+
+@forward "../../components/button/style";
+@forward "../../components/media/style";
+@forward "../../components/project-card/style";
+@forward "../../components/article-card/style";
+@forward "../../components/chip/style";

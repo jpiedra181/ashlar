@@ -1,0 +1,227 @@
+// --------------------------------------------------
+//      Block: Friday report (ashlar/friday-report)
+//      Un parte real de la obra en curso, enseñado como el documento que
+//      recibe el cliente. Cabecera de la sección a la izquierda (fija al
+//      hacer scroll desde 1024) y la hoja blanca a la derecha; en móvil, una
+//      debajo de la otra. La hoja va siempre en tono claro, sea cual sea el de
+//      la sección. Markup: report-doc.js.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.friday-report {
+    &__inner {
+        display: grid;
+        gap: var(--space-60);
+
+        @include up(lg) {
+            grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+            align-items: start;
+            column-gap: var(--space-80);
+        }
+    }
+
+    &__head {
+        display: grid;
+        align-content: start;
+        gap: var(--space-30);
+
+        @include up(lg) {
+            position: sticky;
+            top: calc(var(--header-h) + var(--space-50));
+        }
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__lede {
+        max-width: 30rem;
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__note {
+        max-width: 30rem;
+        padding-top: var(--space-30);
+        border-top: 1px solid var(--line-strong);
+        color: var(--fg-soft);
+        @include t-small;
+    }
+}
+
+// --------------------------------------------------
+//  La hoja
+// --------------------------------------------------
+
+.report-doc {
+    display: grid;
+    gap: var(--space-40);
+    width: 100%;
+    max-width: 44rem;
+    padding: var(--space-50) var(--space-40);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    // Hoja blanca (no el --bg del tono claro, que es piedra)
+    background-color: var(--surface);
+
+    @include up(md) {
+        padding: var(--space-60);
+    }
+
+    &__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        padding-bottom: var(--space-30);
+        border-bottom: 1px solid var(--line-strong);
+    }
+
+    &__label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--success);
+        @include t-label;
+
+        &::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: var(--radius-round);
+            background-color: currentColor;
+        }
+
+        &.is-late {
+            color: var(--accent);
+        }
+    }
+
+    &__title {
+        @include t-h3;
+    }
+
+    &__from {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__avatar {
+        flex: none;
+        width: 3rem;
+        border-radius: var(--radius-round);
+    }
+
+    &__meta {
+        display: grid;
+        flex: 1 1 14rem;
+        gap: 0.25rem;
+    }
+
+    &__meta-row {
+        display: grid;
+        grid-template-columns: minmax(3.5rem, auto) minmax(0, 1fr);
+        align-items: baseline;
+        gap: 0.75rem;
+
+        dt {
+            color: var(--fg-muted);
+            @include t-label;
+        }
+
+        dd {
+            @include t-small;
+        }
+    }
+
+    &__figure {
+        display: grid;
+        gap: 0.625rem;
+    }
+
+    &__caption {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__part {
+        display: grid;
+        gap: 0.625rem;
+    }
+
+    &__part-label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__text {
+        line-height: 1.6;
+    }
+
+    // Guiones en corten, como las listas del proceso
+    &__list {
+        display: grid;
+        gap: 0.5rem;
+        line-height: 1.6;
+        list-style: none;
+
+        li {
+            display: grid;
+            grid-template-columns: 1.25rem minmax(0, 1fr);
+
+            // Texto alternativo vacío: el guion no se lee en voz alta
+            &::before {
+                content: "—" / "";
+                color: var(--accent);
+            }
+        }
+    }
+
+    &__decision {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--accent);
+        background-color: var(--fill);
+    }
+
+    &__decision-label {
+        color: var(--accent);
+        @include t-label;
+    }
+
+    &__price {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.25rem 1rem;
+        padding-block: var(--space-20);
+        border-block: 1px solid var(--line);
+    }
+
+    &__price-label {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+
+    &__price-value {
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__signoff {
+        color: var(--fg-soft);
+    }
+}

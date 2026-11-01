@@ -1,0 +1,126 @@
+// --------------------------------------------------
+//      Component: Button
+//      El botón del Figma (componente Button): rectangular (radio 2 px),
+//      Hanken Grotesk SemiBold y flecha. Tres estilos:
+//        primary (por defecto) · secondary (.btn--secondary) · outline (.btn--outline)
+//      Toma los colores del tono de la sección (--btn-*, --fg, --line-strong),
+//      así que funciona igual sobre claro, beige u oscuro.
+//
+//      Hover: relleno direccional (Osmo «Directional Button Hover»). Un
+//      círculo del color de hover (::before) crece desde el punto por el que
+//      entra el ratón y se recoge hacia el punto por el que sale; lo coloca
+//      src/js/modules/buttons.js (--btn-x, --btn-y, --btn-size). Sin JS o con
+//      el teclado crece desde el centro. Va en un pseudoelemento para no
+//      cambiar el markup que guardan los bloques.
+//
+//      Markup (idéntico en React y PHP):
+//      <a class="btn [btn--secondary|btn--outline]">
+//        <span class="btn__label">Texto</span>
+//        <svg class="btn__icon">…</svg>
+//      </a>
+//      React: src/components/button · PHP: ashlar_button() en inc/helpers.php
+// --------------------------------------------------
+
+@use "tools" as *;
+
+.btn {
+    --b-bg: var(--btn-bg);
+    --b-bg-hover: var(--btn-bg-hover);
+    --b-fg: var(--btn-fg);
+    --b-border: transparent;
+
+    position: relative;
+    // El relleno (z-index: -1) queda entre el fondo del botón y su texto
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.5rem;
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--b-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--b-bg);
+    color: var(--b-fg);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    text-wrap: balance;
+    transition:
+        border-color var(--duration-base) var(--ease-standard),
+        color 0.7s var(--ease-fill);
+
+    // Tiempos del recurso original: 0,7 s el círculo, 0,4 s su color
+    &::before {
+        content: "";
+        position: absolute;
+        top: var(--btn-y, 50%);
+        left: var(--btn-x, 50%);
+        z-index: -1;
+        width: var(--btn-size, 115%);
+        aspect-ratio: 1;
+        border-radius: var(--radius-round);
+        background-color: var(--b-bg-hover);
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(0) rotate(0.001deg);
+        transition:
+            transform 0.7s var(--ease-fill),
+            background-color 0.4s var(--ease-fill);
+    }
+
+    &__icon {
+        flex: none;
+        width: 1.25rem;
+        height: 1.25rem;
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    &--secondary {
+        --b-bg: var(--btn2-bg);
+        --b-bg-hover: var(--btn2-bg-hover);
+        --b-fg: var(--btn2-fg);
+    }
+
+    &--outline {
+        --b-bg: transparent;
+        --b-bg-hover: var(--fg);
+        --b-fg: var(--fg);
+        --b-border: var(--line-strong);
+    }
+
+    @media (hover: hover) {
+        &:hover::before {
+            transform: translate(-50%, -50%) scale(1) rotate(0.001deg);
+        }
+
+        &--outline:hover {
+            border-color: var(--fg);
+            color: var(--bg);
+        }
+
+        &:hover .btn__icon {
+            transform: translate3d(0.25rem, 0, 0);
+        }
+    }
+
+    // Anillo de foco del estado Focus del Figma: hueco del color de la
+    // sección + anillo corten.
+    &:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+
+        &::before {
+            transform: translate(-50%, -50%) scale(1) rotate(0.001deg);
+        }
+    }
+
+    &--outline:focus-visible {
+        border-color: var(--fg);
+        color: var(--bg);
+    }
+}

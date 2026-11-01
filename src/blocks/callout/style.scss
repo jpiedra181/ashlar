@@ -1,0 +1,56 @@
+// --------------------------------------------------
+//      Block: Callout strip (ashlar/callout)
+//      Franja corta (Figma 90:995): textos a la izquierda y botón a la
+//      derecha, 64 de alto arriba y abajo. Móvil: apilado, botón a todo el
+//      ancho.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.callout {
+    padding-block: var(--space-60);
+
+    &__inner {
+        display: grid;
+        gap: 1rem;
+
+        @include up(md) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-50);
+        }
+    }
+
+    &__text {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h3;
+    }
+
+    &__detail {
+        max-width: 62ch;
+        color: var(--fg-soft);
+    }
+
+    &__button {
+        width: 100%;
+
+        @include up(sm) {
+            justify-self: start;
+            width: auto;
+        }
+
+        @include up(md) {
+            flex: none;
+        }
+    }
+}

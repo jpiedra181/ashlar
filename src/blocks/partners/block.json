@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ashlar/partners",
+    "version": "1.0.0",
+    "title": "Partners",
+    "category": "ashlar",
+    "description": "A quiet row of names: the architects and makers you work with.",
+    "keywords": ["partners", "architects", "suppliers", "logos", "names"],
+    "textdomain": "ashlar",
+    "attributes": {
+        "align": { "type": "string", "default": "full" },
+        "theme": { "type": "string", "enum": ["light", "subtle", "dark"], "default": "light" },
+        "label": { "type": "string", "default": "Architects and makers we build with" },
+        "names": {
+            "type": "array",
+            "default": [
+                { "name": "Reid Architects" },
+                { "name": "Studio Norland" },
+                { "name": "Fenwick &amp; Ash" },
+                { "name": "Calder Stone Co." },
+                { "name": "Oakridge Joinery" }
+            ]
+        }
+    },
+    "supports": { "html": false, "align": ["full"], "anchor": true },
+    "example": { "viewportWidth": 1440 },
+    "editorScript": "file:./index.js"
+}

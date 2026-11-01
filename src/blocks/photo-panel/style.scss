@@ -1,0 +1,98 @@
+// --------------------------------------------------
+//      Block: Photo and panel (ashlar/photo-panel)
+//      Escritorio: foto a sangre 780 + panel 660 (The yard, Figma 90:939);
+//      .photo-panel--right: panel 800 + foto 640 (Open house, Figma 73:677).
+//      El panel lleva el gutter por fuera y 64 por dentro. Móvil: foto arriba
+//      (390×260) y el panel debajo, botón a todo el ancho.
+// --------------------------------------------------
+
+@use "config" as *;
+@use "tools" as *;
+
+.photo-panel {
+    display: grid;
+
+    @include up(lg) {
+        grid-template-columns: 780fr 660fr;
+        min-height: clamp(32rem, 43vw, 40rem);
+    }
+
+    &--right {
+        @include up(lg) {
+            grid-template-columns: 800fr 640fr;
+        }
+    }
+
+    &__media {
+        aspect-ratio: 390 / 260;
+        background-color: var(--fill);
+
+        @include up(lg) {
+            aspect-ratio: auto;
+        }
+    }
+
+    &--right &__media {
+        @include up(lg) {
+            order: 2;
+        }
+    }
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-40);
+        padding: var(--space-50) var(--gutter) var(--space-60);
+
+        @include up(lg) {
+            padding: var(--space-80) var(--gutter) var(--space-80) var(--space-60);
+        }
+    }
+
+    &--right &__panel {
+        @include up(lg) {
+            padding-right: var(--space-60);
+            padding-left: var(--gutter);
+        }
+    }
+
+    &__heading {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    &__eyebrow {
+        @include t-chapter;
+    }
+
+    &__title {
+        @include t-h2;
+    }
+
+    &__text {
+        max-width: 62ch;
+        color: var(--fg-soft);
+        @include t-lead;
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.5rem;
+    }
+
+    &__button {
+        width: 100%;
+
+        @include up(sm) {
+            width: auto;
+        }
+    }
+
+    &__note {
+        color: var(--fg-muted);
+        @include t-label;
+    }
+}
